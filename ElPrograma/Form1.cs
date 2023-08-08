@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MySql.Data.MySqlClient;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -28,7 +29,14 @@ namespace ElPrograma
         public menuVertical()
         {
             InitializeComponent();
-            
+
+            MySqlConnection conexion = new MySqlConnection("Server=localhost; Database=proyecto; Uid=Empleados; Pwd=empleado;");
+            conexion.Open();
+
+            MySqlCommand comandos = new MySqlCommand();
+            comandos.Connection = conexion;
+
+
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -85,7 +93,10 @@ namespace ElPrograma
             addUserControl(uc);
         }
 
-      
+        private void panelContenedor_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
     }
 
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MySql.Data.MySqlClient;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -17,6 +18,28 @@ namespace ElPrograma
             InitializeComponent();
         }
 
-       
+        private void button1_Click(object sender, EventArgs e)
+        {
+            MySqlConnection conexion = new MySqlConnection("Server=localhost; Database=proyecto; Uid=Empleados; Pwd=empleado;");
+            conexion.Open();
+
+            MySqlCommand comandos = new MySqlCommand();
+            comandos.Connection = conexion;
+
+            string consulta = "Select Contraseña From Usuarios where Contraseña ='" + txtContraseña.Text + "'";
+
+            comandos.CommandText = consulta;
+            MySqlDataReader datos = comandos.ExecuteReader();
+
+            if (datos.Read())
+            {
+                MessageBox.Show("Bienvenido");
+                this.Hide();
+            }
+            else
+            {
+                MessageBox.Show("Acceso Denegado");
+            }
+        }
     }
 }
