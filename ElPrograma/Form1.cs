@@ -30,8 +30,9 @@ namespace ElPrograma
         {
             InitializeComponent();
 
-            MySqlConnection conexion = new MySqlConnection("Server=localhost; Database=proyecto; Uid=Empleados; Pwd=empleado;");
+            MySqlConnection conexion = new MySqlConnection("Server=localhost; Database=baseDato; Uid=root; Pwd=contrasenia;");
             conexion.Open();
+
 
             MySqlCommand comandos = new MySqlCommand();
             comandos.Connection = conexion;
@@ -63,14 +64,13 @@ namespace ElPrograma
             }
         }
 
-      private void addUserControl(UserControl userControl)
+      public void addUserControl(UserControl userControl)
         {
             userControl.Dock = DockStyle.Fill;
             panelContenedor.Controls.Clear();
             panelContenedor.Controls.Add(userControl);
             userControl.BringToFront();
 
-                
         }
 
         private void btnIniciar_Click(object sender, EventArgs e)
@@ -79,12 +79,11 @@ namespace ElPrograma
             UC_Inicio uc = new UC_Inicio();
             addUserControl(uc);
 
-
-
         }
         private void btnMenu_Click(object sender, EventArgs e)
         {
-            
+            UC_Menu uc = new UC_Menu();
+            addUserControl(uc);
         }
             
         private void btnGestion_Click(object sender, EventArgs e)

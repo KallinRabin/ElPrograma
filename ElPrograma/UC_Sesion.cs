@@ -13,14 +13,20 @@ namespace ElPrograma
 {
     public partial class UC_Sesion : UserControl
     {
+        
         public UC_Sesion()
         {
             InitializeComponent();
+            
         }
 
-        private void button1_Click(object sender, EventArgs e)
+
+        
+
+
+        private void btnIniciarSesion_Click(object sender, EventArgs e)
         {
-            MySqlConnection conexion = new MySqlConnection("Server=localhost; Database=proyecto; Uid=Empleados; Pwd=empleado;");
+            MySqlConnection conexion = new MySqlConnection("Server=localhost; Database=baseDato; Uid=root; Pwd=contrasenia;");
             conexion.Open();
 
             MySqlCommand comandos = new MySqlCommand();
@@ -41,5 +47,7 @@ namespace ElPrograma
                 MessageBox.Show("Acceso Denegado");
             }
         }
+
+
     }
 }

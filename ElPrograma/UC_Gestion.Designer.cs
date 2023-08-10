@@ -28,12 +28,49 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.button1 = new System.Windows.Forms.Button();
+            this.btnIngresos = new System.Windows.Forms.Button();
+            this.btnEnviar2 = new System.Windows.Forms.Button();
             this.SuspendLayout();
+            // 
+            // button1
+            // 
+            this.button1.Font = new System.Drawing.Font("Roboto Bk", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button1.Location = new System.Drawing.Point(526, 342);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(198, 63);
+            this.button1.TabIndex = 1;
+            this.button1.Text = "Modificar Menu";
+            this.button1.UseVisualStyleBackColor = true;
+            // 
+            // btnIngresos
+            // 
+            this.btnIngresos.Font = new System.Drawing.Font("Roboto Bk", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnIngresos.Location = new System.Drawing.Point(318, 363);
+            this.btnIngresos.Name = "btnIngresos";
+            this.btnIngresos.Size = new System.Drawing.Size(136, 42);
+            this.btnIngresos.TabIndex = 2;
+            this.btnIngresos.Text = "Ingresos";
+            this.btnIngresos.UseVisualStyleBackColor = true;
+            // 
+            // btnEnviar2
+            // 
+            this.btnEnviar2.Font = new System.Drawing.Font("Roboto Bk", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnEnviar2.Location = new System.Drawing.Point(67, 363);
+            this.btnEnviar2.Name = "btnEnviar2";
+            this.btnEnviar2.Size = new System.Drawing.Size(136, 42);
+            this.btnEnviar2.TabIndex = 3;
+            this.btnEnviar2.Text = "Enviar";
+            this.btnEnviar2.UseVisualStyleBackColor = true;
             // 
             // UC_Gestion
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(18)))), ((int)(((byte)(39)))));
+            this.Controls.Add(this.btnEnviar2);
+            this.Controls.Add(this.btnIngresos);
+            this.Controls.Add(this.button1);
             this.Name = "UC_Gestion";
             this.Size = new System.Drawing.Size(737, 423);
             this.ResumeLayout(false);
@@ -41,5 +78,8 @@
         }
 
         #endregion
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnIngresos;
+        private System.Windows.Forms.Button btnEnviar2;
     }
 }

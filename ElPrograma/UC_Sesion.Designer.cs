@@ -30,7 +30,7 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(UC_Sesion));
             this.txtContraseña = new System.Windows.Forms.TextBox();
-            this.button1 = new System.Windows.Forms.Button();
+            this.btnIniciarSesion = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
@@ -42,16 +42,16 @@
             this.txtContraseña.Size = new System.Drawing.Size(131, 22);
             this.txtContraseña.TabIndex = 0;
             // 
-            // button1
+            // btnIniciarSesion
             // 
-            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 19.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.Location = new System.Drawing.Point(291, 281);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(131, 47);
-            this.button1.TabIndex = 1;
-            this.button1.Text = "Iniciar";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.btnIniciarSesion.Font = new System.Drawing.Font("Microsoft Sans Serif", 19.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnIniciarSesion.Location = new System.Drawing.Point(291, 281);
+            this.btnIniciarSesion.Name = "btnIniciarSesion";
+            this.btnIniciarSesion.Size = new System.Drawing.Size(131, 47);
+            this.btnIniciarSesion.TabIndex = 1;
+            this.btnIniciarSesion.Text = "Iniciar";
+            this.btnIniciarSesion.UseVisualStyleBackColor = true;
+            this.btnIniciarSesion.Click += new System.EventHandler(this.btnIniciarSesion_Click);
             // 
             // pictureBox1
             // 
@@ -69,7 +69,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(18)))), ((int)(((byte)(39)))));
             this.Controls.Add(this.pictureBox1);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.btnIniciarSesion);
             this.Controls.Add(this.txtContraseña);
             this.Name = "UC_Sesion";
             this.Size = new System.Drawing.Size(737, 423);
@@ -82,7 +82,7 @@
         #endregion
 
         private System.Windows.Forms.TextBox txtContraseña;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnIniciarSesion;
         private System.Windows.Forms.PictureBox pictureBox1;
     }
 }

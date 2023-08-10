@@ -78,3 +78,4 @@ C:\Users\mubra\OneDrive\Desktop\ElPrograma\ElPrograma\obj\Debug\ElPrograma.cspro
 C:\Users\mubra\OneDrive\Desktop\ElPrograma\ElPrograma\obj\Debug\ElPrograma.csproj.CopyComplete
 C:\Users\mubra\OneDrive\Desktop\ElPrograma\ElPrograma\obj\Debug\ElPrograma.exe
 C:\Users\mubra\OneDrive\Desktop\ElPrograma\ElPrograma\obj\Debug\ElPrograma.pdb
+C:\Users\paraj\Desktop\LaTuerca\ElPrograma\ElPrograma\obj\Debug\ElPrograma.UC_Menu.resources

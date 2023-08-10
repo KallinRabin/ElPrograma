@@ -106,6 +106,12 @@
     <Compile Include="UC_Inicio.Designer.cs">
       <DependentUpon>UC_Inicio.cs</DependentUpon>
     </Compile>
+    <Compile Include="UC_Menu.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UC_Menu.Designer.cs">
+      <DependentUpon>UC_Menu.cs</DependentUpon>
+    </Compile>
     <Compile Include="UC_Sesion.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -129,6 +135,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UC_Inicio.resx">
       <DependentUpon>UC_Inicio.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UC_Menu.resx">
+      <DependentUpon>UC_Menu.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UC_Sesion.resx">
       <DependentUpon>UC_Sesion.cs</DependentUpon>

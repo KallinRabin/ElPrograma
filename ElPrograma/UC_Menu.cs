@@ -10,13 +10,16 @@ using System.Windows.Forms;
 
 namespace ElPrograma
 {
-    public partial class UC_Gestion : UserControl
+    public partial class UC_Menu : UserControl
     {
-        public UC_Gestion()
+        public UC_Menu()
         {
             InitializeComponent();
         }
 
+        private void btnEnviar_Click(object sender, EventArgs e)
+        {
 
+        }
     }
 }
