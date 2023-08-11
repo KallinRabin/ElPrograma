@@ -79,3 +79,44 @@ C:\Users\mubra\OneDrive\Desktop\ElPrograma\ElPrograma\obj\Debug\ElPrograma.cspro
 C:\Users\mubra\OneDrive\Desktop\ElPrograma\ElPrograma\obj\Debug\ElPrograma.exe
 C:\Users\mubra\OneDrive\Desktop\ElPrograma\ElPrograma\obj\Debug\ElPrograma.pdb
 C:\Users\paraj\Desktop\LaTuerca\ElPrograma\ElPrograma\obj\Debug\ElPrograma.UC_Menu.resources
+C:\Users\Ian Gomez\OneDrive\Desktop\ElPrograma\ElPrograma\bin\Debug\ElPrograma.exe.config
+C:\Users\Ian Gomez\OneDrive\Desktop\ElPrograma\ElPrograma\bin\Debug\ElPrograma.exe
+C:\Users\Ian Gomez\OneDrive\Desktop\ElPrograma\ElPrograma\bin\Debug\ElPrograma.pdb
+C:\Users\Ian Gomez\OneDrive\Desktop\ElPrograma\ElPrograma\bin\Debug\BouncyCastle.Crypto.dll
+C:\Users\Ian Gomez\OneDrive\Desktop\ElPrograma\ElPrograma\bin\Debug\Google.Protobuf.dll
+C:\Users\Ian Gomez\OneDrive\Desktop\ElPrograma\ElPrograma\bin\Debug\K4os.Compression.LZ4.dll
+C:\Users\Ian Gomez\OneDrive\Desktop\ElPrograma\ElPrograma\bin\Debug\K4os.Compression.LZ4.Streams.dll
+C:\Users\Ian Gomez\OneDrive\Desktop\ElPrograma\ElPrograma\bin\Debug\K4os.Hash.xxHash.dll
+C:\Users\Ian Gomez\OneDrive\Desktop\ElPrograma\ElPrograma\bin\Debug\MySql.Data.dll
+C:\Users\Ian Gomez\OneDrive\Desktop\ElPrograma\ElPrograma\bin\Debug\System.Buffers.dll
+C:\Users\Ian Gomez\OneDrive\Desktop\ElPrograma\ElPrograma\bin\Debug\System.IO.Pipelines.dll
+C:\Users\Ian Gomez\OneDrive\Desktop\ElPrograma\ElPrograma\bin\Debug\System.Memory.dll
+C:\Users\Ian Gomez\OneDrive\Desktop\ElPrograma\ElPrograma\bin\Debug\System.Numerics.Vectors.dll
+C:\Users\Ian Gomez\OneDrive\Desktop\ElPrograma\ElPrograma\bin\Debug\System.Runtime.CompilerServices.Unsafe.dll
+C:\Users\Ian Gomez\OneDrive\Desktop\ElPrograma\ElPrograma\bin\Debug\System.Threading.Tasks.Extensions.dll
+C:\Users\Ian Gomez\OneDrive\Desktop\ElPrograma\ElPrograma\bin\Debug\BouncyCastle.Crypto.xml
+C:\Users\Ian Gomez\OneDrive\Desktop\ElPrograma\ElPrograma\bin\Debug\Google.Protobuf.pdb
+C:\Users\Ian Gomez\OneDrive\Desktop\ElPrograma\ElPrograma\bin\Debug\Google.Protobuf.xml
+C:\Users\Ian Gomez\OneDrive\Desktop\ElPrograma\ElPrograma\bin\Debug\K4os.Compression.LZ4.xml
+C:\Users\Ian Gomez\OneDrive\Desktop\ElPrograma\ElPrograma\bin\Debug\K4os.Compression.LZ4.Streams.xml
+C:\Users\Ian Gomez\OneDrive\Desktop\ElPrograma\ElPrograma\bin\Debug\K4os.Hash.xxHash.xml
+C:\Users\Ian Gomez\OneDrive\Desktop\ElPrograma\ElPrograma\bin\Debug\MySql.Data.xml
+C:\Users\Ian Gomez\OneDrive\Desktop\ElPrograma\ElPrograma\bin\Debug\System.Buffers.xml
+C:\Users\Ian Gomez\OneDrive\Desktop\ElPrograma\ElPrograma\bin\Debug\System.IO.Pipelines.xml
+C:\Users\Ian Gomez\OneDrive\Desktop\ElPrograma\ElPrograma\bin\Debug\System.Memory.xml
+C:\Users\Ian Gomez\OneDrive\Desktop\ElPrograma\ElPrograma\bin\Debug\System.Numerics.Vectors.xml
+C:\Users\Ian Gomez\OneDrive\Desktop\ElPrograma\ElPrograma\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
+C:\Users\Ian Gomez\OneDrive\Desktop\ElPrograma\ElPrograma\bin\Debug\System.Threading.Tasks.Extensions.xml
+C:\Users\Ian Gomez\OneDrive\Desktop\ElPrograma\ElPrograma\obj\Debug\ElPrograma.csproj.AssemblyReference.cache
+C:\Users\Ian Gomez\OneDrive\Desktop\ElPrograma\ElPrograma\obj\Debug\ElPrograma.csproj.SuggestedBindingRedirects.cache
+C:\Users\Ian Gomez\OneDrive\Desktop\ElPrograma\ElPrograma\obj\Debug\ElPrograma.menuVertical.resources
+C:\Users\Ian Gomez\OneDrive\Desktop\ElPrograma\ElPrograma\obj\Debug\ElPrograma.Properties.Resources.resources
+C:\Users\Ian Gomez\OneDrive\Desktop\ElPrograma\ElPrograma\obj\Debug\ElPrograma.UC_Gestion.resources
+C:\Users\Ian Gomez\OneDrive\Desktop\ElPrograma\ElPrograma\obj\Debug\ElPrograma.UC_Inicio.resources
+C:\Users\Ian Gomez\OneDrive\Desktop\ElPrograma\ElPrograma\obj\Debug\ElPrograma.UC_Menu.resources
+C:\Users\Ian Gomez\OneDrive\Desktop\ElPrograma\ElPrograma\obj\Debug\ElPrograma.UC_Sesion.resources
+C:\Users\Ian Gomez\OneDrive\Desktop\ElPrograma\ElPrograma\obj\Debug\ElPrograma.csproj.GenerateResource.cache
+C:\Users\Ian Gomez\OneDrive\Desktop\ElPrograma\ElPrograma\obj\Debug\ElPrograma.csproj.CoreCompileInputs.cache
+C:\Users\Ian Gomez\OneDrive\Desktop\ElPrograma\ElPrograma\obj\Debug\ElPrograma.csproj.CopyComplete
+C:\Users\Ian Gomez\OneDrive\Desktop\ElPrograma\ElPrograma\obj\Debug\ElPrograma.exe
+C:\Users\Ian Gomez\OneDrive\Desktop\ElPrograma\ElPrograma\obj\Debug\ElPrograma.pdb

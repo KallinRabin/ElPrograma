@@ -13,11 +13,12 @@ namespace ElPrograma
 {
     public partial class UC_Sesion : UserControl
     {
-        
-        public UC_Sesion()
+        menuVertical menuVertical; 
+        public UC_Sesion(menuVertical menuVertical)
         {
             InitializeComponent();
             
+            this.menuVertical = menuVertical;   
         }
 
 
@@ -26,7 +27,7 @@ namespace ElPrograma
 
         private void btnIniciarSesion_Click(object sender, EventArgs e)
         {
-            MySqlConnection conexion = new MySqlConnection("Server=localhost; Database=baseDato; Uid=root; Pwd=contrasenia;");
+            MySqlConnection conexion = new MySqlConnection("Server=localhost; Database=baseDato; Uid=root; Pwd=contrasena;");
             conexion.Open();
 
             MySqlCommand comandos = new MySqlCommand();
@@ -40,6 +41,8 @@ namespace ElPrograma
             if (datos.Read())
             {
                 MessageBox.Show("Bienvenido");
+                 UC_Gestion uC_Gestion = new UC_Gestion();
+                menuVertical.addUserControl(uC_Gestion);
                 this.Hide();
             }
             else

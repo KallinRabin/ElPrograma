@@ -30,7 +30,7 @@ namespace ElPrograma
         {
             InitializeComponent();
 
-            MySqlConnection conexion = new MySqlConnection("Server=localhost; Database=baseDato; Uid=root; Pwd=contrasenia;");
+            MySqlConnection conexion = new MySqlConnection("Server=localhost; Database=baseDato; Uid=root; Pwd=contrasena;");
             conexion.Open();
 
 
@@ -88,7 +88,8 @@ namespace ElPrograma
             
         private void btnGestion_Click(object sender, EventArgs e)
         {
-            UC_Sesion uc = new UC_Sesion();
+            
+            UC_Sesion uc = new UC_Sesion(this);
             addUserControl(uc);
         }
 
