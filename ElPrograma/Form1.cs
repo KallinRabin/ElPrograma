@@ -30,7 +30,7 @@ namespace ElPrograma
         {
             InitializeComponent();
 
-            MySqlConnection conexion = new MySqlConnection("Server=localhost; Database=baseDato; Uid=root; Pwd=contrasena;");
+            MySqlConnection conexion = new MySqlConnection("Server=localhost; Database=baseDato; Uid=root; Pwd=contrasenia;");
             conexion.Open();
 
 
@@ -97,6 +97,13 @@ namespace ElPrograma
         {
 
         }
+
+        private void panelTitulo_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+
     }
 
 }

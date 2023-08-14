@@ -17,6 +17,11 @@ namespace ElPrograma
             InitializeComponent();
         }
 
+        private void btnModifcarMenu_Click(object sender, EventArgs e)
+        {
+            ModificarMenu modificarMenu = new ModificarMenu();
+            modificarMenu.ShowDialog(); 
 
+        }
     }
 }
