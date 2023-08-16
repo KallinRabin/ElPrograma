@@ -27,7 +27,7 @@ namespace ElPrograma
 
         private void btnIniciarSesion_Click(object sender, EventArgs e)
         {
-            MySqlConnection conexion = new MySqlConnection("Server=localhost; Database=baseDato; Uid=root; Pwd=contrasenia;");
+            MySqlConnection conexion = new MySqlConnection("Server=localhost; Database=baseDato; Uid=root; Pwd=contrasena;");
             conexion.Open();
 
             MySqlCommand comandos = new MySqlCommand();

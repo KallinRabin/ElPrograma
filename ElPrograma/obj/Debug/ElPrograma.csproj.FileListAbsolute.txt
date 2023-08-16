@@ -121,3 +121,4 @@ C:\Users\Ian Gomez\OneDrive\Desktop\ElPrograma\ElPrograma\obj\Debug\ElPrograma.c
 C:\Users\Ian Gomez\OneDrive\Desktop\ElPrograma\ElPrograma\obj\Debug\ElPrograma.exe
 C:\Users\Ian Gomez\OneDrive\Desktop\ElPrograma\ElPrograma\obj\Debug\ElPrograma.pdb
 C:\Users\paraj\Desktop\LaTuerca\ElPrograma\ElPrograma\obj\Debug\ElPrograma.ModificarMenu.resources
+C:\Users\Ian Gomez\OneDrive\Desktop\ElPrograma\ElPrograma\obj\Debug\ElPrograma.ModificarMenu.resources
