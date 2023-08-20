@@ -54,64 +54,80 @@ namespace ElPrograma
 
         private void btnCargar_Click(object sender, EventArgs e)
         {
-
             string connectionString = "server=localhost;database=baseDato;user=root;password=contrasena;";
-            long IDultimacategoria=-1;
-            //creo una conexion 
-            using (MySqlConnection conexion = new MySqlConnection(connectionString))
-            {
-                try
-                {
-                    conexion.Open(); //abro la conexion
+            long IDultimacategoria = -1;
 
-                    //Seleccionamos los atributos de categoria y pedimos que los llene el usuario 
-                    string insertQuery = "INSERT INTO `categoria` (`Nombre`) VALUES ('" + txtNuevaCategoria.Text + "');";  
-                    //inserta los datos en la BD
+            try
+            {
+                using (MySqlConnection conexion = new MySqlConnection(connectionString))
+                {
+                    conexion.Open();
+
+                    if (string.IsNullOrWhiteSpace(txtNuevaCategoria.Text) ||
+                        (string.IsNullOrWhiteSpace(texprod1.Text) || string.IsNullOrWhiteSpace(texprecio1.Text)))
+                    {
+                        throw new Exception("El campo 'Nueva Categoría' y los campos 'Nombre' y 'Precio' del primer producto no pueden estar vacíos.");
+                    }
+
+                    string insertQuery = "INSERT INTO `categoria` (`Nombre`) VALUES (@Nombre);";
+
                     using (MySqlCommand cmd = new MySqlCommand(insertQuery, conexion))
                     {
-                     
+                        cmd.Parameters.AddWithValue("@Nombre", txtNuevaCategoria.Text);
                         int rowsAffected = cmd.ExecuteNonQuery();
-
-                        //pide la ultima ID agregada
                         IDultimacategoria = cmd.LastInsertedId;
-                        
-
-                        MessageBox.Show($"Nueva categoria agregada");
+                        MessageBox.Show("Nueva categoria agregada");
                     }
                 }
-                catch (Exception ex)
-                {
-                   MessageBox.Show("Error: " + ex.Message);
-                }            
-                conexion.Close(); //cerramos la base de datos 
 
+                if (IDultimacategoria != -1)
+                {
+                    GuardarProducto(IDultimacategoria, texprod1.Text, texprecio1.Text);
+                    GuardarProducto(IDultimacategoria, texprod2.Text, texprecio2.Text);
+                    GuardarProducto(IDultimacategoria, texprod3.Text, texprecio3.Text);
+                    GuardarProducto(IDultimacategoria, texprod4.Text, texprecio4.Text);
+                    GuardarProducto(IDultimacategoria, texprod5.Text, texprecio5.Text);
+                    GuardarProducto(IDultimacategoria, texprod6.Text, texprecio6.Text);
+                    MessageBox.Show("Nuevos platos agregados");
+                }
             }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message);
+            }
+        }
+
+        private void GuardarProducto(long categoriaId, string nombre, string precio)
+        {
+            if (string.IsNullOrWhiteSpace(nombre) || string.IsNullOrWhiteSpace(precio) ) 
+            {
+                return;            
+            
+            }
+            string connectionString = "server=localhost;database=baseDato;user=root;password=contrasena;";
+
             using (MySqlConnection conexion = new MySqlConnection(connectionString))
             {
                 try
                 {
                     conexion.Open();
- 
-                    if (IDultimacategoria != -1)
+
+                    string insertQuery = "INSERT INTO `platos`(`Nombre`,`Descripcion`, `Precio`, `ID_Categoria`) VALUES (@Nombre, 'hola', @Precio, @ID_Categoria);";
+
+                    using (MySqlCommand cmd = new MySqlCommand(insertQuery, conexion))
                     {
-                        string insertQuery = "INSERT INTO `platos`(`Nombre`,`Descripcion`, `Precio`, `ID_Categoria`) VALUES ('" + texprod1.Text + "','hola'," + texprecio1.Text + "," + IDultimacategoria + "); ";
+                        cmd.Parameters.AddWithValue("@Nombre", nombre);
+                        cmd.Parameters.AddWithValue("@Precio", precio);
+                        cmd.Parameters.AddWithValue("@ID_Categoria", categoriaId);
 
-                        using (MySqlCommand cmd = new MySqlCommand(insertQuery, conexion))
-                        {
-
-                            int rowsAffected = cmd.ExecuteNonQuery();
-
-                            MessageBox.Show($"Nuevo plato agregado ");
-                        }
+                        int rowsAffected = cmd.ExecuteNonQuery();
                     }
                 }
                 catch (Exception ex)
                 {
                     MessageBox.Show("Error: " + ex.Message);
                 }
-                conexion.Close();
-
             }
-        }   
+        }
     }
-}
+    }

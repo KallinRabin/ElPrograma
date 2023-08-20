@@ -38,16 +38,16 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.texprod1 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.textBox4 = new System.Windows.Forms.TextBox();
-            this.textBox5 = new System.Windows.Forms.TextBox();
-            this.textBox6 = new System.Windows.Forms.TextBox();
-            this.textBox7 = new System.Windows.Forms.TextBox();
-            this.textBox8 = new System.Windows.Forms.TextBox();
-            this.textBox9 = new System.Windows.Forms.TextBox();
-            this.textBox10 = new System.Windows.Forms.TextBox();
-            this.textBox11 = new System.Windows.Forms.TextBox();
+            this.texprod4 = new System.Windows.Forms.TextBox();
+            this.texprod3 = new System.Windows.Forms.TextBox();
+            this.texprod2 = new System.Windows.Forms.TextBox();
+            this.texprod6 = new System.Windows.Forms.TextBox();
+            this.texprod5 = new System.Windows.Forms.TextBox();
+            this.texprecio5 = new System.Windows.Forms.TextBox();
+            this.texprecio6 = new System.Windows.Forms.TextBox();
+            this.texprecio2 = new System.Windows.Forms.TextBox();
+            this.texprecio3 = new System.Windows.Forms.TextBox();
+            this.texprecio4 = new System.Windows.Forms.TextBox();
             this.texprecio1 = new System.Windows.Forms.TextBox();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.btnCargar = new System.Windows.Forms.Button();
@@ -166,85 +166,85 @@
             this.texprod1.Size = new System.Drawing.Size(120, 20);
             this.texprod1.TabIndex = 10;
             // 
-            // textBox2
+            // texprod4
             // 
-            this.textBox2.Location = new System.Drawing.Point(90, 281);
-            this.textBox2.Margin = new System.Windows.Forms.Padding(2);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(120, 20);
-            this.textBox2.TabIndex = 11;
+            this.texprod4.Location = new System.Drawing.Point(90, 281);
+            this.texprod4.Margin = new System.Windows.Forms.Padding(2);
+            this.texprod4.Name = "texprod4";
+            this.texprod4.Size = new System.Drawing.Size(120, 20);
+            this.texprod4.TabIndex = 11;
             // 
-            // textBox3
+            // texprod3
             // 
-            this.textBox3.Location = new System.Drawing.Point(90, 249);
-            this.textBox3.Margin = new System.Windows.Forms.Padding(2);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(120, 20);
-            this.textBox3.TabIndex = 12;
+            this.texprod3.Location = new System.Drawing.Point(90, 249);
+            this.texprod3.Margin = new System.Windows.Forms.Padding(2);
+            this.texprod3.Name = "texprod3";
+            this.texprod3.Size = new System.Drawing.Size(120, 20);
+            this.texprod3.TabIndex = 12;
             // 
-            // textBox4
+            // texprod2
             // 
-            this.textBox4.Location = new System.Drawing.Point(90, 215);
-            this.textBox4.Margin = new System.Windows.Forms.Padding(2);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(120, 20);
-            this.textBox4.TabIndex = 13;
+            this.texprod2.Location = new System.Drawing.Point(90, 215);
+            this.texprod2.Margin = new System.Windows.Forms.Padding(2);
+            this.texprod2.Name = "texprod2";
+            this.texprod2.Size = new System.Drawing.Size(120, 20);
+            this.texprod2.TabIndex = 13;
             // 
-            // textBox5
+            // texprod6
             // 
-            this.textBox5.Location = new System.Drawing.Point(90, 349);
-            this.textBox5.Margin = new System.Windows.Forms.Padding(2);
-            this.textBox5.Name = "textBox5";
-            this.textBox5.Size = new System.Drawing.Size(120, 20);
-            this.textBox5.TabIndex = 14;
+            this.texprod6.Location = new System.Drawing.Point(90, 349);
+            this.texprod6.Margin = new System.Windows.Forms.Padding(2);
+            this.texprod6.Name = "texprod6";
+            this.texprod6.Size = new System.Drawing.Size(120, 20);
+            this.texprod6.TabIndex = 14;
             // 
-            // textBox6
+            // texprod5
             // 
-            this.textBox6.Location = new System.Drawing.Point(90, 314);
-            this.textBox6.Margin = new System.Windows.Forms.Padding(2);
-            this.textBox6.Name = "textBox6";
-            this.textBox6.Size = new System.Drawing.Size(120, 20);
-            this.textBox6.TabIndex = 15;
+            this.texprod5.Location = new System.Drawing.Point(90, 314);
+            this.texprod5.Margin = new System.Windows.Forms.Padding(2);
+            this.texprod5.Name = "texprod5";
+            this.texprod5.Size = new System.Drawing.Size(120, 20);
+            this.texprod5.TabIndex = 15;
             // 
-            // textBox7
+            // texprecio5
             // 
-            this.textBox7.Location = new System.Drawing.Point(284, 314);
-            this.textBox7.Margin = new System.Windows.Forms.Padding(2);
-            this.textBox7.Name = "textBox7";
-            this.textBox7.Size = new System.Drawing.Size(110, 20);
-            this.textBox7.TabIndex = 21;
+            this.texprecio5.Location = new System.Drawing.Point(284, 314);
+            this.texprecio5.Margin = new System.Windows.Forms.Padding(2);
+            this.texprecio5.Name = "texprecio5";
+            this.texprecio5.Size = new System.Drawing.Size(110, 20);
+            this.texprecio5.TabIndex = 21;
             // 
-            // textBox8
+            // texprecio6
             // 
-            this.textBox8.Location = new System.Drawing.Point(284, 349);
-            this.textBox8.Margin = new System.Windows.Forms.Padding(2);
-            this.textBox8.Name = "textBox8";
-            this.textBox8.Size = new System.Drawing.Size(110, 20);
-            this.textBox8.TabIndex = 20;
+            this.texprecio6.Location = new System.Drawing.Point(284, 349);
+            this.texprecio6.Margin = new System.Windows.Forms.Padding(2);
+            this.texprecio6.Name = "texprecio6";
+            this.texprecio6.Size = new System.Drawing.Size(110, 20);
+            this.texprecio6.TabIndex = 20;
             // 
-            // textBox9
+            // texprecio2
             // 
-            this.textBox9.Location = new System.Drawing.Point(284, 215);
-            this.textBox9.Margin = new System.Windows.Forms.Padding(2);
-            this.textBox9.Name = "textBox9";
-            this.textBox9.Size = new System.Drawing.Size(110, 20);
-            this.textBox9.TabIndex = 19;
+            this.texprecio2.Location = new System.Drawing.Point(284, 215);
+            this.texprecio2.Margin = new System.Windows.Forms.Padding(2);
+            this.texprecio2.Name = "texprecio2";
+            this.texprecio2.Size = new System.Drawing.Size(110, 20);
+            this.texprecio2.TabIndex = 19;
             // 
-            // textBox10
+            // texprecio3
             // 
-            this.textBox10.Location = new System.Drawing.Point(284, 249);
-            this.textBox10.Margin = new System.Windows.Forms.Padding(2);
-            this.textBox10.Name = "textBox10";
-            this.textBox10.Size = new System.Drawing.Size(110, 20);
-            this.textBox10.TabIndex = 18;
+            this.texprecio3.Location = new System.Drawing.Point(284, 249);
+            this.texprecio3.Margin = new System.Windows.Forms.Padding(2);
+            this.texprecio3.Name = "texprecio3";
+            this.texprecio3.Size = new System.Drawing.Size(110, 20);
+            this.texprecio3.TabIndex = 18;
             // 
-            // textBox11
+            // texprecio4
             // 
-            this.textBox11.Location = new System.Drawing.Point(284, 281);
-            this.textBox11.Margin = new System.Windows.Forms.Padding(2);
-            this.textBox11.Name = "textBox11";
-            this.textBox11.Size = new System.Drawing.Size(110, 20);
-            this.textBox11.TabIndex = 17;
+            this.texprecio4.Location = new System.Drawing.Point(284, 281);
+            this.texprecio4.Margin = new System.Windows.Forms.Padding(2);
+            this.texprecio4.Name = "texprecio4";
+            this.texprecio4.Size = new System.Drawing.Size(110, 20);
+            this.texprecio4.TabIndex = 17;
             // 
             // texprecio1
             // 
@@ -294,17 +294,17 @@
             this.Controls.Add(this.txtNuevaCategoria);
             this.Controls.Add(this.btnCargar);
             this.Controls.Add(this.pictureBox2);
-            this.Controls.Add(this.textBox7);
-            this.Controls.Add(this.textBox8);
-            this.Controls.Add(this.textBox9);
-            this.Controls.Add(this.textBox10);
-            this.Controls.Add(this.textBox11);
+            this.Controls.Add(this.texprecio5);
+            this.Controls.Add(this.texprecio6);
+            this.Controls.Add(this.texprecio2);
+            this.Controls.Add(this.texprecio3);
+            this.Controls.Add(this.texprecio4);
             this.Controls.Add(this.texprecio1);
-            this.Controls.Add(this.textBox6);
-            this.Controls.Add(this.textBox5);
-            this.Controls.Add(this.textBox4);
-            this.Controls.Add(this.textBox3);
-            this.Controls.Add(this.textBox2);
+            this.Controls.Add(this.texprod5);
+            this.Controls.Add(this.texprod6);
+            this.Controls.Add(this.texprod2);
+            this.Controls.Add(this.texprod3);
+            this.Controls.Add(this.texprod4);
             this.Controls.Add(this.texprod1);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
@@ -336,16 +336,16 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TextBox texprod1;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.TextBox textBox3;
-        private System.Windows.Forms.TextBox textBox4;
-        private System.Windows.Forms.TextBox textBox5;
-        private System.Windows.Forms.TextBox textBox6;
-        private System.Windows.Forms.TextBox textBox7;
-        private System.Windows.Forms.TextBox textBox8;
-        private System.Windows.Forms.TextBox textBox9;
-        private System.Windows.Forms.TextBox textBox10;
-        private System.Windows.Forms.TextBox textBox11;
+        private System.Windows.Forms.TextBox texprod4;
+        private System.Windows.Forms.TextBox texprod3;
+        private System.Windows.Forms.TextBox texprod2;
+        private System.Windows.Forms.TextBox texprod6;
+        private System.Windows.Forms.TextBox texprod5;
+        private System.Windows.Forms.TextBox texprecio5;
+        private System.Windows.Forms.TextBox texprecio6;
+        private System.Windows.Forms.TextBox texprecio2;
+        private System.Windows.Forms.TextBox texprecio3;
+        private System.Windows.Forms.TextBox texprecio4;
         private System.Windows.Forms.TextBox texprecio1;
         private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.Button btnCargar;
