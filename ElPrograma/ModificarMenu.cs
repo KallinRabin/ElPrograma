@@ -17,6 +17,14 @@ namespace ElPrograma
 {
     public partial class ModificarMenu : Form
     {
+        private int margin = 10;
+
+        private int panelCounter = 0;
+        private int panelHeight = 50;
+        private int initialPanelPositionY = 44;
+
+        private string rutaImagenSeleccionada = "";
+
         [DllImport("user32.dll", EntryPoint = "ReleaseCapture")]
         private extern static void ReleaseCapture();
 
@@ -51,10 +59,74 @@ namespace ElPrograma
                 SendMessage(Handle, WM_NCLBUTTONDOWN, HT_CAPTION, 0);
             }
         }
+        private void CrearCategoria(string contenido, string rutaImagen)
+        {
+
+            Panel nuevoPanel = new Panel();
+            nuevoPanel.Height = panelHeight;
+            nuevoPanel.BorderStyle = BorderStyle.FixedSingle;
+            nuevoPanel.BackColor = Color.LightGray;
+
+            TableLayoutPanel tableLayout = new TableLayoutPanel();
+            tableLayout.Dock = DockStyle.Fill;
+
+            PictureBox pictureBox = new PictureBox();
+            pictureBox.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBox.Image = Image.FromFile(rutaImagen);
+            pictureBox.Size = new Size(30, 30); // Ajustar el tamaño del PictureBox
+
+            Label nuevoLabel = new Label();
+            nuevoLabel.Text = contenido;
+            nuevoLabel.AutoSize = true;
+            nuevoLabel.Font = new Font("Roboto Bk", 10);
+
+            tableLayout.Controls.Add(pictureBox, 0, 0);
+            tableLayout.Controls.Add(nuevoLabel, 1, 0);
+            tableLayout.RowStyles.Add(new RowStyle(SizeType.Percent, 100)); // Centra verticalmente los controles
+
+            nuevoPanel.Controls.Add(tableLayout);
+            panel1.Controls.Add(nuevoPanel);
+
+            int panelPosicionY = initialPanelPositionY + (panelCounter * (panelHeight + margin));
+            nuevoPanel.Location = new Point(10, panelPosicionY);
+
+            panelCounter++;
+
+        }
+        private void MostrarDatos()
+        {
+
+
+            string connectionString = "server=localhost;database=baseDato;user=root;password=contrasenia;";
+            string query = "SELECT nombre FROM categoria ORDER BY ID DESC LIMIT 1;";
+
+
+            using (MySqlConnection connection = new MySqlConnection(connectionString))
+            {
+                using (MySqlCommand command = new MySqlCommand(query, connection))
+                {
+                    connection.Open();
+
+                    MySqlDataReader reader = command.ExecuteReader();
+
+                    if (reader.Read())
+                    {
+                        string valor = reader["nombre"].ToString();
+                    }
+                    else
+                    {
+                        MessageBox.Show("No se encontraron registros en la base de datos.");
+                    }
+
+                    reader.Close();
+
+                }
+            }
+        }
 
         private void btnCargar_Click(object sender, EventArgs e)
         {
-            string connectionString = "server=localhost;database=baseDato;user=root;password=contrasena;";
+            string connectionString = "server=localhost;database=baseDato;user=root;password=contrasenia;";
             long IDultimacategoria = -1;
 
             try
@@ -63,21 +135,41 @@ namespace ElPrograma
                 {
                     conexion.Open();
 
-                    if (string.IsNullOrWhiteSpace(txtNuevaCategoria.Text) ||
-                        (string.IsNullOrWhiteSpace(texprod1.Text) || string.IsNullOrWhiteSpace(texprecio1.Text)))
+                    //MessageBox.Show(string.IsNullOrWhiteSpace(txtNuevaCategoria.Text).ToString());
+                    //MessageBox.Show(string.IsNullOrWhiteSpace(rutaImagenSeleccionada).ToString());
+
+                     if (!string.IsNullOrWhiteSpace(txtNuevaCategoria.Text) && !string.IsNullOrWhiteSpace(texprod1.Text) && !string.IsNullOrWhiteSpace(texprecio1.Text) && rutaImagenSeleccionada!="")
                     {
-                        throw new Exception("El campo 'Nueva Categoría' y los campos 'Nombre' y 'Precio' del primer producto no pueden estar vacíos.");
+
+
+                        string valor = txtNuevaCategoria.Text;
+                        if (!string.IsNullOrWhiteSpace(valor))
+                        {
+                            CrearCategoria(valor, rutaImagenSeleccionada);
+                            pcbAgregarImagen.Image = null;
+
+                            string insertQuery = "INSERT INTO `categoria` (`Nombre`) VALUES (@Nombre);";
+
+                            using (MySqlCommand cmd = new MySqlCommand(insertQuery, conexion))
+                            {
+                                cmd.Parameters.AddWithValue("@Nombre", txtNuevaCategoria.Text);
+                                int rowsAffected = cmd.ExecuteNonQuery();
+                                IDultimacategoria = cmd.LastInsertedId;
+                                MessageBox.Show("Nueva categoria agregada");
+                            }
+                        }
+
+                    }
+                    else
+                    {
+                        MessageBox.Show("El campo 'Nueva Categoría' y los campos 'Nombre' y 'Precio' del primer producto no pueden estar vacíos.", "Por favor, selecciona una imagen primero.");
                     }
 
-                    string insertQuery = "INSERT INTO `categoria` (`Nombre`) VALUES (@Nombre);";
+                   
+                    
+                
 
-                    using (MySqlCommand cmd = new MySqlCommand(insertQuery, conexion))
-                    {
-                        cmd.Parameters.AddWithValue("@Nombre", txtNuevaCategoria.Text);
-                        int rowsAffected = cmd.ExecuteNonQuery();
-                        IDultimacategoria = cmd.LastInsertedId;
-                        MessageBox.Show("Nueva categoria agregada");
-                    }
+                    
                 }
 
                 if (IDultimacategoria != -1)
@@ -95,6 +187,25 @@ namespace ElPrograma
             {
                 MessageBox.Show("Error: " + ex.Message);
             }
+
+           /* if (!string.IsNullOrWhiteSpace(rutaImagenSeleccionada))
+            {
+                string valor = txtNuevaCategoria.Text;
+
+                if (!string.IsNullOrWhiteSpace(valor))
+                {
+                    CrearCategoria(valor, rutaImagenSeleccionada);
+                    pcbAgregarImagen.Image = null;
+                }
+
+            }
+            else
+            {
+                MessageBox.Show("Por favor, selecciona una imagen primero.");
+            }*/
+
+            MostrarDatos();
+
         }
 
         private void GuardarProducto(long categoriaId, string nombre, string precio)
@@ -104,7 +215,7 @@ namespace ElPrograma
                 return;            
             
             }
-            string connectionString = "server=localhost;database=baseDato;user=root;password=contrasena;";
+            string connectionString = "server=localhost;database=baseDato;user=root;password=contrasenia;";
 
             using (MySqlConnection conexion = new MySqlConnection(connectionString))
             {
@@ -127,6 +238,26 @@ namespace ElPrograma
                 {
                     MessageBox.Show("Error: " + ex.Message);
                 }
+            }
+
+        }
+
+        private void pcbRegresar_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void pcbAgregarImagen_DoubleClick(object sender, EventArgs e)
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Filter = "Archivos de imagen|*.jpg;*.jpeg;*.png;*.gif;*.bmp|Todos los archivos|*.*";
+
+            if (openFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                rutaImagenSeleccionada = openFileDialog.FileName;
+
+                pcbAgregarImagen.Image = Image.FromFile(rutaImagenSeleccionada);
+                pcbAgregarImagen.SizeMode = PictureBoxSizeMode.StretchImage;
             }
         }
     }
