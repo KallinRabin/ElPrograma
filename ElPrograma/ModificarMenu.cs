@@ -7,6 +7,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
@@ -97,7 +98,7 @@ namespace ElPrograma
         {
 
 
-            string connectionString = "server=localhost;database=baseDato;user=root;password=contrasenia;";
+            string connectionString = "server=localhost;database=baseDato;user=root;password=contrasena;";
             string query = "SELECT nombre FROM categoria ORDER BY ID DESC LIMIT 1;";
 
 
@@ -126,7 +127,7 @@ namespace ElPrograma
 
         private void btnCargar_Click(object sender, EventArgs e)
         {
-            string connectionString = "server=localhost;database=baseDato;user=root;password=contrasenia;";
+            string connectionString = "server=localhost;database=baseDato;user=root;password=contrasena;";
             long IDultimacategoria = -1;
 
             try
@@ -135,16 +136,16 @@ namespace ElPrograma
                 {
                     conexion.Open();
 
-                    //MessageBox.Show(string.IsNullOrWhiteSpace(txtNuevaCategoria.Text).ToString());
-                    //MessageBox.Show(string.IsNullOrWhiteSpace(rutaImagenSeleccionada).ToString());
+                    
 
-                     if (!string.IsNullOrWhiteSpace(txtNuevaCategoria.Text) && !string.IsNullOrWhiteSpace(texprod1.Text) && !string.IsNullOrWhiteSpace(texprecio1.Text) && rutaImagenSeleccionada!="")
+                     if (!string.IsNullOrWhiteSpace(txtNuevaCategoria.Text) && !string.IsNullOrWhiteSpace(texprod1.Text) && !string.IsNullOrWhiteSpace(texprecio1.Text ) && rutaImagenSeleccionada!="")
                     {
-
+                         
 
                         string valor = txtNuevaCategoria.Text;
                         if (!string.IsNullOrWhiteSpace(valor))
                         {
+                            MessageBox.Show(rutaImagenSeleccionada);
                             CrearCategoria(valor, rutaImagenSeleccionada);
                             pcbAgregarImagen.Image = null;
 
@@ -188,22 +189,6 @@ namespace ElPrograma
                 MessageBox.Show("Error: " + ex.Message);
             }
 
-           /* if (!string.IsNullOrWhiteSpace(rutaImagenSeleccionada))
-            {
-                string valor = txtNuevaCategoria.Text;
-
-                if (!string.IsNullOrWhiteSpace(valor))
-                {
-                    CrearCategoria(valor, rutaImagenSeleccionada);
-                    pcbAgregarImagen.Image = null;
-                }
-
-            }
-            else
-            {
-                MessageBox.Show("Por favor, selecciona una imagen primero.");
-            }*/
-
             MostrarDatos();
 
         }
@@ -215,7 +200,7 @@ namespace ElPrograma
                 return;            
             
             }
-            string connectionString = "server=localhost;database=baseDato;user=root;password=contrasenia;";
+            string connectionString = "server=localhost;database=baseDato;user=root;password=contrasena;";
 
             using (MySqlConnection conexion = new MySqlConnection(connectionString))
             {
@@ -254,10 +239,39 @@ namespace ElPrograma
 
             if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
-                rutaImagenSeleccionada = openFileDialog.FileName;
+               rutaImagenSeleccionada = openFileDialog.FileName;
 
                 pcbAgregarImagen.Image = Image.FromFile(rutaImagenSeleccionada);
                 pcbAgregarImagen.SizeMode = PictureBoxSizeMode.StretchImage;
+
+                // Convertir la imagen en un byte array
+                byte[] imagenBytes = ImageToByteArray(pcbAgregarImagen.Image);
+
+                // Aquí deberías reemplazar "TuConnectionString" con la cadena de conexión a tu base de datos
+                using (MySqlConnection connection = new MySqlConnection("server=localhost;database=baseDato;user=root;password=contrasena"))
+                {
+                    connection.Open();
+
+                    // Crear la consulta SQL para insertar la imagen en la base de datos
+                    string query = "INSERT INTO categoria (Imagen) VALUES (@Imagen)";
+                    using (MySqlCommand command = new MySqlCommand(query, connection))
+                    {
+                        // Agregar el parámetro de la imagen
+                        command.Parameters.AddWithValue("@Imagen", imagenBytes);
+
+                        // Ejecutar la consulta
+                        command.ExecuteNonQuery();
+                    }
+                }
+            }
+        }
+
+        private byte[] ImageToByteArray(Image image)
+        {
+            using (MemoryStream memoryStream = new MemoryStream())
+            {
+                image.Save(memoryStream, System.Drawing.Imaging.ImageFormat.Jpeg); // Puedes ajustar el formato aquí
+                return memoryStream.ToArray();
             }
         }
     }
