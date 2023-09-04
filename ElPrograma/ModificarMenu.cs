@@ -13,6 +13,7 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace ElPrograma
 {
@@ -39,6 +40,22 @@ namespace ElPrograma
         public ModificarMenu()
         {
             InitializeComponent();
+
+            texprecio1.KeyPress += textBoxprecio_KeyPress;
+            texprecio2.KeyPress += textBoxprecio_KeyPress;
+            texprecio3.KeyPress += textBoxprecio_KeyPress;
+            texprecio4.KeyPress += textBoxprecio_KeyPress;
+            texprecio5.KeyPress += textBoxprecio_KeyPress;
+            texprecio6.KeyPress += textBoxprecio_KeyPress;
+
+           texprod1.KeyPress += textBoxnombre_KeyPress;
+            texprod2.KeyPress += textBoxnombre_KeyPress;
+            texprod3.KeyPress += textBoxnombre_KeyPress;
+            texprod4.KeyPress += textBoxnombre_KeyPress;
+            texprod5.KeyPress += textBoxnombre_KeyPress;
+            texprod6.KeyPress += textBoxnombre_KeyPress;
+            txtNuevaCategoria.KeyPress += textBoxnombre_KeyPress;
+
         }
 
         private void btnCerrar_Click(object sender, EventArgs e)
@@ -274,5 +291,23 @@ namespace ElPrograma
                 return memoryStream.ToArray();
             }
         }
+
+        private void textBoxprecio_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+        }
+        private void textBoxnombre_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsLetter(e.KeyChar) && !char.IsControl(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+        }
+
     }
-    }
+        }
+    
+    
