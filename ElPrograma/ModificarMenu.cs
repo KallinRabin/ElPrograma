@@ -7,6 +7,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
@@ -41,6 +42,22 @@ namespace ElPrograma
         public ModificarMenu()
         {
             InitializeComponent();
+
+            texprecio1.KeyPress += textBoxprecio_KeyPress;
+            texprecio2.KeyPress += textBoxprecio_KeyPress;
+            texprecio3.KeyPress += textBoxprecio_KeyPress;
+            texprecio4.KeyPress += textBoxprecio_KeyPress;
+            texprecio5.KeyPress += textBoxprecio_KeyPress;
+            texprecio6.KeyPress += textBoxprecio_KeyPress;
+
+           texprod1.KeyPress += textBoxnombre_KeyPress;
+            texprod2.KeyPress += textBoxnombre_KeyPress;
+            texprod3.KeyPress += textBoxnombre_KeyPress;
+            texprod4.KeyPress += textBoxnombre_KeyPress;
+            texprod5.KeyPress += textBoxnombre_KeyPress;
+            texprod6.KeyPress += textBoxnombre_KeyPress;
+            txtNuevaCategoria.KeyPress += textBoxnombre_KeyPress;
+
         }
  
         private void btnCerrar_Click(object sender, EventArgs e)
@@ -152,16 +169,16 @@ namespace ElPrograma
                 {
                     conexion.Open();
 
-                    //MessageBox.Show(string.IsNullOrWhiteSpace(txtNuevaCategoria.Text).ToString());
-                    //MessageBox.Show(string.IsNullOrWhiteSpace(rutaImagenSeleccionada).ToString());
+                    
 
-                     if (!string.IsNullOrWhiteSpace(txtNuevaCategoria.Text) && !string.IsNullOrWhiteSpace(texprod1.Text) && !string.IsNullOrWhiteSpace(texprecio1.Text) && rutaImagenSeleccionada!="")
+                     if (!string.IsNullOrWhiteSpace(txtNuevaCategoria.Text) && !string.IsNullOrWhiteSpace(texprod1.Text) && !string.IsNullOrWhiteSpace(texprecio1.Text ) && rutaImagenSeleccionada!="")
                     {
-
+                         
 
                         string valor = txtNuevaCategoria.Text;
                         if (!string.IsNullOrWhiteSpace(valor))
                         {
+                            MessageBox.Show(rutaImagenSeleccionada);
                             CrearCategoria(valor, rutaImagenSeleccionada);
                             pcbAgregarImagen.Image = null;
 
@@ -192,6 +209,9 @@ namespace ElPrograma
                     GuardarProducto(IDultimacategoria, texprod4.Text, texprecio4.Text);
                     GuardarProducto(IDultimacategoria, texprod5.Text, texprecio5.Text);
                     GuardarProducto(IDultimacategoria, texprod6.Text, texprecio6.Text);
+
+                    
+
                     MessageBox.Show("Nuevos platos agregados");
                 }
             }
@@ -199,6 +219,7 @@ namespace ElPrograma
             {
                 MessageBox.Show("Error: " + ex.Message);
             }
+
 
             /* if (!string.IsNullOrWhiteSpace(rutaImagenSeleccionada))
              {
@@ -219,45 +240,45 @@ namespace ElPrograma
 
             
             
+
             MostrarDatos();
             MostrarDatosDesdeBD();
 
         }
         private void CrearCategoriaDesdeBD(long categoriaId, string nombreCategoria)
         {
-           /* Panel nuevoPanel = new Panel();
-            nuevoPanel.Height = 35;
-            nuevoPanel.Width = 160;
-            nuevoPanel.BorderStyle = BorderStyle.FixedSingle;
-            nuevoPanel.BackColor = Color.LightGray;
+            /* Panel nuevoPanel = new Panel();
+             nuevoPanel.Height = 35;
+             nuevoPanel.Width = 160;
+             nuevoPanel.BorderStyle = BorderStyle.FixedSingle;
+             nuevoPanel.BackColor = Color.LightGray;
 
-            TableLayoutPanel tableLayout = new TableLayoutPanel();
-            tableLayout.Dock = DockStyle.Fill;
+             TableLayoutPanel tableLayout = new TableLayoutPanel();
+             tableLayout.Dock = DockStyle.Fill;
 
-            /*PictureBox pictureBox = new PictureBox();
-            pictureBox.SizeMode = PictureBoxSizeMode.Zoom;
-            // Aquí podrías cargar la imagen asociada a la categoría desde la base de datos si lo necesitas
-            pictureBox.Image = Image.FromFile("ruta_de_la_imagen"); // Cambia esto por la ruta correcta
-            pictureBox.Size = new Size(30, 30);a
+             /*PictureBox pictureBox = new PictureBox();
+             pictureBox.SizeMode = PictureBoxSizeMode.Zoom;
+             // Aquí podrías cargar la imagen asociada a la categoría desde la base de datos si lo necesitas
+             pictureBox.Image = Image.FromFile("ruta_de_la_imagen"); // Cambia esto por la ruta correcta
+             pictureBox.Size = new Size(30, 30);a
 
-            Label nuevoLabel = new Label();
-            nuevoLabel.Text = nombreCategoria; // Utiliza el nombre de la categoría obtenido desde la base de datos
-            nuevoLabel.AutoSize = true;
-            nuevoLabel.Font = new Font("Roboto Bk", 10);
+             Label nuevoLabel = new Label();
+             nuevoLabel.Text = nombreCategoria; // Utiliza el nombre de la categoría obtenido desde la base de datos
+             nuevoLabel.AutoSize = true;
+             nuevoLabel.Font = new Font("Roboto Bk", 10);
 
-            //tableLayout.Controls.Add(pictureBox, 0, 0);
-            tableLayout.Controls.Add(nuevoLabel, 1, 0);
-            tableLayout.RowStyles.Add(new RowStyle(SizeType.Percent, 100));
+             //tableLayout.Controls.Add(pictureBox, 0, 0);
+             tableLayout.Controls.Add(nuevoLabel, 1, 0);
+             tableLayout.RowStyles.Add(new RowStyle(SizeType.Percent, 100));
 
-            nuevoPanel.Controls.Add(tableLayout);
-            panel1.Controls.Add(nuevoPanel);
+             nuevoPanel.Controls.Add(tableLayout);
+             panel1.Controls.Add(nuevoPanel);
 
-            
-            nuevoPanel.Location = new Point(5, panelPositionY);
-            panelPositionY += nuevoPanel.Height + margin;
 
-            panelCounter++;*/
+             nuevoPanel.Location = new Point(5, panelPositionY);
+             panelPositionY += nuevoPanel.Height + margin;
 
+             panelCounter++;*/
 
             Panel nuevoPanel = new Panel();
             nuevoPanel.Height = 35;
@@ -269,7 +290,7 @@ namespace ElPrograma
             tableLayout.Dock = DockStyle.Fill;
 
             Label nuevoLabel = new Label();
-            nuevoLabel.Text = nombreCategoria; 
+            nuevoLabel.Text = nombreCategoria;
             nuevoLabel.AutoSize = true;
             nuevoLabel.Font = new Font("Roboto Bk", 10);
 
@@ -279,7 +300,8 @@ namespace ElPrograma
             nuevoPanel.Controls.Add(tableLayout);
             panel1.Controls.Add(nuevoPanel);
 
-            nuevoPanel.Location = new Point(5, initialPanelPositionY);
+            nuevoPanel.Location = new Point(5, panelPositionY);
+            panelPositionY += nuevoPanel.Height + margin;
 
             panelCounter++;
         }
@@ -288,15 +310,15 @@ namespace ElPrograma
         {
             string connectionString = "server=localhost;database=baseDato;user=root;password=contrasenia;";
 
-            using (MySqlConnection conexion = new MySqlConnection(connectionString))
+            using (MySqlConnection connection = new MySqlConnection(connectionString))
             {
                 try
                 {
-                    conexion.Open();
+                    connection.Open();
 
-                    string query = "SELECT * FROM categoria;";
+                    string query = "SELECT ID, Nombre FROM categoria;";
 
-                    using (MySqlCommand cmd = new MySqlCommand(query, conexion))
+                    using (MySqlCommand cmd = new MySqlCommand(query, connection))
                     {
                         using (MySqlDataReader reader = cmd.ExecuteReader())
                         {
@@ -357,6 +379,7 @@ namespace ElPrograma
             this.Close();
         }
 
+       
         private void pcbAgregarImagen_DoubleClick(object sender, EventArgs e)
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
@@ -364,16 +387,42 @@ namespace ElPrograma
 
             if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
-                rutaImagenSeleccionada = openFileDialog.FileName;
+               rutaImagenSeleccionada = openFileDialog.FileName;
 
                 pcbAgregarImagen.Image = Image.FromFile(rutaImagenSeleccionada);
                 pcbAgregarImagen.SizeMode = PictureBoxSizeMode.StretchImage;
+
+                // Convertir la imagen en un byte array
+
+
+
+                // ACA HACER QUE LA IMAGEN FUNCIONE
+
+
+                // byte[] imagenBytes = ImageToByteArray(pcbAgregarImagen.Image);
+                // Aquí deberías reemplazar "TuConnectionString" con la cadena de conexión a tu base de datos
+                // using (MySqlConnection connection = new MySqlConnection("server=localhost;database=baseDato;user=root;password=contrasenia"))
+                // {
+                //    connection.Open();
+
+                // Crear la consulta SQL para insertar la imagen en la base de datos
+                /*string query = "INSERT INTO categoria (Imagen) VALUES (@Imagen)";
+                using (MySqlCommand command = new MySqlCommand(query, connection))
+                {
+                    // Agregar el parámetro de la imagen
+                    command.Parameters.AddWithValue("@Imagen", imagenBytes);
+
+                    // Ejecutar la consulta
+                    command.ExecuteNonQuery();
+                }*/
+                //  }
             }
         }
 
-        private void subiBaja_ValueChanged(object sender, EventArgs e)
+        private void subirBajar_ValueChanged(object sender, EventArgs e)
         {
-            int scrollValue = subiBaja.Value;
+
+            int scrollValue = subirBajar.Value;
             int newY = initialPanelPositionY - (scrollValue * (panelHeight + margin));
 
             foreach (Control control in panel1.Controls)
@@ -385,5 +434,32 @@ namespace ElPrograma
                 }
             }
         }
+
+        private byte[] ImageToByteArray(Image image)
+        {
+            using (MemoryStream memoryStream = new MemoryStream())
+            {
+                image.Save(memoryStream, System.Drawing.Imaging.ImageFormat.Jpeg); // Puedes ajustar el formato aquí
+                return memoryStream.ToArray();
+            }
+        }
+
+        private void textBoxprecio_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+        }
+        private void textBoxnombre_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsLetter(e.KeyChar) && !char.IsControl(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+        }
+
+        
     }
 }
+

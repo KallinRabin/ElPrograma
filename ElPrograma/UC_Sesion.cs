@@ -33,9 +33,13 @@ namespace ElPrograma
 
         private void realizarAcceso()
         {
+
             procesando = true;
 
             MySqlConnection conexion = new MySqlConnection("Server=localhost; Database=baseDato; Uid=root; Pwd=contrasenia;");
+
+           // MySqlConnection conexion = new MySqlConnection("Server=localhost; Database=baseDato; Uid=root; Pwd=contrasenia;");
+
             conexion.Open();
 
             MySqlCommand comandos = new MySqlCommand();

@@ -54,10 +54,12 @@
             this.btnCargar = new System.Windows.Forms.Button();
             this.txtNuevaCategoria = new System.Windows.Forms.TextBox();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.subirBajar = new System.Windows.Forms.VScrollBar();
             this.subiBaja = new System.Windows.Forms.VScrollBar();
-            this.pnlTituloC = new System.Windows.Forms.Panel();
             this.label5 = new System.Windows.Forms.Label();
+            this.pnlTituloC = new System.Windows.Forms.Panel();
             this.tmDesplazador = new System.Windows.Forms.Timer(this.components);
+            this.label6 = new System.Windows.Forms.Label();
             this.panelTitulo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pcbAgregarImagen)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pcbRegresar)).BeginInit();
@@ -294,19 +296,41 @@
             // panel1
             // 
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel1.Controls.Add(this.subirBajar);
             this.panel1.Controls.Add(this.subiBaja);
-            this.panel1.Location = new System.Drawing.Point(701, 103);
+            this.panel1.Location = new System.Drawing.Point(701, 101);
+            this.panel1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(253, 399);
+            this.panel1.Size = new System.Drawing.Size(257, 404);
             this.panel1.TabIndex = 25;
+            // 
+            // subirBajar
+            // 
+            this.subirBajar.Location = new System.Drawing.Point(224, 10);
+            this.subirBajar.Name = "subirBajar";
+            this.subirBajar.Size = new System.Drawing.Size(14, 369);
+            this.subirBajar.TabIndex = 9;
+            this.subirBajar.ValueChanged += new System.EventHandler(this.subirBajar_ValueChanged);
             // 
             // subiBaja
             // 
-            this.subiBaja.Location = new System.Drawing.Point(225, 19);
+            this.subiBaja.Location = new System.Drawing.Point(300, 23);
             this.subiBaja.Name = "subiBaja";
-            this.subiBaja.Size = new System.Drawing.Size(13, 358);
+            this.subiBaja.Size = new System.Drawing.Size(13, 441);
             this.subiBaja.TabIndex = 8;
-            this.subiBaja.ValueChanged += new System.EventHandler(this.subiBaja_ValueChanged);
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(18)))), ((int)(((byte)(39)))));
+            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.ForeColor = System.Drawing.SystemColors.Control;
+            this.label5.Location = new System.Drawing.Point(46, 12);
+            this.label5.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(130, 29);
+            this.label5.TabIndex = 7;
+            this.label5.Text = "Categorias";
             // 
             // pnlTituloC
             // 
@@ -316,17 +340,17 @@
             this.pnlTituloC.Size = new System.Drawing.Size(152, 47);
             this.pnlTituloC.TabIndex = 26;
             // 
-            // label5
+            // label6
             // 
-            this.label5.AutoSize = true;
-            this.label5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(18)))), ((int)(((byte)(39)))));
-            this.label5.Font = new System.Drawing.Font("Roboto Bk", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.ForeColor = System.Drawing.SystemColors.Control;
-            this.label5.Location = new System.Drawing.Point(15, 7);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(123, 28);
-            this.label5.TabIndex = 7;
-            this.label5.Text = "Categorias";
+            this.label6.AutoSize = true;
+            this.label6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(18)))), ((int)(((byte)(39)))));
+            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.ForeColor = System.Drawing.SystemColors.Control;
+            this.label6.Location = new System.Drawing.Point(770, 60);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(107, 25);
+            this.label6.TabIndex = 26;
+            this.label6.Text = "Categorias";
             // 
             // ModificarMenu
             // 
@@ -334,7 +358,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(18)))), ((int)(((byte)(39)))));
             this.ClientSize = new System.Drawing.Size(949, 494);
-            this.Controls.Add(this.pnlTituloC);
+            this.Controls.Add(this.label6);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.txtNuevaCategoria);
             this.Controls.Add(this.btnCargar);
@@ -403,5 +427,7 @@
         private System.Windows.Forms.Timer tmDesplazador;
         private System.Windows.Forms.VScrollBar subiBaja;
         private System.Windows.Forms.Panel pnlTituloC;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.VScrollBar subirBajar;
     }
 }
