@@ -12,6 +12,7 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace ElPrograma
 {
@@ -21,7 +22,9 @@ namespace ElPrograma
 
         private int panelCounter = 0;
         private int panelHeight = 50;
-        private int initialPanelPositionY = 44;
+        private int initialPanelPositionY = 10;
+
+        private int panelPositionY = 10;
 
         private string rutaImagenSeleccionada = "";
 
@@ -39,7 +42,7 @@ namespace ElPrograma
         {
             InitializeComponent();
         }
-
+ 
         private void btnCerrar_Click(object sender, EventArgs e)
         {
             this.Close();
@@ -59,11 +62,15 @@ namespace ElPrograma
                 SendMessage(Handle, WM_NCLBUTTONDOWN, HT_CAPTION, 0);
             }
         }
+        
+
+
         private void CrearCategoria(string contenido, string rutaImagen)
         {
 
             Panel nuevoPanel = new Panel();
-            nuevoPanel.Height = panelHeight;
+            nuevoPanel.Height = 35;
+            nuevoPanel.Width = 160;
             nuevoPanel.BorderStyle = BorderStyle.FixedSingle;
             nuevoPanel.BackColor = Color.LightGray;
 
@@ -73,7 +80,7 @@ namespace ElPrograma
             PictureBox pictureBox = new PictureBox();
             pictureBox.SizeMode = PictureBoxSizeMode.Zoom;
             pictureBox.Image = Image.FromFile(rutaImagen);
-            pictureBox.Size = new Size(30, 30); // Ajustar el tamaño del PictureBox
+            pictureBox.Size = new Size(30, 30);
 
             Label nuevoLabel = new Label();
             nuevoLabel.Text = contenido;
@@ -82,17 +89,27 @@ namespace ElPrograma
 
             tableLayout.Controls.Add(pictureBox, 0, 0);
             tableLayout.Controls.Add(nuevoLabel, 1, 0);
-            tableLayout.RowStyles.Add(new RowStyle(SizeType.Percent, 100)); // Centra verticalmente los controles
+            tableLayout.RowStyles.Add(new RowStyle(SizeType.Percent, 100));
 
             nuevoPanel.Controls.Add(tableLayout);
             panel1.Controls.Add(nuevoPanel);
 
-            int panelPosicionY = initialPanelPositionY + (panelCounter * (panelHeight + margin));
-            nuevoPanel.Location = new Point(10, panelPosicionY);
+            if (panelCounter == 0) // Verifica si es el primer panel
+            {
+                nuevoPanel.Location = new Point(5, panelPositionY); // Establece la posición Y del primer panel
+            }
+            else
+            {
+                // Para los demás paneles, utiliza la lógica original
+                int panelPosicionY = initialPanelPositionY + (panelCounter * (panelHeight + margin));
+                nuevoPanel.Location = new Point(5, panelPosicionY);
+            }
 
             panelCounter++;
 
         }
+
+        
         private void MostrarDatos()
         {
 
@@ -164,11 +181,6 @@ namespace ElPrograma
                     {
                         MessageBox.Show("El campo 'Nueva Categoría' y los campos 'Nombre' y 'Precio' del primer producto no pueden estar vacíos.", "Por favor, selecciona una imagen primero.");
                     }
-
-                   
-                    
-                
-
                     
                 }
 
@@ -188,26 +200,124 @@ namespace ElPrograma
                 MessageBox.Show("Error: " + ex.Message);
             }
 
-           /* if (!string.IsNullOrWhiteSpace(rutaImagenSeleccionada))
-            {
-                string valor = txtNuevaCategoria.Text;
+            /* if (!string.IsNullOrWhiteSpace(rutaImagenSeleccionada))
+             {
+                 string valor = txtNuevaCategoria.Text;
 
-                if (!string.IsNullOrWhiteSpace(valor))
-                {
-                    CrearCategoria(valor, rutaImagenSeleccionada);
-                    pcbAgregarImagen.Image = null;
-                }
+                 if (!string.IsNullOrWhiteSpace(valor))
+                 {
+                     CrearCategoria(valor, rutaImagenSeleccionada);
+                     pcbAgregarImagen.Image = null;
+                 }
 
-            }
-            else
-            {
-                MessageBox.Show("Por favor, selecciona una imagen primero.");
-            }*/
+             }
+             else
+             {
+                 MessageBox.Show("Por favor, selecciona una imagen primero.");
+             }*/
 
+
+            
+            
             MostrarDatos();
+            MostrarDatosDesdeBD();
 
         }
+        private void CrearCategoriaDesdeBD(long categoriaId, string nombreCategoria)
+        {
+           /* Panel nuevoPanel = new Panel();
+            nuevoPanel.Height = 35;
+            nuevoPanel.Width = 160;
+            nuevoPanel.BorderStyle = BorderStyle.FixedSingle;
+            nuevoPanel.BackColor = Color.LightGray;
 
+            TableLayoutPanel tableLayout = new TableLayoutPanel();
+            tableLayout.Dock = DockStyle.Fill;
+
+            /*PictureBox pictureBox = new PictureBox();
+            pictureBox.SizeMode = PictureBoxSizeMode.Zoom;
+            // Aquí podrías cargar la imagen asociada a la categoría desde la base de datos si lo necesitas
+            pictureBox.Image = Image.FromFile("ruta_de_la_imagen"); // Cambia esto por la ruta correcta
+            pictureBox.Size = new Size(30, 30);a
+
+            Label nuevoLabel = new Label();
+            nuevoLabel.Text = nombreCategoria; // Utiliza el nombre de la categoría obtenido desde la base de datos
+            nuevoLabel.AutoSize = true;
+            nuevoLabel.Font = new Font("Roboto Bk", 10);
+
+            //tableLayout.Controls.Add(pictureBox, 0, 0);
+            tableLayout.Controls.Add(nuevoLabel, 1, 0);
+            tableLayout.RowStyles.Add(new RowStyle(SizeType.Percent, 100));
+
+            nuevoPanel.Controls.Add(tableLayout);
+            panel1.Controls.Add(nuevoPanel);
+
+            
+            nuevoPanel.Location = new Point(5, panelPositionY);
+            panelPositionY += nuevoPanel.Height + margin;
+
+            panelCounter++;*/
+
+
+            Panel nuevoPanel = new Panel();
+            nuevoPanel.Height = 35;
+            nuevoPanel.Width = 160;
+            nuevoPanel.BorderStyle = BorderStyle.FixedSingle;
+            nuevoPanel.BackColor = Color.LightGray;
+
+            TableLayoutPanel tableLayout = new TableLayoutPanel();
+            tableLayout.Dock = DockStyle.Fill;
+
+            Label nuevoLabel = new Label();
+            nuevoLabel.Text = nombreCategoria; 
+            nuevoLabel.AutoSize = true;
+            nuevoLabel.Font = new Font("Roboto Bk", 10);
+
+            tableLayout.Controls.Add(nuevoLabel, 1, 0);
+            tableLayout.RowStyles.Add(new RowStyle(SizeType.Percent, 100));
+
+            nuevoPanel.Controls.Add(tableLayout);
+            panel1.Controls.Add(nuevoPanel);
+
+            nuevoPanel.Location = new Point(5, initialPanelPositionY);
+
+            panelCounter++;
+        }
+
+        private void MostrarDatosDesdeBD()
+        {
+            string connectionString = "server=localhost;database=baseDato;user=root;password=contrasenia;";
+
+            using (MySqlConnection conexion = new MySqlConnection(connectionString))
+            {
+                try
+                {
+                    conexion.Open();
+
+                    string query = "SELECT * FROM categoria;";
+
+                    using (MySqlCommand cmd = new MySqlCommand(query, conexion))
+                    {
+                        using (MySqlDataReader reader = cmd.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                long categoriaId = Convert.ToInt64(reader["ID"]);
+                                string nombreCategoria = reader["Nombre"].ToString();
+
+                                CrearCategoriaDesdeBD(categoriaId, nombreCategoria);
+                            }
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error: " + ex.Message);
+                }
+            }
+        }
+
+        
         private void GuardarProducto(long categoriaId, string nombre, string precio)
         {
             if (string.IsNullOrWhiteSpace(nombre) || string.IsNullOrWhiteSpace(precio) ) 
@@ -260,5 +370,20 @@ namespace ElPrograma
                 pcbAgregarImagen.SizeMode = PictureBoxSizeMode.StretchImage;
             }
         }
+
+        private void subiBaja_ValueChanged(object sender, EventArgs e)
+        {
+            int scrollValue = subiBaja.Value;
+            int newY = initialPanelPositionY - (scrollValue * (panelHeight + margin));
+
+            foreach (Control control in panel1.Controls)
+            {
+                if (control is Panel)
+                {
+                    control.Location = new Point(control.Location.X, newY);
+                    newY += panelHeight + margin;
+                }
+            }
+        }
     }
-    }
+}

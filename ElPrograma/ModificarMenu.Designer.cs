@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ModificarMenu));
             this.panelTitulo = new System.Windows.Forms.Panel();
             this.btnCerrar = new System.Windows.Forms.Button();
@@ -53,11 +54,15 @@
             this.btnCargar = new System.Windows.Forms.Button();
             this.txtNuevaCategoria = new System.Windows.Forms.TextBox();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.subiBaja = new System.Windows.Forms.VScrollBar();
+            this.pnlTituloC = new System.Windows.Forms.Panel();
             this.label5 = new System.Windows.Forms.Label();
+            this.tmDesplazador = new System.Windows.Forms.Timer(this.components);
             this.panelTitulo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pcbAgregarImagen)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pcbRegresar)).BeginInit();
             this.panel1.SuspendLayout();
+            this.pnlTituloC.SuspendLayout();
             this.SuspendLayout();
             // 
             // panelTitulo
@@ -289,12 +294,27 @@
             // panel1
             // 
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel1.Controls.Add(this.label5);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panel1.Location = new System.Drawing.Point(701, 45);
+            this.panel1.Controls.Add(this.subiBaja);
+            this.panel1.Location = new System.Drawing.Point(701, 103);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(248, 449);
+            this.panel1.Size = new System.Drawing.Size(253, 399);
             this.panel1.TabIndex = 25;
+            // 
+            // subiBaja
+            // 
+            this.subiBaja.Location = new System.Drawing.Point(225, 19);
+            this.subiBaja.Name = "subiBaja";
+            this.subiBaja.Size = new System.Drawing.Size(13, 358);
+            this.subiBaja.TabIndex = 8;
+            this.subiBaja.ValueChanged += new System.EventHandler(this.subiBaja_ValueChanged);
+            // 
+            // pnlTituloC
+            // 
+            this.pnlTituloC.Controls.Add(this.label5);
+            this.pnlTituloC.Location = new System.Drawing.Point(744, 50);
+            this.pnlTituloC.Name = "pnlTituloC";
+            this.pnlTituloC.Size = new System.Drawing.Size(152, 47);
+            this.pnlTituloC.TabIndex = 26;
             // 
             // label5
             // 
@@ -302,7 +322,7 @@
             this.label5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(18)))), ((int)(((byte)(39)))));
             this.label5.Font = new System.Drawing.Font("Roboto Bk", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label5.ForeColor = System.Drawing.SystemColors.Control;
-            this.label5.Location = new System.Drawing.Point(62, 15);
+            this.label5.Location = new System.Drawing.Point(15, 7);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(123, 28);
             this.label5.TabIndex = 7;
@@ -314,6 +334,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(18)))), ((int)(((byte)(39)))));
             this.ClientSize = new System.Drawing.Size(949, 494);
+            this.Controls.Add(this.pnlTituloC);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.txtNuevaCategoria);
             this.Controls.Add(this.btnCargar);
@@ -345,7 +366,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.pcbAgregarImagen)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pcbRegresar)).EndInit();
             this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
+            this.pnlTituloC.ResumeLayout(false);
+            this.pnlTituloC.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -378,5 +400,8 @@
         private System.Windows.Forms.TextBox txtNuevaCategoria;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Timer tmDesplazador;
+        private System.Windows.Forms.VScrollBar subiBaja;
+        private System.Windows.Forms.Panel pnlTituloC;
     }
 }
