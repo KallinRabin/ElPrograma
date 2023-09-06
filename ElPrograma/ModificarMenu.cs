@@ -180,13 +180,17 @@ namespace ElPrograma
                         {
                             MessageBox.Show(rutaImagenSeleccionada);
                             CrearCategoria(valor, rutaImagenSeleccionada);
+
+                            byte[] imagenBytes = ImageToByteArray(pcbAgregarImagen.Image);
                             pcbAgregarImagen.Image = null;
 
-                            string insertQuery = "INSERT INTO `categoria` (`Nombre`) VALUES (@Nombre);";
+                            string insertQuery = "INSERT INTO categoria (Nombre,Imagen) VALUES (@Nombre,@Imagen);";
+                            
 
                             using (MySqlCommand cmd = new MySqlCommand(insertQuery, conexion))
                             {
                                 cmd.Parameters.AddWithValue("@Nombre", txtNuevaCategoria.Text);
+                                cmd.Parameters.AddWithValue("@Imagen", imagenBytes);
                                 int rowsAffected = cmd.ExecuteNonQuery();
                                 IDultimacategoria = cmd.LastInsertedId;
                                 MessageBox.Show("Nueva categoria agregada");
@@ -392,30 +396,6 @@ namespace ElPrograma
                 pcbAgregarImagen.Image = Image.FromFile(rutaImagenSeleccionada);
                 pcbAgregarImagen.SizeMode = PictureBoxSizeMode.StretchImage;
 
-                // Convertir la imagen en un byte array
-
-
-
-                // ACA HACER QUE LA IMAGEN FUNCIONE
-
-
-                // byte[] imagenBytes = ImageToByteArray(pcbAgregarImagen.Image);
-                // Aquí deberías reemplazar "TuConnectionString" con la cadena de conexión a tu base de datos
-                // using (MySqlConnection connection = new MySqlConnection("server=localhost;database=baseDato;user=root;password=contrasenia"))
-                // {
-                //    connection.Open();
-
-                // Crear la consulta SQL para insertar la imagen en la base de datos
-                /*string query = "INSERT INTO categoria (Imagen) VALUES (@Imagen)";
-                using (MySqlCommand command = new MySqlCommand(query, connection))
-                {
-                    // Agregar el parámetro de la imagen
-                    command.Parameters.AddWithValue("@Imagen", imagenBytes);
-
-                    // Ejecutar la consulta
-                    command.ExecuteNonQuery();
-                }*/
-                //  }
             }
         }
 
