@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ModificarMenu));
             this.panelTitulo = new System.Windows.Forms.Panel();
             this.btnCerrar = new System.Windows.Forms.Button();
@@ -53,11 +54,17 @@
             this.btnCargar = new System.Windows.Forms.Button();
             this.txtNuevaCategoria = new System.Windows.Forms.TextBox();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.subirBajar = new System.Windows.Forms.VScrollBar();
+            this.subiBaja = new System.Windows.Forms.VScrollBar();
             this.label5 = new System.Windows.Forms.Label();
+            this.pnlTituloC = new System.Windows.Forms.Panel();
+            this.tmDesplazador = new System.Windows.Forms.Timer(this.components);
+            this.label6 = new System.Windows.Forms.Label();
             this.panelTitulo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pcbAgregarImagen)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pcbRegresar)).BeginInit();
             this.panel1.SuspendLayout();
+            this.pnlTituloC.SuspendLayout();
             this.SuspendLayout();
             // 
             // panelTitulo
@@ -69,9 +76,9 @@
             this.panelTitulo.Controls.Add(this.label2);
             this.panelTitulo.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelTitulo.Location = new System.Drawing.Point(0, 0);
-            this.panelTitulo.Margin = new System.Windows.Forms.Padding(2);
+            this.panelTitulo.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.panelTitulo.Name = "panelTitulo";
-            this.panelTitulo.Size = new System.Drawing.Size(712, 37);
+            this.panelTitulo.Size = new System.Drawing.Size(949, 45);
             this.panelTitulo.TabIndex = 1;
             this.panelTitulo.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panelTitulo_MouseDown);
             // 
@@ -79,10 +86,10 @@
             // 
             this.btnCerrar.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnCerrar.BackgroundImage")));
             this.btnCerrar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.btnCerrar.Location = new System.Drawing.Point(682, 4);
-            this.btnCerrar.Margin = new System.Windows.Forms.Padding(2);
+            this.btnCerrar.Location = new System.Drawing.Point(909, 5);
+            this.btnCerrar.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnCerrar.Name = "btnCerrar";
-            this.btnCerrar.Size = new System.Drawing.Size(26, 27);
+            this.btnCerrar.Size = new System.Drawing.Size(35, 33);
             this.btnCerrar.TabIndex = 6;
             this.btnCerrar.UseVisualStyleBackColor = true;
             this.btnCerrar.Click += new System.EventHandler(this.btnCerrar_Click);
@@ -91,10 +98,10 @@
             // 
             this.btnMinimizar.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnMinimizar.BackgroundImage")));
             this.btnMinimizar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.btnMinimizar.Location = new System.Drawing.Point(652, 4);
-            this.btnMinimizar.Margin = new System.Windows.Forms.Padding(2);
+            this.btnMinimizar.Location = new System.Drawing.Point(869, 5);
+            this.btnMinimizar.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnMinimizar.Name = "btnMinimizar";
-            this.btnMinimizar.Size = new System.Drawing.Size(26, 27);
+            this.btnMinimizar.Size = new System.Drawing.Size(35, 33);
             this.btnMinimizar.TabIndex = 4;
             this.btnMinimizar.UseVisualStyleBackColor = true;
             this.btnMinimizar.Click += new System.EventHandler(this.btnMinimizar_Click);
@@ -105,20 +112,19 @@
             this.label2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(18)))), ((int)(((byte)(39)))));
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 19.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.ForeColor = System.Drawing.SystemColors.Control;
-            this.label2.Location = new System.Drawing.Point(260, 0);
-            this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label2.Location = new System.Drawing.Point(347, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(198, 31);
+            this.label2.Size = new System.Drawing.Size(239, 38);
             this.label2.TabIndex = 5;
             this.label2.Text = "Modificar Menu";
             // 
             // pcbAgregarImagen
             // 
             this.pcbAgregarImagen.BackColor = System.Drawing.Color.White;
-            this.pcbAgregarImagen.Location = new System.Drawing.Point(34, 49);
-            this.pcbAgregarImagen.Margin = new System.Windows.Forms.Padding(2);
+            this.pcbAgregarImagen.Location = new System.Drawing.Point(45, 60);
+            this.pcbAgregarImagen.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.pcbAgregarImagen.Name = "pcbAgregarImagen";
-            this.pcbAgregarImagen.Size = new System.Drawing.Size(75, 62);
+            this.pcbAgregarImagen.Size = new System.Drawing.Size(100, 76);
             this.pcbAgregarImagen.TabIndex = 2;
             this.pcbAgregarImagen.TabStop = false;
             this.pcbAgregarImagen.DoubleClick += new System.EventHandler(this.pcbAgregarImagen_DoubleClick);
@@ -129,10 +135,9 @@
             this.label1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(18)))), ((int)(((byte)(39)))));
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.SystemColors.Control;
-            this.label1.Location = new System.Drawing.Point(186, 49);
-            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label1.Location = new System.Drawing.Point(248, 60);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(127, 20);
+            this.label1.Size = new System.Drawing.Size(159, 25);
             this.label1.TabIndex = 7;
             this.label1.Text = "Nueva Categoria";
             // 
@@ -142,10 +147,9 @@
             this.label3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(18)))), ((int)(((byte)(39)))));
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.ForeColor = System.Drawing.SystemColors.Control;
-            this.label3.Location = new System.Drawing.Point(86, 141);
-            this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label3.Location = new System.Drawing.Point(115, 174);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(133, 20);
+            this.label3.Size = new System.Drawing.Size(164, 25);
             this.label3.TabIndex = 8;
             this.label3.Text = "Nombre Producto";
             // 
@@ -155,116 +159,115 @@
             this.label4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(18)))), ((int)(((byte)(39)))));
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.ForeColor = System.Drawing.SystemColors.Control;
-            this.label4.Location = new System.Drawing.Point(280, 141);
-            this.label4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label4.Location = new System.Drawing.Point(373, 174);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(121, 20);
+            this.label4.Size = new System.Drawing.Size(150, 25);
             this.label4.TabIndex = 9;
             this.label4.Text = "Precio Producto";
             // 
             // texprod1
             // 
-            this.texprod1.Location = new System.Drawing.Point(90, 182);
-            this.texprod1.Margin = new System.Windows.Forms.Padding(2);
+            this.texprod1.Location = new System.Drawing.Point(120, 224);
+            this.texprod1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.texprod1.Name = "texprod1";
-            this.texprod1.Size = new System.Drawing.Size(120, 20);
+            this.texprod1.Size = new System.Drawing.Size(159, 22);
             this.texprod1.TabIndex = 10;
             // 
             // texprod4
             // 
-            this.texprod4.Location = new System.Drawing.Point(90, 281);
-            this.texprod4.Margin = new System.Windows.Forms.Padding(2);
+            this.texprod4.Location = new System.Drawing.Point(120, 346);
+            this.texprod4.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.texprod4.Name = "texprod4";
-            this.texprod4.Size = new System.Drawing.Size(120, 20);
+            this.texprod4.Size = new System.Drawing.Size(159, 22);
             this.texprod4.TabIndex = 11;
             // 
             // texprod3
             // 
-            this.texprod3.Location = new System.Drawing.Point(90, 249);
-            this.texprod3.Margin = new System.Windows.Forms.Padding(2);
+            this.texprod3.Location = new System.Drawing.Point(120, 306);
+            this.texprod3.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.texprod3.Name = "texprod3";
-            this.texprod3.Size = new System.Drawing.Size(120, 20);
+            this.texprod3.Size = new System.Drawing.Size(159, 22);
             this.texprod3.TabIndex = 12;
             // 
             // texprod2
             // 
-            this.texprod2.Location = new System.Drawing.Point(90, 215);
-            this.texprod2.Margin = new System.Windows.Forms.Padding(2);
+            this.texprod2.Location = new System.Drawing.Point(120, 265);
+            this.texprod2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.texprod2.Name = "texprod2";
-            this.texprod2.Size = new System.Drawing.Size(120, 20);
+            this.texprod2.Size = new System.Drawing.Size(159, 22);
             this.texprod2.TabIndex = 13;
             // 
             // texprod6
             // 
-            this.texprod6.Location = new System.Drawing.Point(90, 349);
-            this.texprod6.Margin = new System.Windows.Forms.Padding(2);
+            this.texprod6.Location = new System.Drawing.Point(120, 430);
+            this.texprod6.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.texprod6.Name = "texprod6";
-            this.texprod6.Size = new System.Drawing.Size(120, 20);
+            this.texprod6.Size = new System.Drawing.Size(159, 22);
             this.texprod6.TabIndex = 14;
             // 
             // texprod5
             // 
-            this.texprod5.Location = new System.Drawing.Point(90, 314);
-            this.texprod5.Margin = new System.Windows.Forms.Padding(2);
+            this.texprod5.Location = new System.Drawing.Point(120, 386);
+            this.texprod5.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.texprod5.Name = "texprod5";
-            this.texprod5.Size = new System.Drawing.Size(120, 20);
+            this.texprod5.Size = new System.Drawing.Size(159, 22);
             this.texprod5.TabIndex = 15;
             // 
             // texprecio5
             // 
-            this.texprecio5.Location = new System.Drawing.Point(284, 314);
-            this.texprecio5.Margin = new System.Windows.Forms.Padding(2);
+            this.texprecio5.Location = new System.Drawing.Point(379, 386);
+            this.texprecio5.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.texprecio5.Name = "texprecio5";
-            this.texprecio5.Size = new System.Drawing.Size(110, 20);
+            this.texprecio5.Size = new System.Drawing.Size(145, 22);
             this.texprecio5.TabIndex = 21;
             // 
             // texprecio6
             // 
-            this.texprecio6.Location = new System.Drawing.Point(284, 349);
-            this.texprecio6.Margin = new System.Windows.Forms.Padding(2);
+            this.texprecio6.Location = new System.Drawing.Point(379, 430);
+            this.texprecio6.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.texprecio6.Name = "texprecio6";
-            this.texprecio6.Size = new System.Drawing.Size(110, 20);
+            this.texprecio6.Size = new System.Drawing.Size(145, 22);
             this.texprecio6.TabIndex = 20;
             // 
             // texprecio2
             // 
-            this.texprecio2.Location = new System.Drawing.Point(284, 215);
-            this.texprecio2.Margin = new System.Windows.Forms.Padding(2);
+            this.texprecio2.Location = new System.Drawing.Point(379, 265);
+            this.texprecio2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.texprecio2.Name = "texprecio2";
-            this.texprecio2.Size = new System.Drawing.Size(110, 20);
+            this.texprecio2.Size = new System.Drawing.Size(145, 22);
             this.texprecio2.TabIndex = 19;
             // 
             // texprecio3
             // 
-            this.texprecio3.Location = new System.Drawing.Point(284, 249);
-            this.texprecio3.Margin = new System.Windows.Forms.Padding(2);
+            this.texprecio3.Location = new System.Drawing.Point(379, 306);
+            this.texprecio3.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.texprecio3.Name = "texprecio3";
-            this.texprecio3.Size = new System.Drawing.Size(110, 20);
+            this.texprecio3.Size = new System.Drawing.Size(145, 22);
             this.texprecio3.TabIndex = 18;
             // 
             // texprecio4
             // 
-            this.texprecio4.Location = new System.Drawing.Point(284, 281);
-            this.texprecio4.Margin = new System.Windows.Forms.Padding(2);
+            this.texprecio4.Location = new System.Drawing.Point(379, 346);
+            this.texprecio4.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.texprecio4.Name = "texprecio4";
-            this.texprecio4.Size = new System.Drawing.Size(110, 20);
+            this.texprecio4.Size = new System.Drawing.Size(145, 22);
             this.texprecio4.TabIndex = 17;
             // 
             // texprecio1
             // 
-            this.texprecio1.Location = new System.Drawing.Point(284, 182);
-            this.texprecio1.Margin = new System.Windows.Forms.Padding(2);
+            this.texprecio1.Location = new System.Drawing.Point(379, 224);
+            this.texprecio1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.texprecio1.Name = "texprecio1";
-            this.texprecio1.Size = new System.Drawing.Size(110, 20);
+            this.texprecio1.Size = new System.Drawing.Size(145, 22);
             this.texprecio1.TabIndex = 16;
             // 
             // pcbRegresar
             // 
             this.pcbRegresar.Image = ((System.Drawing.Image)(resources.GetObject("pcbRegresar.Image")));
-            this.pcbRegresar.Location = new System.Drawing.Point(9, 350);
-            this.pcbRegresar.Margin = new System.Windows.Forms.Padding(2);
+            this.pcbRegresar.Location = new System.Drawing.Point(12, 431);
+            this.pcbRegresar.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.pcbRegresar.Name = "pcbRegresar";
-            this.pcbRegresar.Size = new System.Drawing.Size(75, 41);
+            this.pcbRegresar.Size = new System.Drawing.Size(100, 50);
             this.pcbRegresar.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pcbRegresar.TabIndex = 22;
             this.pcbRegresar.TabStop = false;
@@ -273,10 +276,10 @@
             // btnCargar
             // 
             this.btnCargar.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCargar.Location = new System.Drawing.Point(438, 360);
-            this.btnCargar.Margin = new System.Windows.Forms.Padding(2);
+            this.btnCargar.Location = new System.Drawing.Point(584, 443);
+            this.btnCargar.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnCargar.Name = "btnCargar";
-            this.btnCargar.Size = new System.Drawing.Size(67, 31);
+            this.btnCargar.Size = new System.Drawing.Size(89, 38);
             this.btnCargar.TabIndex = 23;
             this.btnCargar.Text = "Cargar";
             this.btnCargar.UseVisualStyleBackColor = true;
@@ -284,22 +287,37 @@
             // 
             // txtNuevaCategoria
             // 
-            this.txtNuevaCategoria.Location = new System.Drawing.Point(190, 91);
-            this.txtNuevaCategoria.Margin = new System.Windows.Forms.Padding(2);
+            this.txtNuevaCategoria.Location = new System.Drawing.Point(253, 112);
+            this.txtNuevaCategoria.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtNuevaCategoria.Name = "txtNuevaCategoria";
-            this.txtNuevaCategoria.Size = new System.Drawing.Size(110, 20);
+            this.txtNuevaCategoria.Size = new System.Drawing.Size(145, 22);
             this.txtNuevaCategoria.TabIndex = 24;
             // 
             // panel1
             // 
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel1.Controls.Add(this.label5);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panel1.Location = new System.Drawing.Point(526, 37);
-            this.panel1.Margin = new System.Windows.Forms.Padding(2);
+            this.panel1.Controls.Add(this.subirBajar);
+            this.panel1.Controls.Add(this.subiBaja);
+            this.panel1.Location = new System.Drawing.Point(701, 101);
+            this.panel1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(186, 364);
+            this.panel1.Size = new System.Drawing.Size(257, 404);
             this.panel1.TabIndex = 25;
+            // 
+            // subirBajar
+            // 
+            this.subirBajar.Location = new System.Drawing.Point(224, 10);
+            this.subirBajar.Name = "subirBajar";
+            this.subirBajar.Size = new System.Drawing.Size(14, 369);
+            this.subirBajar.TabIndex = 9;
+            this.subirBajar.ValueChanged += new System.EventHandler(this.subirBajar_ValueChanged);
+            // 
+            // subiBaja
+            // 
+            this.subiBaja.Location = new System.Drawing.Point(300, 23);
+            this.subiBaja.Name = "subiBaja";
+            this.subiBaja.Size = new System.Drawing.Size(13, 441);
+            this.subiBaja.TabIndex = 8;
             // 
             // label5
             // 
@@ -310,16 +328,37 @@
             this.label5.Location = new System.Drawing.Point(46, 12);
             this.label5.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(99, 24);
+            this.label5.Size = new System.Drawing.Size(130, 29);
             this.label5.TabIndex = 7;
             this.label5.Text = "Categorias";
             // 
+            // pnlTituloC
+            // 
+            this.pnlTituloC.Controls.Add(this.label5);
+            this.pnlTituloC.Location = new System.Drawing.Point(744, 50);
+            this.pnlTituloC.Name = "pnlTituloC";
+            this.pnlTituloC.Size = new System.Drawing.Size(152, 47);
+            this.pnlTituloC.TabIndex = 26;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(18)))), ((int)(((byte)(39)))));
+            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.ForeColor = System.Drawing.SystemColors.Control;
+            this.label6.Location = new System.Drawing.Point(770, 60);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(107, 25);
+            this.label6.TabIndex = 26;
+            this.label6.Text = "Categorias";
+            // 
             // ModificarMenu
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(18)))), ((int)(((byte)(39)))));
-            this.ClientSize = new System.Drawing.Size(712, 401);
+            this.ClientSize = new System.Drawing.Size(949, 494);
+            this.Controls.Add(this.label6);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.txtNuevaCategoria);
             this.Controls.Add(this.btnCargar);
@@ -342,7 +381,7 @@
             this.Controls.Add(this.pcbAgregarImagen);
             this.Controls.Add(this.panelTitulo);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Margin = new System.Windows.Forms.Padding(2);
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "ModificarMenu";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "ModificarMenu";
@@ -351,7 +390,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.pcbAgregarImagen)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pcbRegresar)).EndInit();
             this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
+            this.pnlTituloC.ResumeLayout(false);
+            this.pnlTituloC.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -384,5 +424,10 @@
         private System.Windows.Forms.TextBox txtNuevaCategoria;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Timer tmDesplazador;
+        private System.Windows.Forms.VScrollBar subiBaja;
+        private System.Windows.Forms.Panel pnlTituloC;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.VScrollBar subirBajar;
     }
 }
