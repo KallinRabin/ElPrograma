@@ -36,7 +36,7 @@ namespace ElPrograma
 
             procesando = true;
 
-            MySqlConnection conexion = new MySqlConnection("Server=localhost; Database=baseDato; Uid=root; Pwd=contrasenia;");
+            MySqlConnection conexion = new MySqlConnection("Server=localhost; Database=Basedatos; Uid=root; Pwd=contrasena;");
 
            // MySqlConnection conexion = new MySqlConnection("Server=localhost; Database=baseDato; Uid=root; Pwd=contrasenia;");
 
@@ -45,7 +45,7 @@ namespace ElPrograma
             MySqlCommand comandos = new MySqlCommand();
             comandos.Connection = conexion;
 
-            string consulta = "Select Contraseña From Usuarios where Contraseña ='" + txtContraseña.Text + "'";
+            string consulta = "Select Contraseña From Usuario where Contraseña ='" + txtContraseña.Text + "'";
 
             comandos.CommandText = consulta;
             MySqlDataReader datos = comandos.ExecuteReader();
