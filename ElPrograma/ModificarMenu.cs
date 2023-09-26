@@ -9,6 +9,7 @@ using System.Data.SqlClient;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
@@ -38,28 +39,17 @@ namespace ElPrograma
 
         private const int WM_NCLBUTTONDOWN = 0xA1;
         private const int HT_CAPTION = 0x2;
-
+        
+  
         public ModificarMenu()
         {
             InitializeComponent();
 
-            texprecio1.KeyPress += textBoxprecio_KeyPress;
-            texprecio2.KeyPress += textBoxprecio_KeyPress;
-            texprecio3.KeyPress += textBoxprecio_KeyPress;
-            texprecio4.KeyPress += textBoxprecio_KeyPress;
-            texprecio5.KeyPress += textBoxprecio_KeyPress;
-            texprecio6.KeyPress += textBoxprecio_KeyPress;
-
-           texprod1.KeyPress += textBoxnombre_KeyPress;
-            texprod2.KeyPress += textBoxnombre_KeyPress;
-            texprod3.KeyPress += textBoxnombre_KeyPress;
-            texprod4.KeyPress += textBoxnombre_KeyPress;
-            texprod5.KeyPress += textBoxnombre_KeyPress;
-            texprod6.KeyPress += textBoxnombre_KeyPress;
-            txtNuevaCategoria.KeyPress += textBoxnombre_KeyPress;
+            this.WindowState = FormWindowState.Maximized;
 
         }
- 
+
+
         private void btnCerrar_Click(object sender, EventArgs e)
         {
             this.Close();
@@ -79,13 +69,59 @@ namespace ElPrograma
                 SendMessage(Handle, WM_NCLBUTTONDOWN, HT_CAPTION, 0);
             }
         }
+        
 
 
+        private void CrearCategoria(string contenido, string rutaImagen)
+        {
+
+            Panel nuevoPanel = new Panel();
+            nuevoPanel.Height = 35;
+            nuevoPanel.Width = 160;
+            nuevoPanel.BorderStyle = BorderStyle.FixedSingle;
+            nuevoPanel.BackColor = Color.LightGray;
+
+            TableLayoutPanel tableLayout = new TableLayoutPanel();
+            tableLayout.Dock = DockStyle.Fill;
+
+            PictureBox pictureBox = new PictureBox();
+            pictureBox.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBox.Image = Image.FromFile(rutaImagen);
+            pictureBox.Size = new Size(30, 30);
+
+            Label nuevoLabel = new Label();
+            nuevoLabel.Text = contenido;
+            nuevoLabel.AutoSize = true;
+            nuevoLabel.Font = new Font("Roboto Bk", 10);
+
+            tableLayout.Controls.Add(pictureBox, 0, 0);
+            tableLayout.Controls.Add(nuevoLabel, 1, 0);
+            tableLayout.RowStyles.Add(new RowStyle(SizeType.Percent, 100));
+
+            nuevoPanel.Controls.Add(tableLayout);
+            panel_categorias.Controls.Add(nuevoPanel);
+
+            if (panelCounter == 0) // Verifica si es el primer panel
+            {
+                nuevoPanel.Location = new Point(5, panelPositionY); // Establece la posición Y del primer panel
+            }
+            else
+            {
+                // Para los demás paneles, utiliza la lógica original
+                int panelPosicionY = initialPanelPositionY + (panelCounter * (panelHeight + margin));
+                nuevoPanel.Location = new Point(5, panelPosicionY);
+            }
+
+            panelCounter++;
+
+        }
+
+        
         private void MostrarDatos()
         {
 
 
-            string connectionString = "server=localhost;database=Basedatos;user=root;password=contrasena;";
+            string connectionString = "server=localhost;database=proyecto;user=root;password=;";
             string query = "SELECT nombre FROM categoria ORDER BY ID DESC LIMIT 1;";
 
 
@@ -114,7 +150,7 @@ namespace ElPrograma
 
         private void btnCargar_Click(object sender, EventArgs e)
         {
-            string connectionString = "server=localhost;database=Basedatos;user=root;password=contrasena;";
+            string connectionString = "server=localhost;database=proyecto;user=root;password=;";
             long IDultimacategoria = -1;
 
             try
@@ -132,7 +168,8 @@ namespace ElPrograma
                         string valor = txtNuevaCategoria.Text;
                         if (!string.IsNullOrWhiteSpace(valor))
                         {
-                            MessageBox.Show(rutaImagenSeleccionada);
+                           
+                            CrearCategoria(valor, rutaImagenSeleccionada);
 
                             byte[] imagenBytes = ImageToByteArray(pcbAgregarImagen.Image);
                             pcbAgregarImagen.Image = null;
@@ -177,6 +214,9 @@ namespace ElPrograma
                 MessageBox.Show("Error: " + ex.Message);
             }
 
+
+
+
             
             
 
@@ -184,53 +224,16 @@ namespace ElPrograma
             MostrarDatosDesdeBD();
 
         }
-
-        private void CrearCategoriaDesdeBD(long categoriaId, string nombreCategoria, byte[] imagenBytes)
+        private void CrearCategoriaDesdeBD(long categoriaId, string nombreCategoria)
         {
-            Panel nuevoPanel = new Panel();
-            nuevoPanel.Height = 50; // Ajusta el tamaño según tus preferencias
-            nuevoPanel.Width = 130;
-            nuevoPanel.BorderStyle = BorderStyle.FixedSingle;
-            nuevoPanel.BackColor = Color.LightGray;
+            
 
-            TableLayoutPanel tableLayout = new TableLayoutPanel();
-            tableLayout.Dock = DockStyle.Fill;
-
-            Label nuevoLabel = new Label();
-            nuevoLabel.Text = nombreCategoria;
-            nuevoLabel.AutoSize = true;
-            nuevoLabel.Font = new Font("Roboto Bk", 10);
-
-            PictureBox imagenPictureBox = new PictureBox();
-            imagenPictureBox.SizeMode = PictureBoxSizeMode.StretchImage;
-            if (imagenBytes != null && imagenBytes.Length > 0)
-            {
-                using (MemoryStream ms = new MemoryStream(imagenBytes))
-                {
-                    imagenPictureBox.Image = Image.FromStream(ms);
-                }
-            }
-
-            // Ajusta el porcentaje de espacio que ocupa cada control en el panel
-            tableLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 70)); // Imagen
-            tableLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 70)); // Nombre de la categoría
-            tableLayout.RowStyles.Add(new RowStyle(SizeType.Percent, 70)); // Espacio para la imagen
-            tableLayout.RowStyles.Add(new RowStyle(SizeType.Percent, 40)); // Espacio para el nombre de la categoría
-
-            tableLayout.Controls.Add(imagenPictureBox, 0, 0);
-            tableLayout.Controls.Add(nuevoLabel, 0, 1);
-
-            nuevoPanel.Controls.Add(tableLayout);
-            panel1.Controls.Add(nuevoPanel);
-
-            nuevoPanel.Location = new Point(5, panelPositionY);
-            panelPositionY += nuevoPanel.Height + margin;
-
-            panelCounter++;
+          
         }
+
         private void MostrarDatosDesdeBD()
         {
-            string connectionString = "server=localhost;database=Basedatos;user=root;password=contrasena;";
+            string connectionString = "server=localhost;database=proyecto;user=root;password=;";
 
             using (MySqlConnection connection = new MySqlConnection(connectionString))
             {
@@ -238,7 +241,7 @@ namespace ElPrograma
                 {
                     connection.Open();
 
-                    string query = "SELECT ID, Nombre, Imagen FROM categoria;"; // Agrega la columna Imagen a la consulta
+                    string query = "SELECT ID, Nombre FROM categoria;";
 
                     using (MySqlCommand cmd = new MySqlCommand(query, connection))
                     {
@@ -248,9 +251,8 @@ namespace ElPrograma
                             {
                                 long categoriaId = Convert.ToInt64(reader["ID"]);
                                 string nombreCategoria = reader["Nombre"].ToString();
-                                byte[] imagenBytes = reader["Imagen"] as byte[]; // Recupera los bytes de la imagen
 
-                                CrearCategoriaDesdeBD(categoriaId, nombreCategoria, imagenBytes); // Pasa los bytes de la imagen a la función
+                                CrearCategoriaDesdeBD(categoriaId, nombreCategoria);
                             }
                         }
                     }
@@ -262,7 +264,7 @@ namespace ElPrograma
             }
         }
 
-
+        
         private void GuardarProducto(long categoriaId, string nombre, string precio)
         {
             if (string.IsNullOrWhiteSpace(nombre) || string.IsNullOrWhiteSpace(precio) ) 
@@ -270,7 +272,7 @@ namespace ElPrograma
                 return;            
             
             }
-            string connectionString = "server=localhost;database=Basedatos;user=root;password=contrasena;";
+            string connectionString = "server=localhost;database=proyecto;user=root;password=;";
 
             using (MySqlConnection conexion = new MySqlConnection(connectionString))
             {
@@ -324,7 +326,7 @@ namespace ElPrograma
             int scrollValue = subirBajar.Value;
             int newY = initialPanelPositionY - (scrollValue * (panelHeight + margin));
 
-            foreach (Control control in panel1.Controls)
+            foreach (Control control in panel_categorias.Controls)
             {
                 if (control is Panel)
                 {
@@ -342,24 +344,14 @@ namespace ElPrograma
                 return memoryStream.ToArray();
             }
         }
-       
 
-        private void textBoxprecio_KeyPress(object sender, KeyPressEventArgs e)
+        private void btnMaximizar_Click(object sender, EventArgs e)
         {
-            if (!char.IsDigit(e.KeyChar))
-            {
-                e.Handled = true;
-            }
+            if (WindowState == FormWindowState.Normal)
+                WindowState = FormWindowState.Maximized;
+            else if (WindowState == FormWindowState.Maximized)
+                WindowState = FormWindowState.Normal;
         }
-        private void textBoxnombre_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (!char.IsLetter(e.KeyChar) && !char.IsControl(e.KeyChar))
-            {
-                e.Handled = true;
-            }
-        }
-
-        
     }
 }
 

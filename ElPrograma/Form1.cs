@@ -14,6 +14,9 @@ namespace ElPrograma
 {
     public partial class menuVertical : Form
     {
+        
+
+
         [DllImport("user32.dll", EntryPoint = "ReleaseCapture")]
         private extern static void ReleaseCapture();
 
@@ -24,13 +27,16 @@ namespace ElPrograma
         private const int WM_NCLBUTTONDOWN = 0xA1;
         private const int HT_CAPTION = 0x2;
 
-
+        
         
         public menuVertical()
         {
+            this.WindowState = FormWindowState.Maximized;
+           
             InitializeComponent();
 
-            MySqlConnection conexion = new MySqlConnection("Server=localhost; Database=Basedatos; Uid=root; Pwd=contrasena;");
+
+            MySqlConnection conexion = new MySqlConnection("Server=localhost; Database=Proyecto; Uid=root; Pwd=;");
             conexion.Open();
 
 
@@ -98,9 +104,10 @@ namespace ElPrograma
 
         }
 
-       
+        private void button1_Click(object sender, EventArgs e)
+        {
 
-
+        }
     }
 
 }

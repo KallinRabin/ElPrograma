@@ -31,10 +31,10 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ModificarMenu));
             this.panelTitulo = new System.Windows.Forms.Panel();
+            this.btnMaximizar = new System.Windows.Forms.Button();
             this.btnCerrar = new System.Windows.Forms.Button();
             this.btnMinimizar = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
-            this.pcbAgregarImagen = new System.Windows.Forms.PictureBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
@@ -50,27 +50,29 @@
             this.texprecio3 = new System.Windows.Forms.TextBox();
             this.texprecio4 = new System.Windows.Forms.TextBox();
             this.texprecio1 = new System.Windows.Forms.TextBox();
-            this.pcbRegresar = new System.Windows.Forms.PictureBox();
             this.btnCargar = new System.Windows.Forms.Button();
             this.txtNuevaCategoria = new System.Windows.Forms.TextBox();
-            this.panel1 = new System.Windows.Forms.Panel();
+            this.panel_categorias = new System.Windows.Forms.Panel();
             this.subirBajar = new System.Windows.Forms.VScrollBar();
             this.subiBaja = new System.Windows.Forms.VScrollBar();
             this.label5 = new System.Windows.Forms.Label();
             this.pnlTituloC = new System.Windows.Forms.Panel();
             this.tmDesplazador = new System.Windows.Forms.Timer(this.components);
             this.label6 = new System.Windows.Forms.Label();
+            this.pcbRegresar = new System.Windows.Forms.PictureBox();
+            this.pcbAgregarImagen = new System.Windows.Forms.PictureBox();
             this.panelTitulo.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pcbAgregarImagen)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pcbRegresar)).BeginInit();
-            this.panel1.SuspendLayout();
+            this.panel_categorias.SuspendLayout();
             this.pnlTituloC.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pcbRegresar)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pcbAgregarImagen)).BeginInit();
             this.SuspendLayout();
             // 
             // panelTitulo
             // 
             this.panelTitulo.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(18)))), ((int)(((byte)(39)))));
             this.panelTitulo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panelTitulo.Controls.Add(this.btnMaximizar);
             this.panelTitulo.Controls.Add(this.btnCerrar);
             this.panelTitulo.Controls.Add(this.btnMinimizar);
             this.panelTitulo.Controls.Add(this.label2);
@@ -78,9 +80,21 @@
             this.panelTitulo.Location = new System.Drawing.Point(0, 0);
             this.panelTitulo.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.panelTitulo.Name = "panelTitulo";
-            this.panelTitulo.Size = new System.Drawing.Size(949, 45);
+            this.panelTitulo.Size = new System.Drawing.Size(1605, 45);
             this.panelTitulo.TabIndex = 1;
             this.panelTitulo.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panelTitulo_MouseDown);
+            // 
+            // btnMaximizar
+            // 
+            this.btnMaximizar.BackgroundImage = global::ElPrograma.Properties.Resources.Maximizar_fotor_2023091320127;
+            this.btnMaximizar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnMaximizar.Location = new System.Drawing.Point(869, 5);
+            this.btnMaximizar.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnMaximizar.Name = "btnMaximizar";
+            this.btnMaximizar.Size = new System.Drawing.Size(35, 33);
+            this.btnMaximizar.TabIndex = 7;
+            this.btnMaximizar.UseVisualStyleBackColor = true;
+            this.btnMaximizar.Click += new System.EventHandler(this.btnMaximizar_Click);
             // 
             // btnCerrar
             // 
@@ -98,7 +112,7 @@
             // 
             this.btnMinimizar.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnMinimizar.BackgroundImage")));
             this.btnMinimizar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.btnMinimizar.Location = new System.Drawing.Point(869, 5);
+            this.btnMinimizar.Location = new System.Drawing.Point(828, 5);
             this.btnMinimizar.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnMinimizar.Name = "btnMinimizar";
             this.btnMinimizar.Size = new System.Drawing.Size(35, 33);
@@ -117,17 +131,6 @@
             this.label2.Size = new System.Drawing.Size(239, 38);
             this.label2.TabIndex = 5;
             this.label2.Text = "Modificar Menu";
-            // 
-            // pcbAgregarImagen
-            // 
-            this.pcbAgregarImagen.BackColor = System.Drawing.Color.White;
-            this.pcbAgregarImagen.Location = new System.Drawing.Point(45, 60);
-            this.pcbAgregarImagen.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.pcbAgregarImagen.Name = "pcbAgregarImagen";
-            this.pcbAgregarImagen.Size = new System.Drawing.Size(100, 76);
-            this.pcbAgregarImagen.TabIndex = 2;
-            this.pcbAgregarImagen.TabStop = false;
-            this.pcbAgregarImagen.DoubleClick += new System.EventHandler(this.pcbAgregarImagen_DoubleClick);
             // 
             // label1
             // 
@@ -261,18 +264,6 @@
             this.texprecio1.Size = new System.Drawing.Size(145, 22);
             this.texprecio1.TabIndex = 16;
             // 
-            // pcbRegresar
-            // 
-            this.pcbRegresar.Image = ((System.Drawing.Image)(resources.GetObject("pcbRegresar.Image")));
-            this.pcbRegresar.Location = new System.Drawing.Point(12, 431);
-            this.pcbRegresar.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.pcbRegresar.Name = "pcbRegresar";
-            this.pcbRegresar.Size = new System.Drawing.Size(100, 50);
-            this.pcbRegresar.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pcbRegresar.TabIndex = 22;
-            this.pcbRegresar.TabStop = false;
-            this.pcbRegresar.Click += new System.EventHandler(this.pcbRegresar_Click);
-            // 
             // btnCargar
             // 
             this.btnCargar.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -293,16 +284,16 @@
             this.txtNuevaCategoria.Size = new System.Drawing.Size(145, 22);
             this.txtNuevaCategoria.TabIndex = 24;
             // 
-            // panel1
+            // panel_categorias
             // 
-            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel1.Controls.Add(this.subirBajar);
-            this.panel1.Controls.Add(this.subiBaja);
-            this.panel1.Location = new System.Drawing.Point(701, 101);
-            this.panel1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(257, 404);
-            this.panel1.TabIndex = 25;
+            this.panel_categorias.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel_categorias.Controls.Add(this.subirBajar);
+            this.panel_categorias.Controls.Add(this.subiBaja);
+            this.panel_categorias.Location = new System.Drawing.Point(701, 101);
+            this.panel_categorias.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.panel_categorias.Name = "panel_categorias";
+            this.panel_categorias.Size = new System.Drawing.Size(257, 404);
+            this.panel_categorias.TabIndex = 25;
             // 
             // subirBajar
             // 
@@ -346,20 +337,43 @@
             this.label6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(18)))), ((int)(((byte)(39)))));
             this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label6.ForeColor = System.Drawing.SystemColors.Control;
-            this.label6.Location = new System.Drawing.Point(770, 60);
+            this.label6.Location = new System.Drawing.Point(771, 60);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(107, 25);
             this.label6.TabIndex = 26;
             this.label6.Text = "Categorias";
+            // 
+            // pcbRegresar
+            // 
+            this.pcbRegresar.Image = ((System.Drawing.Image)(resources.GetObject("pcbRegresar.Image")));
+            this.pcbRegresar.Location = new System.Drawing.Point(12, 431);
+            this.pcbRegresar.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.pcbRegresar.Name = "pcbRegresar";
+            this.pcbRegresar.Size = new System.Drawing.Size(100, 50);
+            this.pcbRegresar.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pcbRegresar.TabIndex = 22;
+            this.pcbRegresar.TabStop = false;
+            this.pcbRegresar.Click += new System.EventHandler(this.pcbRegresar_Click);
+            // 
+            // pcbAgregarImagen
+            // 
+            this.pcbAgregarImagen.BackColor = System.Drawing.Color.White;
+            this.pcbAgregarImagen.Location = new System.Drawing.Point(45, 60);
+            this.pcbAgregarImagen.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.pcbAgregarImagen.Name = "pcbAgregarImagen";
+            this.pcbAgregarImagen.Size = new System.Drawing.Size(100, 76);
+            this.pcbAgregarImagen.TabIndex = 2;
+            this.pcbAgregarImagen.TabStop = false;
+            this.pcbAgregarImagen.DoubleClick += new System.EventHandler(this.pcbAgregarImagen_DoubleClick);
             // 
             // ModificarMenu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(18)))), ((int)(((byte)(39)))));
-            this.ClientSize = new System.Drawing.Size(949, 494);
+            this.ClientSize = new System.Drawing.Size(1605, 766);
             this.Controls.Add(this.label6);
-            this.Controls.Add(this.panel1);
+            this.Controls.Add(this.panel_categorias);
             this.Controls.Add(this.txtNuevaCategoria);
             this.Controls.Add(this.btnCargar);
             this.Controls.Add(this.pcbRegresar);
@@ -387,11 +401,11 @@
             this.Text = "ModificarMenu";
             this.panelTitulo.ResumeLayout(false);
             this.panelTitulo.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pcbAgregarImagen)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pcbRegresar)).EndInit();
-            this.panel1.ResumeLayout(false);
+            this.panel_categorias.ResumeLayout(false);
             this.pnlTituloC.ResumeLayout(false);
             this.pnlTituloC.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pcbRegresar)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pcbAgregarImagen)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -422,12 +436,13 @@
         private System.Windows.Forms.PictureBox pcbRegresar;
         private System.Windows.Forms.Button btnCargar;
         private System.Windows.Forms.TextBox txtNuevaCategoria;
-        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Panel panel_categorias;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Timer tmDesplazador;
         private System.Windows.Forms.VScrollBar subiBaja;
         private System.Windows.Forms.Panel pnlTituloC;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.VScrollBar subirBajar;
+        private System.Windows.Forms.Button btnMaximizar;
     }
 }

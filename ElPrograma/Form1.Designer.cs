@@ -39,6 +39,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.panelTitulo = new System.Windows.Forms.Panel();
+            this.btnMaximizar = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.panelTitulo.SuspendLayout();
             this.SuspendLayout();
@@ -122,10 +123,12 @@
             // 
             this.btnSalir.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnSalir.BackgroundImage")));
             this.btnSalir.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.btnSalir.Location = new System.Drawing.Point(917, 6);
+            this.btnSalir.Location = new System.Drawing.Point(915, 5);
+            this.btnSalir.MaximumSize = new System.Drawing.Size(40, 40);
             this.btnSalir.Name = "btnSalir";
             this.btnSalir.Size = new System.Drawing.Size(35, 33);
             this.btnSalir.TabIndex = 2;
+            this.btnSalir.TextAlign = System.Drawing.ContentAlignment.TopRight;
             this.btnSalir.UseVisualStyleBackColor = true;
             this.btnSalir.Click += new System.EventHandler(this.btnSalir_Click);
             // 
@@ -133,7 +136,7 @@
             // 
             this.btnMinimixar.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnMinimixar.BackgroundImage")));
             this.btnMinimixar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.btnMinimixar.Location = new System.Drawing.Point(876, 6);
+            this.btnMinimixar.Location = new System.Drawing.Point(835, 5);
             this.btnMinimixar.Name = "btnMinimixar";
             this.btnMinimixar.Size = new System.Drawing.Size(35, 33);
             this.btnMinimixar.TabIndex = 3;
@@ -168,6 +171,7 @@
             // 
             this.panelTitulo.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(18)))), ((int)(((byte)(39)))));
             this.panelTitulo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panelTitulo.Controls.Add(this.btnMaximizar);
             this.panelTitulo.Controls.Add(this.label2);
             this.panelTitulo.Controls.Add(this.label1);
             this.panelTitulo.Controls.Add(this.btnMinimixar);
@@ -178,6 +182,18 @@
             this.panelTitulo.Size = new System.Drawing.Size(955, 45);
             this.panelTitulo.TabIndex = 0;
             this.panelTitulo.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panelTitulo_MouseDown);
+            // 
+            // btnMaximizar
+            // 
+            this.btnMaximizar.BackgroundImage = global::ElPrograma.Properties.Resources.Maximizar_fotor_2023091320127;
+            this.btnMaximizar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnMaximizar.Location = new System.Drawing.Point(876, 5);
+            this.btnMaximizar.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnMaximizar.Name = "btnMaximizar";
+            this.btnMaximizar.Size = new System.Drawing.Size(34, 33);
+            this.btnMaximizar.TabIndex = 8;
+            this.btnMaximizar.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.btnMaximizar.UseVisualStyleBackColor = true;
             // 
             // menuVertical
             // 
@@ -210,6 +226,7 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Panel panelTitulo;
+        private System.Windows.Forms.Button btnMaximizar;
     }
 }
 

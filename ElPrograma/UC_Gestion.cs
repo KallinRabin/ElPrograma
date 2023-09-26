@@ -28,5 +28,10 @@ namespace ElPrograma
         {
             
         }
+
+        private void UC_Gestion_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }
