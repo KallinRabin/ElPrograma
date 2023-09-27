@@ -144,6 +144,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <EmbeddedResource Include="UC_Gestion.resx">
       <DependentUpon>UC_Gestion.cs</DependentUpon>
@@ -173,6 +174,21 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Maximizar.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Maximizar-fotor-20230913195911.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Maximizar-fotor-2023091320127.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Maximizar-fotor-2023091320219.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\max.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -122,6 +122,7 @@ C:\Users\Ian Gomez\OneDrive\Desktop\ElPrograma\ElPrograma\obj\Debug\ElPrograma.e
 C:\Users\Ian Gomez\OneDrive\Desktop\ElPrograma\ElPrograma\obj\Debug\ElPrograma.pdb
 C:\Users\paraj\Desktop\LaTuerca\ElPrograma\ElPrograma\obj\Debug\ElPrograma.ModificarMenu.resources
 C:\Users\Ian Gomez\OneDrive\Desktop\ElPrograma\ElPrograma\obj\Debug\ElPrograma.ModificarMenu.resources
+<<<<<<< HEAD
 C:\Users\mubra\OneDrive\Desktop\Proyecto\Proyecto-Programa\ElPrograma\ElPrograma\bin\Debug\ElPrograma.exe.config
 C:\Users\mubra\OneDrive\Desktop\Proyecto\Proyecto-Programa\ElPrograma\ElPrograma\bin\Debug\ElPrograma.exe
 C:\Users\mubra\OneDrive\Desktop\Proyecto\Proyecto-Programa\ElPrograma\ElPrograma\bin\Debug\ElPrograma.pdb
@@ -165,3 +166,7 @@ C:\Users\mubra\OneDrive\Desktop\Proyecto\Proyecto-Programa\ElPrograma\ElPrograma
 C:\Users\mubra\OneDrive\Desktop\Proyecto\Proyecto-Programa\ElPrograma\ElPrograma\obj\Debug\ElPrograma.exe
 C:\Users\mubra\OneDrive\Desktop\Proyecto\Proyecto-Programa\ElPrograma\ElPrograma\obj\Debug\ElPrograma.pdb
 C:\Users\paraj\Desktop\LaTuerca\ElPrograma\ElPrograma\obj\Debug\ElPrograma.ventanaCategorias.resources
+=======
+C:\Users\mubra\OneDrive\Desktop\ElPrograma\ElPrograma\obj\Debug\ElPrograma.ModificarMenu.resources
+C:\Users\mubra\OneDrive\Desktop\ElPrograma\ElPrograma\obj\Debug\ElPrograma.UC_Menu.resources
+>>>>>>> e57ce6f03178bf8f2168efb51e5b850ae1e2bbb4

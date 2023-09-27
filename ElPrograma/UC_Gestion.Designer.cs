@@ -81,11 +81,16 @@
             this.Precio});
             this.dtgvcomidas.Location = new System.Drawing.Point(0, 0);
             this.dtgvcomidas.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+
             this.dtgvcomidas.MultiSelect = false;
             this.dtgvcomidas.Name = "dtgvcomidas";
             this.dtgvcomidas.ReadOnly = true;
             this.dtgvcomidas.RowHeadersWidth = 51;
             this.dtgvcomidas.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+
+            this.dtgvcomidas.Name = "dtgvcomidas";
+            this.dtgvcomidas.RowHeadersWidth = 51;
+
             this.dtgvcomidas.Size = new System.Drawing.Size(528, 336);
             this.dtgvcomidas.TabIndex = 4;
             // 
@@ -128,6 +133,9 @@
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "UC_Gestion";
             this.Size = new System.Drawing.Size(737, 423);
+
+            this.Load += new System.EventHandler(this.UC_Gestion_Load);
+
             ((System.ComponentModel.ISupportInitialize)(this.dtgvcomidas)).EndInit();
             this.ResumeLayout(false);
 

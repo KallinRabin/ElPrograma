@@ -204,6 +204,7 @@
             this.nombreProducto,
             this.precio});
             this.dgvProductos.Location = new System.Drawing.Point(140, 71);
+            this.dgvProductos.MultiSelect = false;
             this.dgvProductos.Name = "dgvProductos";
             this.dgvProductos.ReadOnly = true;
             this.dgvProductos.RowHeadersWidth = 51;

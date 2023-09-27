@@ -31,7 +31,7 @@ namespace ElPrograma
             
             InitializeComponent();
 
-            string connectionString = "server=localhost;database=baseDatosMomentaria;user=root;password=contrasenia;";
+            string connectionString = "server=localhost;database=baseDatosProyecto;user=root;password=contrasenia;";
             string query = "SELECT * from categoria where ID = "+ idCategoria + ";";
 
             string valor="";
@@ -65,10 +65,10 @@ namespace ElPrograma
     
         private void actualizarLista (string idCategoria ){
 
-            string connectionString = "server=localhost;database=baseDatosMomentaria;user=root;password=contrasenia;";
+            string connectionString = "server=localhost;database=baseDatosProyecto;user=root;password=contrasenia;";
             string query = "SELECT * from platos where ID_Categoria = " + idCategoria + ";";
 
-            string valor = "";
+            
 
             using (MySqlConnection connection = new MySqlConnection(connectionString))
             {
