@@ -50,7 +50,7 @@ namespace ElPrograma
             texprecio5.KeyPress += textBoxprecio_KeyPress;
             texprecio6.KeyPress += textBoxprecio_KeyPress;
 
-           texprod1.KeyPress += textBoxnombre_KeyPress;
+            texprod1.KeyPress += textBoxnombre_KeyPress;
             texprod2.KeyPress += textBoxnombre_KeyPress;
             texprod3.KeyPress += textBoxnombre_KeyPress;
             texprod4.KeyPress += textBoxnombre_KeyPress;
@@ -85,7 +85,7 @@ namespace ElPrograma
         {
 
 
-            string connectionString = "server=localhost;database=Basedatos;user=root;password=contrasena;";
+            string connectionString = "server=localhost;database=baseDatosMomentaria;user=root;password=contrasenia;";
             string query = "SELECT nombre FROM categoria ORDER BY ID DESC LIMIT 1;";
 
 
@@ -114,7 +114,7 @@ namespace ElPrograma
 
         private void btnCargar_Click(object sender, EventArgs e)
         {
-            string connectionString = "server=localhost;database=Basedatos;user=root;password=contrasena;";
+            string connectionString = "server=localhost;database=baseDatosMomentaria;user=root;password=contrasenia;";
             long IDultimacategoria = -1;
 
             try
@@ -193,6 +193,9 @@ namespace ElPrograma
             nuevoPanel.BorderStyle = BorderStyle.FixedSingle;
             nuevoPanel.BackColor = Color.LightGray;
 
+           
+
+
             TableLayoutPanel tableLayout = new TableLayoutPanel();
             tableLayout.Dock = DockStyle.Fill;
 
@@ -200,6 +203,8 @@ namespace ElPrograma
             nuevoLabel.Text = nombreCategoria;
             nuevoLabel.AutoSize = true;
             nuevoLabel.Font = new Font("Roboto Bk", 10);
+
+           
 
             PictureBox imagenPictureBox = new PictureBox();
             imagenPictureBox.SizeMode = PictureBoxSizeMode.StretchImage;
@@ -218,9 +223,14 @@ namespace ElPrograma
             tableLayout.RowStyles.Add(new RowStyle(SizeType.Percent, 40)); // Espacio para el nombre de la categoría
 
             tableLayout.Controls.Add(imagenPictureBox, 0, 0);
+            tableLayout.Name = categoriaId.ToString();
             tableLayout.Controls.Add(nuevoLabel, 0, 1);
 
             nuevoPanel.Controls.Add(tableLayout);
+
+            tableLayout.MouseDown += new MouseEventHandler(panelRezisable_MouseDown);
+
+
             panel1.Controls.Add(nuevoPanel);
 
             nuevoPanel.Location = new Point(5, panelPositionY);
@@ -228,9 +238,22 @@ namespace ElPrograma
 
             panelCounter++;
         }
+
+        private void panelRezisable_MouseDown(object sender, MouseEventArgs e)
+        {
+            TableLayoutPanel panel = sender as TableLayoutPanel;
+
+            if (panel != null)
+            {
+                string categoriaId = panel.Name;
+                ventanaCategorias ven = new ventanaCategorias(categoriaId, 23);
+                ven.ShowDialog();
+            }
+        }
+
         private void MostrarDatosDesdeBD()
         {
-            string connectionString = "server=localhost;database=Basedatos;user=root;password=contrasena;";
+            string connectionString = "server=localhost;database=baseDatosMomentaria;user=root;password=contrasenia;";
 
             using (MySqlConnection connection = new MySqlConnection(connectionString))
             {
@@ -249,6 +272,8 @@ namespace ElPrograma
                                 long categoriaId = Convert.ToInt64(reader["ID"]);
                                 string nombreCategoria = reader["Nombre"].ToString();
                                 byte[] imagenBytes = reader["Imagen"] as byte[]; // Recupera los bytes de la imagen
+                                
+                                
 
                                 CrearCategoriaDesdeBD(categoriaId, nombreCategoria, imagenBytes); // Pasa los bytes de la imagen a la función
                             }
@@ -259,6 +284,8 @@ namespace ElPrograma
                 {
                     MessageBox.Show("Error: " + ex.Message);
                 }
+
+
             }
         }
 
@@ -270,7 +297,7 @@ namespace ElPrograma
                 return;            
             
             }
-            string connectionString = "server=localhost;database=Basedatos;user=root;password=contrasena;";
+            string connectionString = "server=localhost;database=baseDatosMomentaria;user=root;password=contrasenia;";
 
             using (MySqlConnection conexion = new MySqlConnection(connectionString))
             {
@@ -359,7 +386,6 @@ namespace ElPrograma
             }
         }
 
-        
     }
 }
 

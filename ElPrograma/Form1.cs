@@ -30,7 +30,7 @@ namespace ElPrograma
         {
             InitializeComponent();
 
-            MySqlConnection conexion = new MySqlConnection("Server=localhost; Database=Basedatos; Uid=root; Pwd=contrasena;");
+            MySqlConnection conexion = new MySqlConnection("Server=localhost; Database=baseDatosMomentaria; Uid=root; Pwd=contrasenia;");
             conexion.Open();
 
 

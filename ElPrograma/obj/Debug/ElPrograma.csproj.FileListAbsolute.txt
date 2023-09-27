@@ -164,3 +164,4 @@ C:\Users\mubra\OneDrive\Desktop\Proyecto\Proyecto-Programa\ElPrograma\ElPrograma
 C:\Users\mubra\OneDrive\Desktop\Proyecto\Proyecto-Programa\ElPrograma\ElPrograma\obj\Debug\ElPrograma.csproj.CopyComplete
 C:\Users\mubra\OneDrive\Desktop\Proyecto\Proyecto-Programa\ElPrograma\ElPrograma\obj\Debug\ElPrograma.exe
 C:\Users\mubra\OneDrive\Desktop\Proyecto\Proyecto-Programa\ElPrograma\ElPrograma\obj\Debug\ElPrograma.pdb
+C:\Users\paraj\Desktop\LaTuerca\ElPrograma\ElPrograma\obj\Debug\ElPrograma.ventanaCategorias.resources
