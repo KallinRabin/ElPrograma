@@ -37,7 +37,10 @@ namespace ElPrograma
             Responsive();
             
 
-            MySqlConnection conexion = new MySqlConnection("Server=localhost; Database=Proyecto; Uid=root; Pwd=;");
+            MySqlConnection conexion = new MySqlConnection("Server=localhost; Database=baseDatosMomentaria; Uid=root; Pwd=contrasenia;");
+
+
+            
             conexion.Open();
 
 
