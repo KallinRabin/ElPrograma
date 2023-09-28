@@ -52,7 +52,7 @@
             this.texprecio1 = new System.Windows.Forms.TextBox();
             this.btnCargar = new System.Windows.Forms.Button();
             this.txtNuevaCategoria = new System.Windows.Forms.TextBox();
-            this.panel_categorias = new System.Windows.Forms.Panel();
+            this.pnlCategorias = new System.Windows.Forms.Panel();
             this.subirBajar = new System.Windows.Forms.VScrollBar();
             this.subiBaja = new System.Windows.Forms.VScrollBar();
             this.label5 = new System.Windows.Forms.Label();
@@ -62,7 +62,7 @@
             this.pcbRegresar = new System.Windows.Forms.PictureBox();
             this.pcbAgregarImagen = new System.Windows.Forms.PictureBox();
             this.panelTitulo.SuspendLayout();
-            this.panel_categorias.SuspendLayout();
+            this.pnlCategorias.SuspendLayout();
             this.pnlTituloC.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pcbRegresar)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pcbAgregarImagen)).BeginInit();
@@ -284,16 +284,16 @@
             this.txtNuevaCategoria.Size = new System.Drawing.Size(145, 22);
             this.txtNuevaCategoria.TabIndex = 24;
             // 
-            // panel_categorias
+            // pnlCategorias
             // 
-            this.panel_categorias.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel_categorias.Controls.Add(this.subirBajar);
-            this.panel_categorias.Controls.Add(this.subiBaja);
-            this.panel_categorias.Location = new System.Drawing.Point(701, 101);
-            this.panel_categorias.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.panel_categorias.Name = "panel_categorias";
-            this.panel_categorias.Size = new System.Drawing.Size(257, 404);
-            this.panel_categorias.TabIndex = 25;
+            this.pnlCategorias.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pnlCategorias.Controls.Add(this.subirBajar);
+            this.pnlCategorias.Controls.Add(this.subiBaja);
+            this.pnlCategorias.Location = new System.Drawing.Point(701, 101);
+            this.pnlCategorias.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.pnlCategorias.Name = "pnlCategorias";
+            this.pnlCategorias.Size = new System.Drawing.Size(257, 404);
+            this.pnlCategorias.TabIndex = 25;
             // 
             // subirBajar
             // 
@@ -373,7 +373,7 @@
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(18)))), ((int)(((byte)(39)))));
             this.ClientSize = new System.Drawing.Size(1605, 766);
             this.Controls.Add(this.label6);
-            this.Controls.Add(this.panel_categorias);
+            this.Controls.Add(this.pnlCategorias);
             this.Controls.Add(this.txtNuevaCategoria);
             this.Controls.Add(this.btnCargar);
             this.Controls.Add(this.pcbRegresar);
@@ -401,7 +401,7 @@
             this.Text = "ModificarMenu";
             this.panelTitulo.ResumeLayout(false);
             this.panelTitulo.PerformLayout();
-            this.panel_categorias.ResumeLayout(false);
+            this.pnlCategorias.ResumeLayout(false);
             this.pnlTituloC.ResumeLayout(false);
             this.pnlTituloC.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pcbRegresar)).EndInit();
@@ -436,7 +436,7 @@
         private System.Windows.Forms.PictureBox pcbRegresar;
         private System.Windows.Forms.Button btnCargar;
         private System.Windows.Forms.TextBox txtNuevaCategoria;
-        private System.Windows.Forms.Panel panel_categorias;
+        private System.Windows.Forms.Panel pnlCategorias;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Timer tmDesplazador;
         private System.Windows.Forms.VScrollBar subiBaja;

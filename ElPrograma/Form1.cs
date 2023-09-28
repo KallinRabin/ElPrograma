@@ -32,9 +32,10 @@ namespace ElPrograma
         public menuVertical()
         {
             this.WindowState = FormWindowState.Maximized;
-           
+                      
             InitializeComponent();
-
+            Responsive();
+            
 
             MySqlConnection conexion = new MySqlConnection("Server=localhost; Database=Proyecto; Uid=root; Pwd=;");
             conexion.Open();
@@ -108,6 +109,20 @@ namespace ElPrograma
         {
 
         }
+
+        private void Ajustar(object sender, EventArgs e)
+        {
+            Responsive();
+        }
+
+        private void Responsive()
+        {
+            panelTitulo.Width = this.Width;
+            //MessageBox.Show(Convert.ToString(this.Width) + "x" + Convert.ToString(this.Height));
+            //MessageBox.Show(Convert.ToString(panelTitulo.Width) + "x" + Convert.ToString(panelTitulo.Height));
+            pnlOpciones.Width = Convert.ToInt32(this.Width * 0.4);
+        }
+
     }
 
 }

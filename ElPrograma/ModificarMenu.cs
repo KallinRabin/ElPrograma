@@ -99,7 +99,7 @@ namespace ElPrograma
             tableLayout.RowStyles.Add(new RowStyle(SizeType.Percent, 100));
 
             nuevoPanel.Controls.Add(tableLayout);
-            panel_categorias.Controls.Add(nuevoPanel);
+            pnlCategorias.Controls.Add(nuevoPanel);
 
             if (panelCounter == 0) // Verifica si es el primer panel
             {
@@ -326,7 +326,7 @@ namespace ElPrograma
             int scrollValue = subirBajar.Value;
             int newY = initialPanelPositionY - (scrollValue * (panelHeight + margin));
 
-            foreach (Control control in panel_categorias.Controls)
+            foreach (Control control in pnlCategorias.Controls)
             {
                 if (control is Panel)
                 {

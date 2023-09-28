@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(menuVertical));
-            this.panel1 = new System.Windows.Forms.Panel();
+            this.pnlOpciones = new System.Windows.Forms.Panel();
             this.btnGestion = new System.Windows.Forms.Button();
             this.btnMenu = new System.Windows.Forms.Button();
             this.btnIniciar = new System.Windows.Forms.Button();
@@ -40,22 +40,22 @@
             this.label2 = new System.Windows.Forms.Label();
             this.panelTitulo = new System.Windows.Forms.Panel();
             this.btnMaximizar = new System.Windows.Forms.Button();
-            this.panel1.SuspendLayout();
+            this.pnlOpciones.SuspendLayout();
             this.panelTitulo.SuspendLayout();
             this.SuspendLayout();
             // 
-            // panel1
+            // pnlOpciones
             // 
-            this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(18)))), ((int)(((byte)(39)))));
-            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel1.Controls.Add(this.btnGestion);
-            this.panel1.Controls.Add(this.btnMenu);
-            this.panel1.Controls.Add(this.btnIniciar);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Left;
-            this.panel1.Location = new System.Drawing.Point(0, 45);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(218, 423);
-            this.panel1.TabIndex = 1;
+            this.pnlOpciones.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(18)))), ((int)(((byte)(39)))));
+            this.pnlOpciones.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pnlOpciones.Controls.Add(this.btnGestion);
+            this.pnlOpciones.Controls.Add(this.btnMenu);
+            this.pnlOpciones.Controls.Add(this.btnIniciar);
+            this.pnlOpciones.Dock = System.Windows.Forms.DockStyle.Left;
+            this.pnlOpciones.Location = new System.Drawing.Point(0, 45);
+            this.pnlOpciones.Name = "pnlOpciones";
+            this.pnlOpciones.Size = new System.Drawing.Size(212, 423);
+            this.pnlOpciones.TabIndex = 1;
             // 
             // btnGestion
             // 
@@ -113,9 +113,9 @@
             this.panelContenedor.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(18)))), ((int)(((byte)(39)))));
             this.panelContenedor.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panelContenedor.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelContenedor.Location = new System.Drawing.Point(218, 45);
+            this.panelContenedor.Location = new System.Drawing.Point(212, 45);
             this.panelContenedor.Name = "panelContenedor";
-            this.panelContenedor.Size = new System.Drawing.Size(737, 423);
+            this.panelContenedor.Size = new System.Drawing.Size(743, 423);
             this.panelContenedor.TabIndex = 2;
             this.panelContenedor.Paint += new System.Windows.Forms.PaintEventHandler(this.panelContenedor_Paint);
             // 
@@ -123,10 +123,11 @@
             // 
             this.btnSalir.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnSalir.BackgroundImage")));
             this.btnSalir.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.btnSalir.Location = new System.Drawing.Point(915, 5);
+            this.btnSalir.Dock = System.Windows.Forms.DockStyle.Right;
+            this.btnSalir.Location = new System.Drawing.Point(918, 0);
             this.btnSalir.MaximumSize = new System.Drawing.Size(40, 40);
             this.btnSalir.Name = "btnSalir";
-            this.btnSalir.Size = new System.Drawing.Size(35, 33);
+            this.btnSalir.Size = new System.Drawing.Size(35, 40);
             this.btnSalir.TabIndex = 2;
             this.btnSalir.TextAlign = System.Drawing.ContentAlignment.TopRight;
             this.btnSalir.UseVisualStyleBackColor = true;
@@ -136,9 +137,10 @@
             // 
             this.btnMinimixar.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnMinimixar.BackgroundImage")));
             this.btnMinimixar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.btnMinimixar.Location = new System.Drawing.Point(835, 5);
+            this.btnMinimixar.Dock = System.Windows.Forms.DockStyle.Right;
+            this.btnMinimixar.Location = new System.Drawing.Point(883, 0);
             this.btnMinimixar.Name = "btnMinimixar";
-            this.btnMinimixar.Size = new System.Drawing.Size(35, 33);
+            this.btnMinimixar.Size = new System.Drawing.Size(35, 43);
             this.btnMinimixar.TabIndex = 3;
             this.btnMinimixar.UseVisualStyleBackColor = true;
             this.btnMinimixar.Click += new System.EventHandler(this.btnMinimixar_Click);
@@ -149,7 +151,7 @@
             this.label1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(18)))), ((int)(((byte)(39)))));
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 19.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.SystemColors.Control;
-            this.label1.Location = new System.Drawing.Point(11, 2);
+            this.label1.Location = new System.Drawing.Point(3, 3);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(202, 38);
             this.label1.TabIndex = 4;
@@ -187,10 +189,11 @@
             // 
             this.btnMaximizar.BackgroundImage = global::ElPrograma.Properties.Resources.Maximizar_fotor_2023091320127;
             this.btnMaximizar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.btnMaximizar.Location = new System.Drawing.Point(876, 5);
+            this.btnMaximizar.Dock = System.Windows.Forms.DockStyle.Right;
+            this.btnMaximizar.Location = new System.Drawing.Point(849, 0);
             this.btnMaximizar.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnMaximizar.Name = "btnMaximizar";
-            this.btnMaximizar.Size = new System.Drawing.Size(34, 33);
+            this.btnMaximizar.Size = new System.Drawing.Size(34, 43);
             this.btnMaximizar.TabIndex = 8;
             this.btnMaximizar.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             this.btnMaximizar.UseVisualStyleBackColor = true;
@@ -201,14 +204,15 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(955, 468);
             this.Controls.Add(this.panelContenedor);
-            this.Controls.Add(this.panel1);
+            this.Controls.Add(this.pnlOpciones);
             this.Controls.Add(this.panelTitulo);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "menuVertical";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "LaTuerca";
             this.Load += new System.EventHandler(this.Form1_Load);
-            this.panel1.ResumeLayout(false);
+            this.ResizeEnd += new System.EventHandler(this.Ajustar);
+            this.pnlOpciones.ResumeLayout(false);
             this.panelTitulo.ResumeLayout(false);
             this.panelTitulo.PerformLayout();
             this.ResumeLayout(false);
@@ -216,7 +220,7 @@
         }
 
         #endregion
-        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Panel pnlOpciones;
         private System.Windows.Forms.Panel panelContenedor;
         private System.Windows.Forms.Button btnIniciar;
         private System.Windows.Forms.Button btnGestion;
