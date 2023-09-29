@@ -37,7 +37,7 @@ namespace ElPrograma
             procesando = true;
             
 
-            MySqlConnection conexion = new MySqlConnection("Server=localhost; Database=baseDatosProyecto; Uid=root; Pwd=contrasenia;");
+            MySqlConnection conexion = new MySqlConnection("Server=localhost; Database=Proyecto; Uid=root; Pwd=contrasena;");
 
           //MySqlConnection conexion = new MySqlConnection("server=localhost;database=proyecto;user=root;password=;");
 

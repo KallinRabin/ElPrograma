@@ -1,20 +1,10 @@
-﻿using Google.Protobuf.WellKnownTypes;
-using MySql.Data.MySqlClient;
-using Org.BouncyCastle.Utilities.Collections;
+﻿using MySql.Data.MySqlClient;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Data.SqlClient;
 using System.Drawing;
 using System.IO;
-using System.Linq;
-using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace ElPrograma
 {
@@ -80,8 +70,47 @@ namespace ElPrograma
             }
         }
 
-        private void CrearCategoria(string contenido, string rutaImagen)
+        private void CrearCategoria(string contenido, System.Drawing.Image imagen, string ID)
         {
+            Panel nuevoPanel = new Panel() {
+                BackColor = Color.LightGray,
+                BorderStyle = BorderStyle.FixedSingle,
+                Dock = DockStyle.Top,
+                Height = 35,
+                Name = ID 
+            };
+            Label lblNombre = new Label()
+            {
+                Dock = DockStyle.Fill,
+                Text = contenido,
+                AutoSize = false,
+                Font = new Font("Roboto Bk", 10),
+                Name = ID
+            };
+            PictureBox Imagen = new PictureBox() {
+                Dock = DockStyle.Left,
+                Width = 35,
+                Image = imagen,
+                SizeMode = PictureBoxSizeMode.Zoom,
+                Name = ID
+            };
+
+            nuevoPanel.Controls.Add(lblNombre);
+            nuevoPanel.Controls.Add(Imagen);
+            pnlCategorias.Controls.Add(nuevoPanel);
+
+            lblNombre.Click += (sender, e) =>
+            {
+                Ventan_categorias ven = new Ventan_categorias(Imagen.Name);
+                ven.ShowDialog();
+            };
+            Imagen.Click += (sender, e) =>
+            {
+                Ventan_categorias ven = new Ventan_categorias(lblNombre.Name);
+                ven.ShowDialog();
+            };
+
+            /*
             Panel nuevoPanel = new Panel();
             nuevoPanel.Height = 35;
             nuevoPanel.Width = 160;
@@ -93,9 +122,9 @@ namespace ElPrograma
 
             PictureBox pictureBox = new PictureBox();
             pictureBox.SizeMode = PictureBoxSizeMode.Zoom;
-            pictureBox.Image = Image.FromFile(rutaImagen);
+            pictureBox.Image = imagen;
             pictureBox.Size = new Size(30, 30);
-
+            Font = new Font("Roboto Bk", 10);Font = new Font("Roboto Bk", 10);
             Label nuevoLabel = new Label();
             nuevoLabel.Text = contenido;
             nuevoLabel.AutoSize = true;
@@ -106,7 +135,7 @@ namespace ElPrograma
             tableLayout.RowStyles.Add(new RowStyle(SizeType.Percent, 100));
 
             nuevoPanel.Controls.Add(tableLayout);
-            pnlCategorias.Controls.Add(nuevoPanel);
+            
 
             if (panelCounter == 0)
             {
@@ -117,14 +146,17 @@ namespace ElPrograma
                 int panelPosicionY = initialPanelPositionY + (panelCounter * (panelHeight + margin));
                 nuevoPanel.Location = new Point(5, panelPosicionY);
             }
+            */
+
 
             panelCounter++;
         }
 
         private void MostrarDatos()
         {
-            string connectionString = "server=localhost;database=baseDatosProyecto;user=root;password=contrasenia;";
+            string connectionString = "server=localhost;database=Proyecto;user=root;password=contrasena;";
             string query = "SELECT nombre FROM categoria ORDER BY ID DESC LIMIT 1;";
+            
 
             using (MySqlConnection connection = new MySqlConnection(connectionString))
             {
@@ -147,12 +179,45 @@ namespace ElPrograma
                 }
             }
         }
-
-        private void btnCargar_Click(object sender, EventArgs e)
+        private void cargarCategorias()
         {
-            string connectionString = "server=localhost;database=baseDatosProyecto;user=root;password=contrasenia;";
-            long IDultimacategoria = -1;
+            pnlCategorias.Controls.Clear();
+            string connectionString = "server=localhost;database=Proyecto;user=root;password=contrasena;";
 
+            using (MySqlConnection connection = new MySqlConnection(connectionString))
+            {
+
+                connection.Open();
+
+                string query = "SELECT * from categoria;";
+
+                using (MySqlCommand cmd = new MySqlCommand(query, connection))
+                {
+                    using (MySqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            byte[] imagenBytes = (byte[])reader["Imagen"];
+                            string nombreCategoria = reader["Nombre"].ToString();
+                            string idCategoria = reader["ID"].ToString();
+                            using (MemoryStream ms = new MemoryStream(imagenBytes))
+                            {
+                                System.Drawing.Image imagen = System.Drawing.Image.FromStream(ms);
+                                CrearCategoria(nombreCategoria, imagen, idCategoria);
+                            }
+                        }
+                    }
+                }
+
+
+            }
+        }
+        private void btnCargar_Click(object sender, EventArgs e) {
+
+             
+            string connectionString = "server=localhost;database=Proyecto;user=root;password=contrasena;";
+            long IDultimacategoria = -1;
+           
             try
             {
                 using (MySqlConnection conexion = new MySqlConnection(connectionString))
@@ -164,7 +229,7 @@ namespace ElPrograma
                         string valor = txtNuevaCategoria.Text;
                         if (!string.IsNullOrWhiteSpace(valor))
                         {
-                            CrearCategoria(valor, rutaImagenSeleccionada);
+                            
 
                             byte[] imagenBytes = ImageToByteArray(pcbAgregarImagen.Image);
                             pcbAgregarImagen.Image = null;
@@ -204,8 +269,10 @@ namespace ElPrograma
                 MessageBox.Show("Error: " + ex.Message);
             }
 
-            MostrarDatos();
-            MostrarDatosDesdeBD();
+            //MostrarDatos();
+            //MostrarDatosDesdeBD();
+            cargarCategorias();
+
         }
 
         private void CrearCategoriaDesdeBD(long categoriaId, string nombreCategoria)
@@ -227,7 +294,7 @@ namespace ElPrograma
             {
                 using (MemoryStream ms = new MemoryStream(imagenBytes))
                 {
-                    imagenPictureBox.Image = Image.FromStream(ms);
+                    imagenPictureBox.Image = System.Drawing.Image.FromStream(ms);
                 }
             }
 
@@ -239,7 +306,7 @@ namespace ElPrograma
             tableLayout.Controls.Add(imagenPictureBox, 0, 0);
             tableLayout.Name = categoriaId.ToString();
             tableLayout.Controls.Add(nuevoLabel, 0, 1);
-
+            
            
                   
 
@@ -260,13 +327,13 @@ namespace ElPrograma
             if (panel != null)
             {
                 string categoriaId = panel.Name;
-                ventanaCategorias ven = new ventanaCategorias(categoriaId, 23);
-                ven.ShowDialog();
+                //ventanaCategorias ven = new ventanaCategorias(categoriaId, 23);
+                //ven.ShowDialog();
             }
         }
         private byte[] ObtenerImagenDesdeBD(long categoriaId)
         {
-            string connectionString = "server=localhost;database=baseDatosProyecto;user=root;password=contrasenia;";
+            string connectionString = "server=localhost;database=Proyecto;user=root;password=contrasena;";
             string query = "SELECT Imagen FROM categoria WHERE ID = @CategoriaId;";
 
             using (MySqlConnection connection = new MySqlConnection(connectionString))
@@ -295,7 +362,7 @@ namespace ElPrograma
 
         private void MostrarDatosDesdeBD()
         {
-            string connectionString = "server=localhost;database=baseDatosProyecto;user=root;password=contrasenia;";
+            string connectionString = "server=localhost;database=Proyecto;user=root;password=contrasena;";
 
             using (MySqlConnection connection = new MySqlConnection(connectionString))
             {
@@ -333,7 +400,7 @@ namespace ElPrograma
                 return;
             }
 
-            string connectionString = "server=localhost;database=baseDatosProyecto;user=root;password=contrasenia;";
+            string connectionString = "server=localhost;database=Proyecto;user=root;password=contrasena;";
 
             using (MySqlConnection conexion = new MySqlConnection(connectionString))
             {
@@ -373,27 +440,14 @@ namespace ElPrograma
             {
                 rutaImagenSeleccionada = openFileDialog.FileName;
 
-                pcbAgregarImagen.Image = Image.FromFile(rutaImagenSeleccionada);
+                pcbAgregarImagen.Image = System.Drawing.Image.FromFile(rutaImagenSeleccionada);
                 pcbAgregarImagen.SizeMode = PictureBoxSizeMode.StretchImage;
             }
         }
 
-        private void subirBajar_ValueChanged(object sender, EventArgs e)
-        {
-            int scrollValue = subirBajar.Value;
-            int newY = initialPanelPositionY - (scrollValue * (panelHeight + margin));
+        
 
-            foreach (Control control in pnlCategorias.Controls)
-            {
-                if (control is Panel)
-                {
-                    control.Location = new Point(control.Location.X, newY);
-                    newY += panelHeight + margin;
-                }
-            }
-        }
-
-        private byte[] ImageToByteArray(Image image)
+        private byte[] ImageToByteArray(System.Drawing.Image image)
         {
             using (MemoryStream memoryStream = new MemoryStream())
             {
@@ -431,5 +485,8 @@ namespace ElPrograma
                 e.Handled = true;
             }
         }
+
+        
+        
     }
 }

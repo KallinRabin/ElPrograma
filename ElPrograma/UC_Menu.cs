@@ -29,7 +29,7 @@ namespace ElPrograma
 
          
 
-            MySqlConnection conexion = new MySqlConnection("Server=localhost; Database=proyecto; Uid=root; Pwd=;");
+            MySqlConnection conexion = new MySqlConnection("Server=localhost; Database=proyecto; Uid=root; Pwd=contrasena;");
             conexion.Open();
             MySqlCommand comandos = new MySqlCommand("SELECT ID,Nombre, Imagen, Disponible FROM categoria where Disponible=1;", conexion);
             comandos.Connection = conexion;
