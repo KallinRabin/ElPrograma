@@ -28,7 +28,8 @@ namespace ElPrograma
         private const int HT_CAPTION = 0x2;
 
         
-        
+        string basedeDatos = "baseDatosProyecto";
+        string contrasenia = "contrasenia";
         public menuVertical()
         {
             this.WindowState = FormWindowState.Maximized;
@@ -37,7 +38,7 @@ namespace ElPrograma
             Responsive();
             
 
-            MySqlConnection conexion = new MySqlConnection("Server=localhost; Database=Proyecto; Uid=root; Pwd=contrasena;");
+            MySqlConnection conexion = new MySqlConnection($"Server=localhost; Database={basedeDatos}; Uid=root; Pwd={contrasenia};");
 
 
             

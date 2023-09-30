@@ -29,14 +29,12 @@
         private void InitializeComponent()
         {
             this.panel_menu = new System.Windows.Forms.Panel();
-            this.label1 = new System.Windows.Forms.Label();
             this.btnEnviar = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
             this.label2 = new System.Windows.Forms.Label();
             this.pnlCarrito = new System.Windows.Forms.Panel();
             this.pnlProductos = new System.Windows.Forms.Panel();
             this.btncancelar = new System.Windows.Forms.Button();
-            this.panel_menu.SuspendLayout();
             this.panel2.SuspendLayout();
             this.pnlCarrito.SuspendLayout();
             this.SuspendLayout();
@@ -44,22 +42,12 @@
             // panel_menu
             // 
             this.panel_menu.AutoScroll = true;
-            this.panel_menu.Controls.Add(this.label1);
             this.panel_menu.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel_menu.Location = new System.Drawing.Point(0, 0);
             this.panel_menu.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.panel_menu.Name = "panel_menu";
             this.panel_menu.Size = new System.Drawing.Size(528, 802);
             this.panel_menu.TabIndex = 4;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(151, 430);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(44, 16);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "label1";
             // 
             // btnEnviar
             // 
@@ -137,8 +125,6 @@
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "UC_Menu";
             this.Size = new System.Drawing.Size(1604, 802);
-            this.panel_menu.ResumeLayout(false);
-            this.panel_menu.PerformLayout();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
             this.pnlCarrito.ResumeLayout(false);
@@ -154,6 +140,5 @@
         private System.Windows.Forms.Panel pnlCarrito;
         private System.Windows.Forms.Button btncancelar;
         private System.Windows.Forms.Panel pnlProductos;
-        private System.Windows.Forms.Label label1;
     }
 }

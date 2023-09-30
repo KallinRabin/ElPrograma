@@ -23,13 +23,15 @@ namespace ElPrograma
         int PnlProductosX = 8;
         int PnlProductosY = 27;
 
+        string basedeDatos = "baseDatosProyecto";
+        string contrasenia = "contrasenia";
         public UC_Menu()
         {
             InitializeComponent();
 
          
 
-            MySqlConnection conexion = new MySqlConnection("Server=localhost; Database=proyecto; Uid=root; Pwd=contrasena;");
+            MySqlConnection conexion = new MySqlConnection($"Server=localhost; Database={basedeDatos}; Uid=root; Pwd={contrasenia};");
             conexion.Open();
             MySqlCommand comandos = new MySqlCommand("SELECT ID,Nombre, Imagen, Disponible FROM categoria where Disponible=1;", conexion);
             comandos.Connection = conexion;

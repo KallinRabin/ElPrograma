@@ -21,6 +21,8 @@ namespace ElPrograma
 
         private bool procesando = false;
 
+        string basedeDatos = "baseDatosProyecto";
+        string contrasenia = "contrasenia";
         public UC_Sesion(menuVertical menuVertical)
         {
             InitializeComponent();
@@ -37,11 +39,11 @@ namespace ElPrograma
             procesando = true;
             
 
-            MySqlConnection conexion = new MySqlConnection("Server=localhost; Database=Proyecto; Uid=root; Pwd=contrasena;");
+            MySqlConnection conexion = new MySqlConnection($"Server=localhost; Database={basedeDatos}; Uid=root; Pwd={contrasenia};");
 
-          //MySqlConnection conexion = new MySqlConnection("server=localhost;database=proyecto;user=root;password=;");
+            //MySqlConnection conexion = new MySqlConnection("server=localhost;database=proyecto;user=root;password=;");
 
-           // MySqlConnection conexion = new MySqlConnection("Server=localhost; Database=baseDato; Uid=root; Pwd=contrasenia;");
+            // MySqlConnection conexion = new MySqlConnection("Server=localhost; Database=baseDato; Uid=root; Pwd=contrasenia;");
 
             conexion.Open();
 

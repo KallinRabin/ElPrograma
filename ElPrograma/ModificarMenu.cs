@@ -29,6 +29,8 @@ namespace ElPrograma
         private const int WM_NCLBUTTONDOWN = 0xA1;
         private const int HT_CAPTION = 0x2;
 
+        string basedeDatos = "baseDatosProyecto";
+        string contrasenia = "contrasenia";
         public ModificarMenu()
         {
             InitializeComponent();
@@ -49,6 +51,7 @@ namespace ElPrograma
             txtNuevaCategoria.KeyPress += textBoxnombre_KeyPress;
 
             this.WindowState = FormWindowState.Maximized;
+            cargarCategorias();
         }
 
         private void btnCerrar_Click(object sender, EventArgs e)
@@ -154,7 +157,7 @@ namespace ElPrograma
 
         private void MostrarDatos()
         {
-            string connectionString = "server=localhost;database=Proyecto;user=root;password=contrasena;";
+            string connectionString = ($"Server=localhost; Database={basedeDatos}; Uid=root; Pwd={contrasenia};");
             string query = "SELECT nombre FROM categoria ORDER BY ID DESC LIMIT 1;";
             
 
@@ -182,7 +185,7 @@ namespace ElPrograma
         private void cargarCategorias()
         {
             pnlCategorias.Controls.Clear();
-            string connectionString = "server=localhost;database=Proyecto;user=root;password=contrasena;";
+            string connectionString = ($"Server=localhost; Database={basedeDatos}; Uid=root; Pwd={contrasenia};");
 
             using (MySqlConnection connection = new MySqlConnection(connectionString))
             {
@@ -215,7 +218,7 @@ namespace ElPrograma
         private void btnCargar_Click(object sender, EventArgs e) {
 
              
-            string connectionString = "server=localhost;database=Proyecto;user=root;password=contrasena;";
+            string connectionString = ($"Server=localhost; Database={basedeDatos}; Uid=root; Pwd={contrasenia};");
             long IDultimacategoria = -1;
            
             try
@@ -333,7 +336,7 @@ namespace ElPrograma
         }
         private byte[] ObtenerImagenDesdeBD(long categoriaId)
         {
-            string connectionString = "server=localhost;database=Proyecto;user=root;password=contrasena;";
+            string connectionString = ($"Server=localhost; Database={basedeDatos}; Uid=root; Pwd={contrasenia};");
             string query = "SELECT Imagen FROM categoria WHERE ID = @CategoriaId;";
 
             using (MySqlConnection connection = new MySqlConnection(connectionString))
@@ -362,7 +365,7 @@ namespace ElPrograma
 
         private void MostrarDatosDesdeBD()
         {
-            string connectionString = "server=localhost;database=Proyecto;user=root;password=contrasena;";
+            string connectionString = ($"Server=localhost; Database={basedeDatos}; Uid=root; Pwd={contrasenia};");
 
             using (MySqlConnection connection = new MySqlConnection(connectionString))
             {
@@ -400,7 +403,7 @@ namespace ElPrograma
                 return;
             }
 
-            string connectionString = "server=localhost;database=Proyecto;user=root;password=contrasena;";
+            string connectionString = ($"Server=localhost; Database={basedeDatos}; Uid=root; Pwd={contrasenia};");
 
             using (MySqlConnection conexion = new MySqlConnection(connectionString))
             {
