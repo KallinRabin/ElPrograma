@@ -20,8 +20,12 @@ namespace ElPrograma
     public partial class UC_Menu : UserControl
     {
 
+        
         int PnlProductosX = 8;
         int PnlProductosY = 27;
+        int id;
+        string nombre;
+        int precio;
 
         string basedeDatos = "baseDatosProyecto";
         string contrasenia = "contrasenia";
@@ -29,9 +33,9 @@ namespace ElPrograma
         {
             InitializeComponent();
 
-         
 
-            MySqlConnection conexion = new MySqlConnection($"Server=localhost; Database={basedeDatos}; Uid=root; Pwd={contrasenia};");
+
+            MySqlConnection conexion = new MySqlConnection($"Server=localhost; Database=proyecto; Uid=root; Pwd=;");
             conexion.Open();
             MySqlCommand comandos = new MySqlCommand("SELECT ID,Nombre, Imagen, Disponible FROM categoria where Disponible=1;", conexion);
             comandos.Connection = conexion;
@@ -50,7 +54,7 @@ namespace ElPrograma
             {
 
                 Panel panel_categoria = new Panel();
-                panel_categoria.Width = 372;
+                panel_categoria.Width = 800;
                 panel_categoria.Location = new Point(PanelPosicionX, PanelPosicionY);
                 panel_categoria.Height = 90;
                 panel_categoria.BackColor = System.Drawing.Color.White;
@@ -99,9 +103,9 @@ namespace ElPrograma
                     btn_platos.Height = 50;
                     btn_platos.Location = new Point(btn_PosicionX, btn_PosicionY);
 
-                    int id = Convert.ToInt32(dataRow["ID"]);
-                    string nombre = dataRow["Nombre"].ToString();
-                    int precio = Convert.ToInt32(dataRow["Precio"]);
+                     id = Convert.ToInt32(dataRow["ID"]);
+                     nombre = dataRow["Nombre"].ToString();
+                     precio = Convert.ToInt32(dataRow["Precio"]);
 
                     btn_platos.Text = nombre;
 
@@ -148,37 +152,37 @@ namespace ElPrograma
         {
             Button btn = (Button)sender;
             dynamic producto = btn.Tag;
-            int PnlProductosX = 8;
-            int PnlProductosY = 27;
+
 
             Panel pnlPlatos = new Panel();
             pnlPlatos.Width = 380;
-            pnlPlatos.Height = 70;
-            pnlPlatos.Location = new Point(PnlProductosX, PnlProductosY);
+            pnlPlatos.Height = 55;
+            pnlPlatos.Location = new Point(8, PnlProductosY);
             pnlPlatos.BackColor = Color.White;
             pnlPlatos.BringToFront();
 
             Label lblNombre = new Label();
+            lblNombre.Width = 380;
             lblNombre.Text = "Nombre: " + producto.Nombre;
-            lblNombre.Location = new Point(25, 30);
-            
+            lblNombre.Location = new Point(5, 10);
+
 
             Label lblPrecio = new Label();
             lblPrecio.Text = "Precio: $" + producto.Precio.ToString();
-            lblPrecio.Location = new Point(185,30);
-            
+            lblPrecio.Location = new Point(5, 33);
+
 
             pnlPlatos.Controls.Add(lblNombre);
             pnlPlatos.Controls.Add(lblPrecio);
 
             pnlProductos.Controls.Add(pnlPlatos);
 
-            //int nuevaPosY = pnlPlatos.Controls.Cast<Control>().Sum(ctrl => ctrl.Height) + 10;
-            //pnlPlatos.Location = new Point(0, nuevaPosY);
+            PnlProductosY += 60;
 
-            MessageBox.Show(lblNombre.Text + lblPrecio.Text);
 
-            
+            MessageBox.Show(PnlProductosY.ToString());
+
+
 
         }
 

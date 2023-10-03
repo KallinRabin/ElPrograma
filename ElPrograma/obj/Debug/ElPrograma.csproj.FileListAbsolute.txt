@@ -212,3 +212,5 @@ C:\Users\Ian Gomez\OneDrive\Desktop\veta programa axel\ElPrograma\ElPrograma\obj
 C:\Users\Ian Gomez\OneDrive\Desktop\veta programa axel\ElPrograma\ElPrograma\obj\Debug\ElPrograma.Ventan_categorias.resources
 C:\Users\paraj\Desktop\LaTuerca\ElPrograma\ElPrograma\obj\Debug\ElPrograma.ventanaCategorias.resources
 C:\Users\paraj\Desktop\LaTuerca\ElPrograma\ElPrograma\obj\Debug\ElPrograma.Ventan_categorias.resources
+C:\Users\mubra\OneDrive\Desktop\Proyecto\Proyecto-Programa\ElPrograma\ElPrograma\obj\Debug\ElPrograma.ventanaCategorias.resources
+C:\Users\mubra\OneDrive\Desktop\Proyecto\Proyecto-Programa\ElPrograma\ElPrograma\obj\Debug\ElPrograma.Ventan_categorias.resources

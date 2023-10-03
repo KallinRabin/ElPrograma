@@ -185,7 +185,7 @@ namespace ElPrograma
         private void cargarCategorias()
         {
             pnlCategorias.Controls.Clear();
-            string connectionString = ($"Server=localhost; Database={basedeDatos}; Uid=root; Pwd={contrasenia};");
+            string connectionString = ($"Server=localhost; Database=proyecto; Uid=root; Pwd=;");
 
             using (MySqlConnection connection = new MySqlConnection(connectionString))
             {
