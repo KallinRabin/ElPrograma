@@ -29,8 +29,8 @@ namespace ElPrograma
         private const int WM_NCLBUTTONDOWN = 0xA1;
         private const int HT_CAPTION = 0x2;
 
-        string basedeDatos = "baseDatosProyecto";
-        string contrasenia = "contrasenia";
+        string basedeDatos = "Proyecto1";
+        string contrasenia = "contrasena";
         public ModificarMenu()
         {
             InitializeComponent();
@@ -97,9 +97,17 @@ namespace ElPrograma
                 SizeMode = PictureBoxSizeMode.Zoom,
                 Name = ID
             };
+            Button btnDarDeBaja = new Button()
+            {
+                Text = "Dar de Baja",
+                Dock = DockStyle.Right,
+                Width = 80,
+                Name = ID
+            };
 
             nuevoPanel.Controls.Add(lblNombre);
             nuevoPanel.Controls.Add(Imagen);
+            nuevoPanel.Controls.Add(btnDarDeBaja);
             pnlCategorias.Controls.Add(nuevoPanel);
 
             lblNombre.Click += (sender, e) =>
@@ -112,44 +120,12 @@ namespace ElPrograma
                 Ventan_categorias ven = new Ventan_categorias(lblNombre.Name);
                 ven.ShowDialog();
             };
-
-            /*
-            Panel nuevoPanel = new Panel();
-            nuevoPanel.Height = 35;
-            nuevoPanel.Width = 160;
-            nuevoPanel.BorderStyle = BorderStyle.FixedSingle;
-            nuevoPanel.BackColor = Color.LightGray;
-
-            TableLayoutPanel tableLayout = new TableLayoutPanel();
-            tableLayout.Dock = DockStyle.Fill;
-
-            PictureBox pictureBox = new PictureBox();
-            pictureBox.SizeMode = PictureBoxSizeMode.Zoom;
-            pictureBox.Image = imagen;
-            pictureBox.Size = new Size(30, 30);
-            Font = new Font("Roboto Bk", 10);Font = new Font("Roboto Bk", 10);
-            Label nuevoLabel = new Label();
-            nuevoLabel.Text = contenido;
-            nuevoLabel.AutoSize = true;
-            nuevoLabel.Font = new Font("Roboto Bk", 10);
-
-            tableLayout.Controls.Add(pictureBox, 0, 0);
-            tableLayout.Controls.Add(nuevoLabel, 1, 0);
-            tableLayout.RowStyles.Add(new RowStyle(SizeType.Percent, 100));
-
-            nuevoPanel.Controls.Add(tableLayout);
-            
-
-            if (panelCounter == 0)
+            btnDarDeBaja.Click += (sender, e) =>
             {
-                nuevoPanel.Location = new Point(5, panelPositionY);
-            }
-            else
-            {
-                int panelPosicionY = initialPanelPositionY + (panelCounter * (panelHeight + margin));
-                nuevoPanel.Location = new Point(5, panelPosicionY);
-            }
-            */
+                string categoriaId = ((Button)sender).Name;
+                // Lógica para dar de baja la categoría en la base de datos y el programa
+                DarDeBajaCategoria(categoriaId);
+            };
 
 
             panelCounter++;
@@ -182,6 +158,33 @@ namespace ElPrograma
                 }
             }
         }
+        private void DarDeBajaCategoria(string categoriaId)
+        {
+            // Establecer disponible en 0 en la base de datos
+            string connectionString = ($"Server=localhost; Database={basedeDatos}; Uid=root; Pwd={contrasenia};");
+            string updateQuery = "UPDATE categoria SET disponible = 0 WHERE ID = @CategoriaId;";
+
+            using (MySqlConnection connection = new MySqlConnection(connectionString))
+            {
+                using (MySqlCommand command = new MySqlCommand(updateQuery, connection))
+                {
+                    command.Parameters.AddWithValue("@CategoriaId", categoriaId);
+                    connection.Open();
+
+                    int rowsAffected = command.ExecuteNonQuery();
+
+                    if (rowsAffected > 0)
+                    {
+                        
+                    }
+                    else
+                    {
+                        MessageBox.Show("No se pudo dar de baja la categoría.");
+                    }
+                }
+            }
+            cargarCategorias();
+        }
         private void cargarCategorias()
         {
             pnlCategorias.Controls.Clear();
@@ -192,7 +195,7 @@ namespace ElPrograma
 
                 connection.Open();
 
-                string query = "SELECT * from categoria;";
+                string query = "SELECT * from categoria WHERE disponible = 1;";
 
                 using (MySqlCommand cmd = new MySqlCommand(query, connection))
                 {
@@ -215,12 +218,11 @@ namespace ElPrograma
 
             }
         }
-        private void btnCargar_Click(object sender, EventArgs e) {
-
-             
+        private void btnCargar_Click(object sender, EventArgs e)
+        {
             string connectionString = ($"Server=localhost; Database={basedeDatos}; Uid=root; Pwd={contrasenia};");
             long IDultimacategoria = -1;
-           
+
             try
             {
                 using (MySqlConnection conexion = new MySqlConnection(connectionString))
@@ -229,23 +231,32 @@ namespace ElPrograma
 
                     if (!string.IsNullOrWhiteSpace(txtNuevaCategoria.Text) && !string.IsNullOrWhiteSpace(texprod1.Text) && !string.IsNullOrWhiteSpace(texprecio1.Text) && rutaImagenSeleccionada != "")
                     {
-                        string valor = txtNuevaCategoria.Text;
-                        if (!string.IsNullOrWhiteSpace(valor))
+                        byte[] imagenBytes = ImageToByteArray(pcbAgregarImagen.Image);
+                        pcbAgregarImagen.Image = null;
+
+                        string insertCategoriaQuery = "INSERT INTO categoria (Nombre, Imagen, disponible) VALUES (@Nombre, @Imagen, 1);";
+
+                        using (MySqlCommand cmdCategoria = new MySqlCommand(insertCategoriaQuery, conexion))
                         {
-                            
+                            cmdCategoria.Parameters.AddWithValue("@Nombre", txtNuevaCategoria.Text);
+                            cmdCategoria.Parameters.AddWithValue("@Imagen", imagenBytes);
+                            int rowsAffectedCategoria = cmdCategoria.ExecuteNonQuery();
 
-                            byte[] imagenBytes = ImageToByteArray(pcbAgregarImagen.Image);
-                            pcbAgregarImagen.Image = null;
+                            // Obtener el ID de la última categoría insertada
+                            IDultimacategoria = cmdCategoria.LastInsertedId;
+                            MessageBox.Show("Nueva categoría agregada");
 
-                            string insertQuery = "INSERT INTO categoria (Nombre,Imagen) VALUES (@Nombre,@Imagen);";
-
-                            using (MySqlCommand cmd = new MySqlCommand(insertQuery, conexion))
+                            if (rowsAffectedCategoria > 0)
                             {
-                                cmd.Parameters.AddWithValue("@Nombre", txtNuevaCategoria.Text);
-                                cmd.Parameters.AddWithValue("@Imagen", imagenBytes);
-                                int rowsAffected = cmd.ExecuteNonQuery();
-                                IDultimacategoria = cmd.LastInsertedId;
-                                MessageBox.Show("Nueva categoria agregada");
+                                // Establecer los productos de la nueva categoría como disponibles
+                                GuardarProducto(IDultimacategoria, texprod1.Text, texprecio1.Text);
+                                GuardarProducto(IDultimacategoria, texprod2.Text, texprecio2.Text);
+                                GuardarProducto(IDultimacategoria, texprod3.Text, texprecio3.Text);
+                                GuardarProducto(IDultimacategoria, texprod4.Text, texprecio4.Text);
+                                GuardarProducto(IDultimacategoria, texprod5.Text, texprecio5.Text);
+                                GuardarProducto(IDultimacategoria, texprod6.Text, texprecio6.Text);
+
+                                MessageBox.Show("Nuevos platos agregados");
                             }
                         }
                     }
@@ -255,27 +266,12 @@ namespace ElPrograma
                     }
                 }
 
-                if (IDultimacategoria != -1)
-                {
-                    GuardarProducto(IDultimacategoria, texprod1.Text, texprecio1.Text);
-                    GuardarProducto(IDultimacategoria, texprod2.Text, texprecio2.Text);
-                    GuardarProducto(IDultimacategoria, texprod3.Text, texprecio3.Text);
-                    GuardarProducto(IDultimacategoria, texprod4.Text, texprecio4.Text);
-                    GuardarProducto(IDultimacategoria, texprod5.Text, texprecio5.Text);
-                    GuardarProducto(IDultimacategoria, texprod6.Text, texprecio6.Text);
-
-                    MessageBox.Show("Nuevos platos agregados");
-                }
+                cargarCategorias();
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Error: " + ex.Message);
             }
-
-            //MostrarDatos();
-            //MostrarDatosDesdeBD();
-            cargarCategorias();
-
         }
 
         private void CrearCategoriaDesdeBD(long categoriaId, string nombreCategoria)

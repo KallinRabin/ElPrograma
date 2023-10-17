@@ -23,8 +23,8 @@ namespace ElPrograma
         int PnlProductosX = 8;
         int PnlProductosY = 27;
 
-        string basedeDatos = "baseDatosProyecto";
-        string contrasenia = "contrasenia";
+        string basedeDatos = "Proyecto1";
+        string contrasenia = "contrasena";
         public UC_Menu()
         {
             InitializeComponent();
@@ -33,7 +33,7 @@ namespace ElPrograma
 
             MySqlConnection conexion = new MySqlConnection($"Server=localhost; Database={basedeDatos}; Uid=root; Pwd={contrasenia};");
             conexion.Open();
-            MySqlCommand comandos = new MySqlCommand("SELECT ID,Nombre, Imagen, Disponible FROM categoria where Disponible=1;", conexion);
+            MySqlCommand comandos = new MySqlCommand("SELECT ID, Nombre, Imagen, Disponible FROM categoria;", conexion);
             comandos.Connection = conexion;
             MySqlDataAdapter consulta_categoria = new MySqlDataAdapter();
             consulta_categoria.SelectCommand = comandos;

@@ -28,8 +28,8 @@ namespace ElPrograma
         private const int HT_CAPTION = 0x2;
 
         
-        string basedeDatos = "baseDatosProyecto";
-        string contrasenia = "contrasenia";
+        string basedeDatos = "Proyecto";
+        string contrasenia = "contrasena";
         public menuVertical()
         {
             this.WindowState = FormWindowState.Maximized;

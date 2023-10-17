@@ -14,8 +14,8 @@ namespace ElPrograma
 {
     public partial class Ventan_categorias : Form
     {
-        string basedeDatos = "baseDatosProyecto";
-        string contrasenia = "contrasenia";
+        string basedeDatos = "Proyecto1";
+        string contrasenia = "contrasena";
 
         public int CategoriaSeleccionadaId { get; private set; }
 
@@ -263,27 +263,25 @@ namespace ElPrograma
         }
         private void btnEliminar_Click(object sender, EventArgs e)
         {
-           // MessageBox.Show("Botón de eliminar presionado.");
+            // MessageBox.Show("Botón de eliminar presionado.");
 
             if (dataGridView1.SelectedRows.Count > 0)
             {
-               
-                int idProducto = Convert.ToInt32(dataGridView1.SelectedRows[0].Cells["ID"].Value);
+                DataGridViewRow filaSeleccionada = dataGridView1.SelectedRows[0];
+                int idProducto = Convert.ToInt32(filaSeleccionada.Tag);
 
+                // Llama a la función para deshabilitar el producto
                 eliminarProducto(idProducto);
 
-                    
-                    actualizarLista(CategoriaSeleccionadaId.ToString());
+                // Actualiza la lista después de deshabilitar el producto
+                actualizarLista(CategoriaSeleccionadaId.ToString());
 
-                    MessageBox.Show("Producto deshabilitado correctamente.");
-                
-                
+                MessageBox.Show("Producto deshabilitado correctamente.");
             }
             else
             {
                 MessageBox.Show("Por favor, selecciona una fila en el DataGridView.");
             }
-
 
         }
 
