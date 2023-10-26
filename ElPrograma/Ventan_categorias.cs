@@ -134,38 +134,46 @@ namespace ElPrograma
 
         private void btnAcetparModi_Click(object sender, EventArgs e)
         {
-
             if (dataGridView1.SelectedRows.Count > 0)
             {
-                string connectionString = ($"Server=localhost; Database={basedeDatos}; Uid=root; Pwd={contrasenia};");
-
+                string connectionString = $"Server=localhost; Database={basedeDatos}; Uid=root; Pwd={contrasenia};";
                 int id = Convert.ToInt32(dataGridView1.SelectedRows[0].Tag);
-
                 string nuevoNombre = txtNombreProd.Text;
                 string nuevoPrecio = txtPrecioProd.Text;
 
-                dataGridView1.SelectedRows[0].Cells["Nombre"].Value = nuevoNombre;
-                dataGridView1.SelectedRows[0].Cells["Precio"].Value = nuevoPrecio;
+                // Reemplazar comas por puntos en el precio
+                nuevoPrecio = nuevoPrecio.Replace(',', '.');
 
-                string consulta = $"UPDATE platos SET Nombre = @Nombre, Precio = @Precio WHERE ID = @ID";
-
-                using (MySqlConnection connection = new MySqlConnection(connectionString))
+                // Verificar que el nombre no esté vacío y el precio sea un número válido
+                if (!string.IsNullOrWhiteSpace(nuevoNombre) && decimal.TryParse(nuevoPrecio, out _))
                 {
-                    connection.Open();
-                    using (MySqlCommand command = new MySqlCommand(consulta, connection))
+                    dataGridView1.SelectedRows[0].Cells["Nombre"].Value = nuevoNombre;
+                    dataGridView1.SelectedRows[0].Cells["Precio"].Value = nuevoPrecio;
+
+                    string consulta = "UPDATE platos SET Nombre = @Nombre, Precio = @Precio WHERE ID = @ID";
+
+                    using (MySqlConnection connection = new MySqlConnection(connectionString))
                     {
-                        command.Parameters.AddWithValue("@Nombre", nuevoNombre);
-                        command.Parameters.AddWithValue("@Precio", nuevoPrecio);
-                        command.Parameters.AddWithValue("@ID", id);
+                        connection.Open();
+                        using (MySqlCommand command = new MySqlCommand(consulta, connection))
+                        {
+                            command.Parameters.AddWithValue("@Nombre", nuevoNombre);
+                            command.Parameters.AddWithValue("@Precio", nuevoPrecio);
+                            command.Parameters.AddWithValue("@ID", id);
 
-                        command.ExecuteNonQuery();
+                            command.ExecuteNonQuery();
+                        }
                     }
+
+                    MessageBox.Show("Datos actualizados correctamente en la base de datos.");
+
+                    txtNombreProd.Text = "";
+                    txtPrecioProd.Text = "";
                 }
-
-                MessageBox.Show("Datos actualizados correctamente en la base de datos.");
-
-                txtNombreProd.Text = "";
-                txtPrecioProd.Text = "";
+                else
+                {
+                    MessageBox.Show("Por favor, completa un nombre válido y un precio válido antes de actualizar.");
+                }
             }
             else
             {
@@ -175,11 +183,10 @@ namespace ElPrograma
 
         private void txtNombreProd_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (!char.IsLetter(e.KeyChar) && !char.IsControl(e.KeyChar))
+            if (!char.IsLetter(e.KeyChar) && !char.IsControl(e.KeyChar) && !char.IsWhiteSpace(e.KeyChar))
             {
                 e.Handled = true;
             }
-
         }
 
         private void txtPrecioProd_KeyPress(object sender, KeyPressEventArgs e)
@@ -285,7 +292,19 @@ namespace ElPrograma
 
         }
 
-       
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (dataGridView1.SelectedRows.Count > 0)
+            {
+                DataGridViewRow selectedRow = dataGridView1.SelectedRows[0];
+
+                // Obtén el valor de las celdas y asígnalos a los TextBoxes
+                txtNombreProd.Text = selectedRow.Cells["Nombre"].Value.ToString();
+                txtPrecioProd.Text = selectedRow.Cells["Precio"].Value.ToString();
+
+          
+            }
+        }
     }
 
 }
