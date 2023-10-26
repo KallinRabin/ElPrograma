@@ -33,7 +33,7 @@ namespace ElPrograma
 
             dataGridView1.AutoGenerateColumns = true;
 
-            string connectionString = ($"Server=localhost; Database={basedeDatos}; Uid=root; Pwd={contrasenia};");
+            string connectionString = ($"Server=localhost; Database=proyecto; Uid=root; Pwd=;");
             string query = "SELECT * from categoria where ID = " + IdCategoria + ";";
 
             string valor = "";
@@ -67,7 +67,7 @@ namespace ElPrograma
         private void actualizarLista(string idCategoria)
         {
 
-            string connectionString = ($"Server=localhost; Database={basedeDatos}; Uid=root; Pwd={contrasenia};");
+            string connectionString = ($"Server=localhost; Database=proyecto; Uid=root; Pwd=;");
             string query = "SELECT ID, Nombre, Precio FROM platos WHERE ID_Categoria = " + idCategoria + " AND Disponible = 1;";
 
             using (MySqlConnection connection = new MySqlConnection(connectionString))

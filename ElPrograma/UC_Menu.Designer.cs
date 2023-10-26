@@ -46,7 +46,7 @@
             this.panel_menu.Location = new System.Drawing.Point(0, 0);
             this.panel_menu.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.panel_menu.Name = "panel_menu";
-            this.panel_menu.Size = new System.Drawing.Size(528, 802);
+            this.panel_menu.Size = new System.Drawing.Size(1166, 802);
             this.panel_menu.TabIndex = 4;
             // 
             // btnEnviar

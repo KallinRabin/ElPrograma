@@ -32,13 +32,13 @@ namespace ElPrograma
         string contrasenia = "contrasena";
         public menuVertical()
         {
-            this.WindowState = FormWindowState.Maximized;
+           // this.WindowState = FormWindowState.Maximized;
                       
             InitializeComponent();
             Responsive();
             
 
-            MySqlConnection conexion = new MySqlConnection($"Server=localhost; Database={basedeDatos}; Uid=root; Pwd={contrasenia};");
+            MySqlConnection conexion = new MySqlConnection($"Server=localhost; Database=proyecto; Uid=root; Pwd=;");
 
 
             
@@ -124,7 +124,7 @@ namespace ElPrograma
             panelTitulo.Width = this.Width;
             //MessageBox.Show(Convert.ToString(this.Width) + "x" + Convert.ToString(this.Height));
             //MessageBox.Show(Convert.ToString(panelTitulo.Width) + "x" + Convert.ToString(panelTitulo.Height));
-            pnlOpciones.Width = Convert.ToInt32(this.Width * 0.4);
+           // pnlOpciones.Width = Convert.ToInt32(this.Width * 0.4);
         }
 
     }

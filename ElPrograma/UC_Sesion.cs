@@ -37,9 +37,9 @@ namespace ElPrograma
         {
 
             procesando = true;
-            
 
-            MySqlConnection conexion = new MySqlConnection($"Server=localhost; Database={basedeDatos}; Uid=root; Pwd={contrasenia};");
+
+            MySqlConnection conexion = new MySqlConnection($"Server=localhost; Database=proyecto; Uid=root; Pwd=;");
 
             //MySqlConnection conexion = new MySqlConnection("server=localhost;database=proyecto;user=root;password=;");
 
