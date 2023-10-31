@@ -41,7 +41,7 @@
             // btnModifcarMenu
             // 
             this.btnModifcarMenu.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnModifcarMenu.Location = new System.Drawing.Point(525, 342);
+            this.btnModifcarMenu.Location = new System.Drawing.Point(865, 513);
             this.btnModifcarMenu.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnModifcarMenu.Name = "btnModifcarMenu";
             this.btnModifcarMenu.Size = new System.Drawing.Size(197, 63);
@@ -53,7 +53,7 @@
             // btnIngresos
             // 
             this.btnIngresos.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnIngresos.Location = new System.Drawing.Point(329, 363);
+            this.btnIngresos.Location = new System.Drawing.Point(560, 554);
             this.btnIngresos.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnIngresos.Name = "btnIngresos";
             this.btnIngresos.Size = new System.Drawing.Size(157, 42);
@@ -64,7 +64,7 @@
             // btnEnviar2
             // 
             this.btnEnviar2.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnEnviar2.Location = new System.Drawing.Point(169, 363);
+            this.btnEnviar2.Location = new System.Drawing.Point(325, 554);
             this.btnEnviar2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnEnviar2.Name = "btnEnviar2";
             this.btnEnviar2.Size = new System.Drawing.Size(136, 42);
@@ -79,19 +79,14 @@
             this.dtgvcomidas.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Nombre,
             this.Precio});
-            this.dtgvcomidas.Location = new System.Drawing.Point(0, 0);
-            this.dtgvcomidas.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-
+            this.dtgvcomidas.Location = new System.Drawing.Point(4, 4);
+            this.dtgvcomidas.Margin = new System.Windows.Forms.Padding(4);
             this.dtgvcomidas.MultiSelect = false;
             this.dtgvcomidas.Name = "dtgvcomidas";
             this.dtgvcomidas.ReadOnly = true;
             this.dtgvcomidas.RowHeadersWidth = 51;
             this.dtgvcomidas.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-
-            this.dtgvcomidas.Name = "dtgvcomidas";
-            this.dtgvcomidas.RowHeadersWidth = 51;
-
-            this.dtgvcomidas.Size = new System.Drawing.Size(528, 336);
+            this.dtgvcomidas.Size = new System.Drawing.Size(819, 507);
             this.dtgvcomidas.TabIndex = 4;
             // 
             // Nombre
@@ -99,6 +94,7 @@
             this.Nombre.HeaderText = "Nombre";
             this.Nombre.MinimumWidth = 6;
             this.Nombre.Name = "Nombre";
+            this.Nombre.ReadOnly = true;
             this.Nombre.Width = 177;
             // 
             // Precio
@@ -106,13 +102,14 @@
             this.Precio.HeaderText = "Precio";
             this.Precio.MinimumWidth = 6;
             this.Precio.Name = "Precio";
+            this.Precio.ReadOnly = true;
             this.Precio.Width = 177;
             // 
             // btnEliminar
             // 
             this.btnEliminar.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F);
-            this.btnEliminar.Location = new System.Drawing.Point(5, 363);
-            this.btnEliminar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnEliminar.Location = new System.Drawing.Point(94, 554);
+            this.btnEliminar.Margin = new System.Windows.Forms.Padding(4);
             this.btnEliminar.Name = "btnEliminar";
             this.btnEliminar.Size = new System.Drawing.Size(137, 42);
             this.btnEliminar.TabIndex = 5;
@@ -132,10 +129,8 @@
             this.Controls.Add(this.btnModifcarMenu);
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "UC_Gestion";
-            this.Size = new System.Drawing.Size(737, 423);
-
+            this.Size = new System.Drawing.Size(1126, 642);
             this.Load += new System.EventHandler(this.UC_Gestion_Load);
-
             ((System.ComponentModel.ISupportInitialize)(this.dtgvcomidas)).EndInit();
             this.ResumeLayout(false);
 

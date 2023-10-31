@@ -54,19 +54,21 @@
             // 
             // txtNombreProd
             // 
-            this.txtNombreProd.Location = new System.Drawing.Point(702, 121);
+            this.txtNombreProd.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtNombreProd.Location = new System.Drawing.Point(904, 130);
             this.txtNombreProd.Margin = new System.Windows.Forms.Padding(4);
             this.txtNombreProd.Name = "txtNombreProd";
-            this.txtNombreProd.Size = new System.Drawing.Size(211, 22);
+            this.txtNombreProd.Size = new System.Drawing.Size(246, 30);
             this.txtNombreProd.TabIndex = 3;
             this.txtNombreProd.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtNombreProd_KeyPress);
             // 
             // txtPrecioProd
             // 
-            this.txtPrecioProd.Location = new System.Drawing.Point(702, 238);
+            this.txtPrecioProd.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtPrecioProd.Location = new System.Drawing.Point(904, 247);
             this.txtPrecioProd.Margin = new System.Windows.Forms.Padding(4);
             this.txtPrecioProd.Name = "txtPrecioProd";
-            this.txtPrecioProd.Size = new System.Drawing.Size(211, 22);
+            this.txtPrecioProd.Size = new System.Drawing.Size(246, 30);
             this.txtPrecioProd.TabIndex = 4;
             this.txtPrecioProd.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtPrecioProd_KeyPress);
             // 
@@ -78,13 +80,13 @@
             this.Nombre,
             this.Precio,
             this.ID});
-            this.dataGridView1.Location = new System.Drawing.Point(140, 71);
+            this.dataGridView1.Location = new System.Drawing.Point(39, 71);
             this.dataGridView1.Margin = new System.Windows.Forms.Padding(4);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
             this.dataGridView1.RowHeadersWidth = 51;
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView1.Size = new System.Drawing.Size(492, 243);
+            this.dataGridView1.Size = new System.Drawing.Size(586, 400);
             this.dataGridView1.TabIndex = 5;
             // 
             // Nombre
@@ -112,7 +114,7 @@
             // pcbRegresar
             // 
             this.pcbRegresar.Image = ((System.Drawing.Image)(resources.GetObject("pcbRegresar.Image")));
-            this.pcbRegresar.Location = new System.Drawing.Point(12, 431);
+            this.pcbRegresar.Location = new System.Drawing.Point(12, 579);
             this.pcbRegresar.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.pcbRegresar.Name = "pcbRegresar";
             this.pcbRegresar.Size = new System.Drawing.Size(100, 50);
@@ -124,10 +126,10 @@
             // btnModificar
             // 
             this.btnModificar.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnModificar.Location = new System.Drawing.Point(208, 350);
+            this.btnModificar.Location = new System.Drawing.Point(199, 496);
             this.btnModificar.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnModificar.Name = "btnModificar";
-            this.btnModificar.Size = new System.Drawing.Size(141, 74);
+            this.btnModificar.Size = new System.Drawing.Size(136, 53);
             this.btnModificar.TabIndex = 25;
             this.btnModificar.Text = "Modifcar";
             this.btnModificar.UseVisualStyleBackColor = true;
@@ -136,10 +138,10 @@
             // btnEliminar
             // 
             this.btnEliminar.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnEliminar.Location = new System.Drawing.Point(444, 350);
+            this.btnEliminar.Location = new System.Drawing.Point(481, 496);
             this.btnEliminar.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnEliminar.Name = "btnEliminar";
-            this.btnEliminar.Size = new System.Drawing.Size(141, 74);
+            this.btnEliminar.Size = new System.Drawing.Size(132, 53);
             this.btnEliminar.TabIndex = 27;
             this.btnEliminar.Text = "Eliminar";
             this.btnEliminar.UseVisualStyleBackColor = true;
@@ -149,11 +151,11 @@
             // 
             this.label4.AutoSize = true;
             this.label4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(18)))), ((int)(((byte)(39)))));
-            this.label4.Font = new System.Drawing.Font("Roboto Bk", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.ForeColor = System.Drawing.SystemColors.Control;
-            this.label4.Location = new System.Drawing.Point(698, 71);
+            this.label4.Location = new System.Drawing.Point(900, 80);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(152, 20);
+            this.label4.Size = new System.Drawing.Size(210, 29);
             this.label4.TabIndex = 29;
             this.label4.Text = "Nombre Producto:";
             // 
@@ -161,21 +163,21 @@
             // 
             this.label1.AutoSize = true;
             this.label1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(18)))), ((int)(((byte)(39)))));
-            this.label1.Font = new System.Drawing.Font("Roboto Bk", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.SystemColors.Control;
-            this.label1.Location = new System.Drawing.Point(698, 183);
+            this.label1.Location = new System.Drawing.Point(900, 192);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(64, 20);
+            this.label1.Size = new System.Drawing.Size(89, 29);
             this.label1.TabIndex = 30;
             this.label1.Text = "Precio:";
             // 
             // btnAgregar
             // 
             this.btnAgregar.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAgregar.Location = new System.Drawing.Point(702, 306);
+            this.btnAgregar.Location = new System.Drawing.Point(865, 389);
             this.btnAgregar.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnAgregar.Name = "btnAgregar";
-            this.btnAgregar.Size = new System.Drawing.Size(89, 72);
+            this.btnAgregar.Size = new System.Drawing.Size(141, 73);
             this.btnAgregar.TabIndex = 31;
             this.btnAgregar.Text = "Agregar Platos";
             this.btnAgregar.UseVisualStyleBackColor = true;
@@ -193,25 +195,25 @@
             this.panelTitulo.Location = new System.Drawing.Point(0, 0);
             this.panelTitulo.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.panelTitulo.Name = "panelTitulo";
-            this.panelTitulo.Size = new System.Drawing.Size(949, 45);
+            this.panelTitulo.Size = new System.Drawing.Size(1383, 45);
             this.panelTitulo.TabIndex = 32;
             // 
             // lblNombreCategoria
             // 
             this.lblNombreCategoria.AutoSize = true;
             this.lblNombreCategoria.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(18)))), ((int)(((byte)(39)))));
-            this.lblNombreCategoria.Font = new System.Drawing.Font("Roboto Bk", 19.8F);
+            this.lblNombreCategoria.Font = new System.Drawing.Font("Microsoft Sans Serif", 19.8F);
             this.lblNombreCategoria.ForeColor = System.Drawing.SystemColors.Control;
             this.lblNombreCategoria.Location = new System.Drawing.Point(427, 0);
             this.lblNombreCategoria.Name = "lblNombreCategoria";
-            this.lblNombreCategoria.Size = new System.Drawing.Size(0, 39);
+            this.lblNombreCategoria.Size = new System.Drawing.Size(0, 38);
             this.lblNombreCategoria.TabIndex = 30;
             // 
             // btnCerrar
             // 
             this.btnCerrar.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnCerrar.BackgroundImage")));
             this.btnCerrar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.btnCerrar.Location = new System.Drawing.Point(909, 5);
+            this.btnCerrar.Location = new System.Drawing.Point(1326, 5);
             this.btnCerrar.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnCerrar.Name = "btnCerrar";
             this.btnCerrar.Size = new System.Drawing.Size(35, 33);
@@ -223,7 +225,7 @@
             // 
             this.btnMinimizar.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnMinimizar.BackgroundImage")));
             this.btnMinimizar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.btnMinimizar.Location = new System.Drawing.Point(869, 5);
+            this.btnMinimizar.Location = new System.Drawing.Point(1285, 5);
             this.btnMinimizar.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnMinimizar.Name = "btnMinimizar";
             this.btnMinimizar.Size = new System.Drawing.Size(35, 33);
@@ -235,21 +237,21 @@
             // 
             this.lblCategoria.AutoSize = true;
             this.lblCategoria.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(18)))), ((int)(((byte)(39)))));
-            this.lblCategoria.Font = new System.Drawing.Font("Roboto Bk", 19.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblCategoria.Font = new System.Drawing.Font("Microsoft Sans Serif", 19.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblCategoria.ForeColor = System.Drawing.SystemColors.Control;
             this.lblCategoria.Location = new System.Drawing.Point(75, 0);
             this.lblCategoria.Name = "lblCategoria";
-            this.lblCategoria.Size = new System.Drawing.Size(337, 39);
+            this.lblCategoria.Size = new System.Drawing.Size(338, 38);
             this.lblCategoria.TabIndex = 5;
             this.lblCategoria.Text = "Estas en la Categoria:";
             // 
             // btnAcetparModi
             // 
             this.btnAcetparModi.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAcetparModi.Location = new System.Drawing.Point(797, 306);
+            this.btnAcetparModi.Location = new System.Drawing.Point(1064, 389);
             this.btnAcetparModi.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnAcetparModi.Name = "btnAcetparModi";
-            this.btnAcetparModi.Size = new System.Drawing.Size(116, 72);
+            this.btnAcetparModi.Size = new System.Drawing.Size(151, 73);
             this.btnAcetparModi.TabIndex = 33;
             this.btnAcetparModi.Text = "Modificar Plato";
             this.btnAcetparModi.UseVisualStyleBackColor = true;
@@ -260,7 +262,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(18)))), ((int)(((byte)(39)))));
-            this.ClientSize = new System.Drawing.Size(949, 494);
+            this.ClientSize = new System.Drawing.Size(1383, 691);
             this.Controls.Add(this.btnAcetparModi);
             this.Controls.Add(this.panelTitulo);
             this.Controls.Add(this.btnAgregar);

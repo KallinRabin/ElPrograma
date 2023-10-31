@@ -14,8 +14,8 @@ namespace ElPrograma
 {
     public partial class Ventan_categorias : Form
     {
-        string basedeDatos = "baseDatosProyecto";
-        string contrasenia = "contrasenia";
+        string basedeDatos = "proyecto";
+        string contrasenia = "";
 
         public int CategoriaSeleccionadaId { get; private set; }
 
