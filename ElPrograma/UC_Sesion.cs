@@ -21,8 +21,8 @@ namespace ElPrograma
 
         private bool procesando = false;
 
-        string basedeDatos = "baseDatosProyecto";
-        string contrasenia = "contrasenia";
+        string basedeDatos = "Proyecto";
+        string contrasenia = "contrasena";
         public UC_Sesion(menuVertical menuVertical)
         {
             InitializeComponent();
