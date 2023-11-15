@@ -46,19 +46,20 @@
             this.panel_menu.Location = new System.Drawing.Point(0, 0);
             this.panel_menu.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.panel_menu.Name = "panel_menu";
-            this.panel_menu.Size = new System.Drawing.Size(1166, 802);
+            this.panel_menu.Size = new System.Drawing.Size(799, 642);
             this.panel_menu.TabIndex = 4;
             // 
             // btnEnviar
             // 
-            this.btnEnviar.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnEnviar.Location = new System.Drawing.Point(99, 736);
+            this.btnEnviar.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnEnviar.Location = new System.Drawing.Point(62, 601);
             this.btnEnviar.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnEnviar.Name = "btnEnviar";
-            this.btnEnviar.Size = new System.Drawing.Size(198, 47);
+            this.btnEnviar.Size = new System.Drawing.Size(180, 33);
             this.btnEnviar.TabIndex = 0;
             this.btnEnviar.Text = "Enviar";
             this.btnEnviar.UseVisualStyleBackColor = true;
+            this.btnEnviar.Click += new System.EventHandler(this.btnEnviar_Click);
             // 
             // panel2
             // 
@@ -66,21 +67,20 @@
             this.panel2.Location = new System.Drawing.Point(12, 2);
             this.panel2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(384, 121);
+            this.panel2.Size = new System.Drawing.Size(310, 62);
             this.panel2.TabIndex = 1;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
             this.label2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(18)))), ((int)(((byte)(39)))));
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 36F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.ForeColor = System.Drawing.SystemColors.Control;
-            this.label2.Location = new System.Drawing.Point(90, 35);
+            this.label2.Location = new System.Drawing.Point(92, 13);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(210, 69);
+            this.label2.Size = new System.Drawing.Size(104, 36);
             this.label2.TabIndex = 2;
             this.label2.Text = "Carrito";
-            this.label2.Click += new System.EventHandler(this.label2_Click);
             // 
             // pnlCarrito
             // 
@@ -89,31 +89,32 @@
             this.pnlCarrito.Controls.Add(this.btncancelar);
             this.pnlCarrito.Controls.Add(this.panel2);
             this.pnlCarrito.Controls.Add(this.btnEnviar);
-            this.pnlCarrito.Location = new System.Drawing.Point(1172, 2);
+            this.pnlCarrito.Location = new System.Drawing.Point(805, 2);
             this.pnlCarrito.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.pnlCarrito.Name = "pnlCarrito";
-            this.pnlCarrito.Size = new System.Drawing.Size(412, 802);
+            this.pnlCarrito.Size = new System.Drawing.Size(318, 638);
             this.pnlCarrito.TabIndex = 0;
             // 
             // pnlProductos
             // 
             this.pnlProductos.AutoScroll = true;
             this.pnlProductos.AutoScrollMargin = new System.Drawing.Size(10, 20);
-            this.pnlProductos.Location = new System.Drawing.Point(12, 128);
+            this.pnlProductos.Location = new System.Drawing.Point(12, 69);
             this.pnlProductos.Name = "pnlProductos";
-            this.pnlProductos.Size = new System.Drawing.Size(384, 517);
+            this.pnlProductos.Size = new System.Drawing.Size(290, 487);
             this.pnlProductos.TabIndex = 5;
             // 
             // btncancelar
             // 
-            this.btncancelar.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btncancelar.Location = new System.Drawing.Point(79, 663);
+            this.btncancelar.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btncancelar.Location = new System.Drawing.Point(75, 561);
             this.btncancelar.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btncancelar.Name = "btncancelar";
-            this.btncancelar.Size = new System.Drawing.Size(245, 57);
+            this.btncancelar.Size = new System.Drawing.Size(151, 36);
             this.btncancelar.TabIndex = 2;
             this.btncancelar.Text = "Cancelar";
             this.btncancelar.UseVisualStyleBackColor = true;
+            this.btncancelar.Click += new System.EventHandler(this.btncancelar_Click);
             // 
             // UC_Menu
             // 
@@ -124,7 +125,7 @@
             this.Controls.Add(this.panel_menu);
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "UC_Menu";
-            this.Size = new System.Drawing.Size(1604, 802);
+            this.Size = new System.Drawing.Size(1126, 642);
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
             this.pnlCarrito.ResumeLayout(false);

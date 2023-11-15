@@ -39,7 +39,6 @@
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.panelTitulo = new System.Windows.Forms.Panel();
-            this.btnMaximizar = new System.Windows.Forms.Button();
             this.pnlOpciones.SuspendLayout();
             this.panelTitulo.SuspendLayout();
             this.SuspendLayout();
@@ -54,7 +53,7 @@
             this.pnlOpciones.Dock = System.Windows.Forms.DockStyle.Left;
             this.pnlOpciones.Location = new System.Drawing.Point(0, 45);
             this.pnlOpciones.Name = "pnlOpciones";
-            this.pnlOpciones.Size = new System.Drawing.Size(212, 423);
+            this.pnlOpciones.Size = new System.Drawing.Size(257, 646);
             this.pnlOpciones.TabIndex = 1;
             // 
             // btnGestion
@@ -66,9 +65,9 @@
             this.btnGestion.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnGestion.ForeColor = System.Drawing.Color.White;
             this.btnGestion.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnGestion.Location = new System.Drawing.Point(31, 293);
+            this.btnGestion.Location = new System.Drawing.Point(40, 420);
             this.btnGestion.Name = "btnGestion";
-            this.btnGestion.Size = new System.Drawing.Size(154, 47);
+            this.btnGestion.Size = new System.Drawing.Size(165, 61);
             this.btnGestion.TabIndex = 2;
             this.btnGestion.Text = "Gestionar";
             this.btnGestion.UseVisualStyleBackColor = false;
@@ -83,9 +82,9 @@
             this.btnMenu.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnMenu.ForeColor = System.Drawing.Color.White;
             this.btnMenu.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnMenu.Location = new System.Drawing.Point(31, 187);
+            this.btnMenu.Location = new System.Drawing.Point(40, 256);
             this.btnMenu.Name = "btnMenu";
-            this.btnMenu.Size = new System.Drawing.Size(154, 47);
+            this.btnMenu.Size = new System.Drawing.Size(165, 62);
             this.btnMenu.TabIndex = 1;
             this.btnMenu.Text = "Menú";
             this.btnMenu.UseVisualStyleBackColor = false;
@@ -100,9 +99,9 @@
             this.btnIniciar.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnIniciar.ForeColor = System.Drawing.Color.White;
             this.btnIniciar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnIniciar.Location = new System.Drawing.Point(31, 79);
+            this.btnIniciar.Location = new System.Drawing.Point(40, 98);
             this.btnIniciar.Name = "btnIniciar";
-            this.btnIniciar.Size = new System.Drawing.Size(154, 47);
+            this.btnIniciar.Size = new System.Drawing.Size(165, 60);
             this.btnIniciar.TabIndex = 0;
             this.btnIniciar.Text = "Inicio";
             this.btnIniciar.UseVisualStyleBackColor = false;
@@ -112,10 +111,9 @@
             // 
             this.panelContenedor.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(18)))), ((int)(((byte)(39)))));
             this.panelContenedor.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panelContenedor.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelContenedor.Location = new System.Drawing.Point(212, 45);
+            this.panelContenedor.Location = new System.Drawing.Point(257, 45);
             this.panelContenedor.Name = "panelContenedor";
-            this.panelContenedor.Size = new System.Drawing.Size(743, 423);
+            this.panelContenedor.Size = new System.Drawing.Size(1126, 642);
             this.panelContenedor.TabIndex = 2;
             this.panelContenedor.Paint += new System.Windows.Forms.PaintEventHandler(this.panelContenedor_Paint);
             // 
@@ -124,7 +122,7 @@
             this.btnSalir.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnSalir.BackgroundImage")));
             this.btnSalir.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btnSalir.Dock = System.Windows.Forms.DockStyle.Right;
-            this.btnSalir.Location = new System.Drawing.Point(918, 0);
+            this.btnSalir.Location = new System.Drawing.Point(1346, 0);
             this.btnSalir.MaximumSize = new System.Drawing.Size(40, 40);
             this.btnSalir.Name = "btnSalir";
             this.btnSalir.Size = new System.Drawing.Size(35, 40);
@@ -138,7 +136,7 @@
             this.btnMinimixar.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnMinimixar.BackgroundImage")));
             this.btnMinimixar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btnMinimixar.Dock = System.Windows.Forms.DockStyle.Right;
-            this.btnMinimixar.Location = new System.Drawing.Point(883, 0);
+            this.btnMinimixar.Location = new System.Drawing.Point(1311, 0);
             this.btnMinimixar.Name = "btnMinimixar";
             this.btnMinimixar.Size = new System.Drawing.Size(35, 43);
             this.btnMinimixar.TabIndex = 3;
@@ -163,7 +161,7 @@
             this.label2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(18)))), ((int)(((byte)(39)))));
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 19.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.ForeColor = System.Drawing.SystemColors.Control;
-            this.label2.Location = new System.Drawing.Point(450, 3);
+            this.label2.Location = new System.Drawing.Point(672, 5);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(92, 38);
             this.label2.TabIndex = 5;
@@ -173,7 +171,6 @@
             // 
             this.panelTitulo.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(18)))), ((int)(((byte)(39)))));
             this.panelTitulo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panelTitulo.Controls.Add(this.btnMaximizar);
             this.panelTitulo.Controls.Add(this.label2);
             this.panelTitulo.Controls.Add(this.label1);
             this.panelTitulo.Controls.Add(this.btnMinimixar);
@@ -181,28 +178,16 @@
             this.panelTitulo.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelTitulo.Location = new System.Drawing.Point(0, 0);
             this.panelTitulo.Name = "panelTitulo";
-            this.panelTitulo.Size = new System.Drawing.Size(955, 45);
+            this.panelTitulo.Size = new System.Drawing.Size(1383, 45);
             this.panelTitulo.TabIndex = 0;
             this.panelTitulo.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panelTitulo_MouseDown);
-            // 
-            // btnMaximizar
-            // 
-            this.btnMaximizar.BackgroundImage = global::ElPrograma.Properties.Resources.Maximizar_fotor_2023091320127;
-            this.btnMaximizar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.btnMaximizar.Dock = System.Windows.Forms.DockStyle.Right;
-            this.btnMaximizar.Location = new System.Drawing.Point(849, 0);
-            this.btnMaximizar.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.btnMaximizar.Name = "btnMaximizar";
-            this.btnMaximizar.Size = new System.Drawing.Size(34, 43);
-            this.btnMaximizar.TabIndex = 8;
-            this.btnMaximizar.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.btnMaximizar.UseVisualStyleBackColor = true;
             // 
             // menuVertical
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(955, 468);
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(18)))), ((int)(((byte)(39)))));
+            this.ClientSize = new System.Drawing.Size(1383, 691);
             this.Controls.Add(this.panelContenedor);
             this.Controls.Add(this.pnlOpciones);
             this.Controls.Add(this.panelTitulo);
@@ -210,8 +195,6 @@
             this.Name = "menuVertical";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "LaTuerca";
-            this.Load += new System.EventHandler(this.Form1_Load);
-            this.ResizeEnd += new System.EventHandler(this.Ajustar);
             this.pnlOpciones.ResumeLayout(false);
             this.panelTitulo.ResumeLayout(false);
             this.panelTitulo.PerformLayout();
@@ -230,7 +213,6 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Panel panelTitulo;
-        private System.Windows.Forms.Button btnMaximizar;
     }
 }
 
