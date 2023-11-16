@@ -10,40 +10,38 @@ namespace ElPrograma
 {
     public partial class ModificarMenu : Form
     {
-        // Declaración de variables miembro
         private int margin = 10;
+
         private int panelCounter = 0;
         private int panelHeight = 50;
         private int initialPanelPositionY = 10;
+
         private int panelPositionY = 10;
+
         private string rutaImagenSeleccionada = "";
 
-        // Declaraciones para el arrastre de ventanas
         [DllImport("user32.dll", EntryPoint = "ReleaseCapture")]
         private extern static void ReleaseCapture();
 
         [DllImport("user32.dll", EntryPoint = "SendMessage")]
         private extern static void SendMessage(IntPtr hWnd, int wMsg, int wParam, int lParam);
 
-        // Constantes utilizadas para el arrastre de ventanas
         private const int WM_NCLBUTTONDOWN = 0xA1;
         private const int HT_CAPTION = 0x2;
 
-        // Variables de base de datos
-        string basedeDatos = "baseDatosProyecto";
-        string contrasenia = "contrasenia";
-
+        string basedeDatos = "Proyecto1";
+        string contrasenia = "contrasena";
         public ModificarMenu()
         {
             InitializeComponent();
 
-            // Asociar eventos KeyPress a las cajas de texto
             texprecio1.KeyPress += textBoxprecio_KeyPress;
             texprecio2.KeyPress += textBoxprecio_KeyPress;
             texprecio3.KeyPress += textBoxprecio_KeyPress;
             texprecio4.KeyPress += textBoxprecio_KeyPress;
             texprecio5.KeyPress += textBoxprecio_KeyPress;
             texprecio6.KeyPress += textBoxprecio_KeyPress;
+
             texprod1.KeyPress += textBoxnombre_KeyPress;
             texprod2.KeyPress += textBoxnombre_KeyPress;
             texprod3.KeyPress += textBoxnombre_KeyPress;
@@ -52,23 +50,20 @@ namespace ElPrograma
             texprod6.KeyPress += textBoxnombre_KeyPress;
             txtNuevaCategoria.KeyPress += textBoxnombre_KeyPress;
 
-            // Cargar categorías existentes en el constructor
+            this.WindowState = FormWindowState.Maximized;
             cargarCategorias();
         }
 
-        // Función para el botón de cerrar
         private void btnCerrar_Click(object sender, EventArgs e)
         {
             this.Close();
         }
 
-        // Función para el botón de minimizar (no implementada)
         private void btnMinimizar_Click(object sender, EventArgs e)
         {
             this.WindowState = FormWindowState.Minimized;
         }
 
-        // Función para permitir el arrastre de la ventana
         private void panelTitulo_MouseDown(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Left)
@@ -78,7 +73,6 @@ namespace ElPrograma
             }
         }
 
-        // Función para crear una nueva categoría
         private void CrearCategoria(string contenido, System.Drawing.Image imagen, string ID)
         {
             Panel nuevoPanel = new Panel() {
@@ -103,9 +97,17 @@ namespace ElPrograma
                 SizeMode = PictureBoxSizeMode.Zoom,
                 Name = ID
             };
+            Button btnDarDeBaja = new Button()
+            {
+                Text = "Dar de Baja",
+                Dock = DockStyle.Right,
+                Width = 80,
+                Name = ID
+            };
 
             nuevoPanel.Controls.Add(lblNombre);
             nuevoPanel.Controls.Add(Imagen);
+            nuevoPanel.Controls.Add(btnDarDeBaja);
             pnlCategorias.Controls.Add(nuevoPanel);
 
             lblNombre.Click += (sender, e) =>
@@ -118,8 +120,13 @@ namespace ElPrograma
                 Ventan_categorias ven = new Ventan_categorias(lblNombre.Name);
                 ven.ShowDialog();
             };
+            btnDarDeBaja.Click += (sender, e) =>
+            {
+                string categoriaId = ((Button)sender).Name;
+                // Lógica para dar de baja la categoría en la base de datos y el programa
+                DarDeBajaCategoria(categoriaId);
+            };
 
-            
 
             panelCounter++;
         }
@@ -151,8 +158,33 @@ namespace ElPrograma
                 }
             }
         }
+        private void DarDeBajaCategoria(string categoriaId)
+        {
+            // Establecer disponible en 0 en la base de datos
+            string connectionString = ($"Server=localhost; Database={basedeDatos}; Uid=root; Pwd={contrasenia};");
+            string updateQuery = "UPDATE categoria SET disponible = 0 WHERE ID = @CategoriaId;";
 
-        // Función para cargar y mostrar datos de las categorías
+            using (MySqlConnection connection = new MySqlConnection(connectionString))
+            {
+                using (MySqlCommand command = new MySqlCommand(updateQuery, connection))
+                {
+                    command.Parameters.AddWithValue("@CategoriaId", categoriaId);
+                    connection.Open();
+
+                    int rowsAffected = command.ExecuteNonQuery();
+
+                    if (rowsAffected > 0)
+                    {
+                        
+                    }
+                    else
+                    {
+                        MessageBox.Show("No se pudo dar de baja la categoría.");
+                    }
+                }
+            }
+            cargarCategorias();
+        }
         private void cargarCategorias()
         {
             pnlCategorias.Controls.Clear();
@@ -163,7 +195,7 @@ namespace ElPrograma
 
                 connection.Open();
 
-                string query = "SELECT * from categoria;";
+                string query = "SELECT * from categoria WHERE disponible = 1;";
 
                 using (MySqlCommand cmd = new MySqlCommand(query, connection))
                 {
@@ -186,13 +218,11 @@ namespace ElPrograma
 
             }
         }
-
-        private void btnCargar_Click(object sender, EventArgs e) {
-
-             
+        private void btnCargar_Click(object sender, EventArgs e)
+        {
             string connectionString = ($"Server=localhost; Database={basedeDatos}; Uid=root; Pwd={contrasenia};");
             long IDultimacategoria = -1;
-           
+
             try
             {
                 using (MySqlConnection conexion = new MySqlConnection(connectionString))
@@ -201,23 +231,32 @@ namespace ElPrograma
 
                     if (!string.IsNullOrWhiteSpace(txtNuevaCategoria.Text) && !string.IsNullOrWhiteSpace(texprod1.Text) && !string.IsNullOrWhiteSpace(texprecio1.Text) && rutaImagenSeleccionada != "")
                     {
-                        string valor = txtNuevaCategoria.Text;
-                        if (!string.IsNullOrWhiteSpace(valor))
+                        byte[] imagenBytes = ImageToByteArray(pcbAgregarImagen.Image);
+                        pcbAgregarImagen.Image = null;
+
+                        string insertCategoriaQuery = "INSERT INTO categoria (Nombre, Imagen, disponible) VALUES (@Nombre, @Imagen, 1);";
+
+                        using (MySqlCommand cmdCategoria = new MySqlCommand(insertCategoriaQuery, conexion))
                         {
-                            
+                            cmdCategoria.Parameters.AddWithValue("@Nombre", txtNuevaCategoria.Text);
+                            cmdCategoria.Parameters.AddWithValue("@Imagen", imagenBytes);
+                            int rowsAffectedCategoria = cmdCategoria.ExecuteNonQuery();
 
-                            byte[] imagenBytes = ImageToByteArray(pcbAgregarImagen.Image);
-                            pcbAgregarImagen.Image = null;
+                            // Obtener el ID de la última categoría insertada
+                            IDultimacategoria = cmdCategoria.LastInsertedId;
+                            MessageBox.Show("Nueva categoría agregada");
 
-                            string insertQuery = "INSERT INTO categoria (Nombre,Imagen) VALUES (@Nombre,@Imagen);";
-
-                            using (MySqlCommand cmd = new MySqlCommand(insertQuery, conexion))
+                            if (rowsAffectedCategoria > 0)
                             {
-                                cmd.Parameters.AddWithValue("@Nombre", txtNuevaCategoria.Text);
-                                cmd.Parameters.AddWithValue("@Imagen", imagenBytes);
-                                int rowsAffected = cmd.ExecuteNonQuery();
-                                IDultimacategoria = cmd.LastInsertedId;
-                                MessageBox.Show("Nueva categoria agregada");
+                                // Establecer los productos de la nueva categoría como disponibles
+                                GuardarProducto(IDultimacategoria, texprod1.Text, texprecio1.Text);
+                                GuardarProducto(IDultimacategoria, texprod2.Text, texprecio2.Text);
+                                GuardarProducto(IDultimacategoria, texprod3.Text, texprecio3.Text);
+                                GuardarProducto(IDultimacategoria, texprod4.Text, texprecio4.Text);
+                                GuardarProducto(IDultimacategoria, texprod5.Text, texprecio5.Text);
+                                GuardarProducto(IDultimacategoria, texprod6.Text, texprecio6.Text);
+
+                                MessageBox.Show("Nuevos platos agregados");
                             }
                         }
                     }
@@ -227,42 +266,24 @@ namespace ElPrograma
                     }
                 }
 
-                if (IDultimacategoria != -1)
-                {
-                    GuardarProducto(IDultimacategoria, texprod1.Text, texprecio1.Text);
-                    GuardarProducto(IDultimacategoria, texprod2.Text, texprecio2.Text);
-                    GuardarProducto(IDultimacategoria, texprod3.Text, texprecio3.Text);
-                    GuardarProducto(IDultimacategoria, texprod4.Text, texprecio4.Text);
-                    GuardarProducto(IDultimacategoria, texprod5.Text, texprecio5.Text);
-                    GuardarProducto(IDultimacategoria, texprod6.Text, texprecio6.Text);
-
-                    MessageBox.Show("Nuevos platos agregados");
-                }
+                cargarCategorias();
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Error: " + ex.Message);
             }
-
-            
-            cargarCategorias();
-
         }
 
-
-        // Función para crear una categoría basada en datos desde la base de datos
         private void CrearCategoriaDesdeBD(long categoriaId, string nombreCategoria)
         {
             TableLayoutPanel tableLayout = new TableLayoutPanel();
             tableLayout.Dock = DockStyle.Fill;
 
-            // Crear un Label con el nombre de la categoría.
             Label nuevoLabel = new Label();
             nuevoLabel.Text = nombreCategoria;
             nuevoLabel.AutoSize = true;
             nuevoLabel.Font = new Font("Roboto Bk", 10);
 
-            // Crear un PictureBox para mostrar la imagen de la categoría.
             PictureBox imagenPictureBox = new PictureBox();
             imagenPictureBox.SizeMode = PictureBoxSizeMode.StretchImage;
 
@@ -276,28 +297,28 @@ namespace ElPrograma
                 }
             }
 
-            // Definir la estructura de columnas y filas del TableLayoutPanel.
             tableLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 70));
             tableLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 70));
             tableLayout.RowStyles.Add(new RowStyle(SizeType.Percent, 70));
             tableLayout.RowStyles.Add(new RowStyle(SizeType.Percent, 40));
 
-            // Agregar el PictureBox con la imagen en la primera fila y el Label en la segunda fila.
             tableLayout.Controls.Add(imagenPictureBox, 0, 0);
             tableLayout.Name = categoriaId.ToString();
             tableLayout.Controls.Add(nuevoLabel, 0, 1);
+            
+           
+                  
 
-            // Asociar un evento MouseDown al TableLayoutPanel para permitir interacción con la categoría.
             tableLayout.MouseDown += new MouseEventHandler(panelRezisable_MouseDown);
 
-            // Establecer la posición y el espaciado del TableLayoutPanel en el formulario.
+            
+
             tableLayout.Location = new Point(5, panelPositionY);
             panelPositionY += tableLayout.Height + margin;
 
             panelCounter++;
         }
 
-        // Función para manejar el evento al hacer clic en una categoría desde la base de datos
         private void panelRezisable_MouseDown(object sender, MouseEventArgs e)
         {
             TableLayoutPanel panel = sender as TableLayoutPanel;
@@ -309,7 +330,6 @@ namespace ElPrograma
                 //ven.ShowDialog();
             }
         }
-        // Función para obtener una imagen desde la base de datos
         private byte[] ObtenerImagenDesdeBD(long categoriaId)
         {
             string connectionString = ($"Server=localhost; Database={basedeDatos}; Uid=root; Pwd={contrasenia};");
@@ -319,7 +339,6 @@ namespace ElPrograma
             {
                 using (MySqlCommand command = new MySqlCommand(query, connection))
                 {
-                    // Establecer el parámetro @CategoriaId en la consulta SQL.
                     command.Parameters.AddWithValue("@CategoriaId", categoriaId);
                     connection.Open();
 
@@ -329,7 +348,6 @@ namespace ElPrograma
                         {
                             if (!reader.IsDBNull(0))
                             {
-                                // Devolver los bytes de la imagen desde la columna "Imagen" de la consulta.
                                 return (byte[])reader[0]; // Devuelve los bytes de la imagen
                             }
                         }
@@ -340,7 +358,7 @@ namespace ElPrograma
             return null; // Si no se encuentra la imagen, devuelve null
         }
 
-        // Función para mostrar datos de las categorías desde la base de datos
+
         private void MostrarDatosDesdeBD()
         {
             string connectionString = ($"Server=localhost; Database={basedeDatos}; Uid=root; Pwd={contrasenia};");
@@ -351,7 +369,6 @@ namespace ElPrograma
                 {
                     connection.Open();
 
-                    // Definir una consulta SQL para seleccionar ID y Nombre de categorías.
                     string query = "SELECT ID, Nombre FROM categoria;";
 
                     using (MySqlCommand cmd = new MySqlCommand(query, connection))
@@ -360,11 +377,9 @@ namespace ElPrograma
                         {
                             while (reader.Read())
                             {
-                                // Obtener el ID y el nombre de cada categoría desde el resultado de la consulta.
                                 long categoriaId = Convert.ToInt64(reader["ID"]);
                                 string nombreCategoria = reader["Nombre"].ToString();
 
-                                // Crear una representación visual de la categoría en la interfaz de usuario.
                                 CrearCategoriaDesdeBD(categoriaId, nombreCategoria);
                             }
                         }
@@ -372,16 +387,13 @@ namespace ElPrograma
                 }
                 catch (Exception ex)
                 {
-                    // En caso de error, mostrar un mensaje de error.
                     MessageBox.Show("Error: " + ex.Message);
                 }
             }
         }
 
-        // Función para guardar un producto en la base de datos
         private void GuardarProducto(long categoriaId, string nombre, string precio)
         {
-            // Si el nombre o el precio están vacíos o nulos, se detiene la inserción.
             if (string.IsNullOrWhiteSpace(nombre) || string.IsNullOrWhiteSpace(precio))
             {
                 return;
@@ -399,30 +411,25 @@ namespace ElPrograma
 
                     using (MySqlCommand cmd = new MySqlCommand(insertQuery, conexion))
                     {
-                        // Asignar parámetros para la consulta de inserción.
                         cmd.Parameters.AddWithValue("@Nombre", nombre);
                         cmd.Parameters.AddWithValue("@Precio", precio);
                         cmd.Parameters.AddWithValue("@ID_Categoria", categoriaId);
 
-                        // Ejecutar la consulta de inserción en la base de datos.
                         int rowsAffected = cmd.ExecuteNonQuery();
                     }
                 }
                 catch (Exception ex)
                 {
-                    // Manejar cualquier error que pueda ocurrir durante la inserción.
                     MessageBox.Show("Error: " + ex.Message);
                 }
             }
         }
-
 
         private void pcbRegresar_Click(object sender, EventArgs e)
         {
             this.Close();
         }
 
-        // Función para manejar el evento al hacer doble clic en el cuadro de imagen
         private void pcbAgregarImagen_DoubleClick(object sender, EventArgs e)
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
@@ -437,7 +444,8 @@ namespace ElPrograma
             }
         }
 
-        // Función para convertir una imagen en un array de bytes
+        
+
         private byte[] ImageToByteArray(System.Drawing.Image image)
         {
             using (MemoryStream memoryStream = new MemoryStream())
@@ -447,7 +455,6 @@ namespace ElPrograma
             }
         }
 
-        // Función para manejar el evento al hacer clic en el botón de maximizar
         private void btnMaximizar_Click(object sender, EventArgs e)
         {
             if (WindowState == FormWindowState.Normal)
@@ -456,16 +463,14 @@ namespace ElPrograma
                 WindowState = FormWindowState.Normal;
         }
 
-        // Función para validar entrada de caracteres en el cuadro de texto (solo letras)
         private void textBoxnombre_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (!char.IsLetter(e.KeyChar) && !char.IsControl(e.KeyChar))
+            if (!char.IsLetter(e.KeyChar) && !char.IsWhiteSpace(e.KeyChar) && !char.IsControl(e.KeyChar))
             {
                 e.Handled = true;
             }
         }
 
-        // Función para validar entrada de caracteres en el cuadro de texto (solo números y punto decimal)
         private void textBoxprecio_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (!char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar) && e.KeyChar != '.')

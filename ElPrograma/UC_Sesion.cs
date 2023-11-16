@@ -21,8 +21,8 @@ namespace ElPrograma
 
         private bool procesando = false;
 
-        string basedeDatos = "baseDatosProyecto";
-        string contrasenia = "contrasenia";
+        string basedeDatos = "Proyecto";
+        string contrasenia = "contrasena";
         public UC_Sesion(menuVertical menuVertical)
         {
             InitializeComponent();
@@ -49,7 +49,7 @@ namespace ElPrograma
             comandos.Connection = conexion;
 
             // Consulta SQL para verificar la contraseña ingresada.
-            string consulta = "Select Contraseña From usuarios where Contraseña ='" + txtContraseña.Text + "'";
+            string consulta = "Select Contraseña From usuario where Contraseña ='" + txtContraseña.Text + "'";
 
             comandos.CommandText = consulta;
             MySqlDataReader datos = comandos.ExecuteReader();

@@ -48,13 +48,6 @@ namespace ElPrograma
             conexionBD.Close();
         }
 
-        public void actualizar(string sql)
-        {
-            conexionBD.Open();
-            MySqlCommand consulta = new MySqlCommand(sql, conexionBD);
-            consulta.ExecuteNonQuery();
-            conexionBD.Close();
-        }
-
+      
     }
 }
