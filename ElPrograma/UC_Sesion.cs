@@ -15,75 +15,76 @@ namespace ElPrograma
 {
     public partial class UC_Sesion : UserControl
     {
-        menuVertical menuVertical;
-
-        private bool procesoRealizado = false;
+        private menuVertical menuVertical;
+        private Conexion conexion;
 
         private bool procesando = false;
 
-        string basedeDatos = "baseDatosProyecto";
-        string contrasenia = "contrasenia";
         public UC_Sesion(menuVertical menuVertical)
         {
             InitializeComponent();
 
+            // Configurar el campo de contraseña para mostrar caracteres de contraseña.
             txtContraseña.UseSystemPasswordChar = true;
 
             this.menuVertical = menuVertical;
+            this.conexion = new Conexion("empleado"); // Initialize the Conexion class
         }
-        
 
         private void realizarAcceso()
         {
-
+            // Indicar que se está procesando el acceso.
             procesando = true;
 
-
-            MySqlConnection conexion = new MySqlConnection($"Server=localhost; Database=proyecto; Uid=root; Pwd=;");
-
-            //MySqlConnection conexion = new MySqlConnection("server=localhost;database=proyecto;user=root;password=;");
-
-            // MySqlConnection conexion = new MySqlConnection("Server=localhost; Database=baseDato; Uid=root; Pwd=contrasenia;");
-
-            conexion.Open();
-
-            MySqlCommand comandos = new MySqlCommand();
-            comandos.Connection = conexion;
-
-            string consulta = "Select Contraseña From usuario where Contraseña ='" + txtContraseña.Text + "'";
-
-            comandos.CommandText = consulta;
-            MySqlDataReader datos = comandos.ExecuteReader();
-
-            if (datos.Read())
+            try
             {
-                MessageBox.Show("Bienvenido");
-                UC_Gestion uC_Gestion = new UC_Gestion();
-                menuVertical.addUserControl(uC_Gestion);
+                // Use the Conexion class for database operations
+                DataTable resultado = conexion.consultar($"SELECT CONTRASEÑA FROM USUARIOS WHERE CONTRASEÑA ='{txtContraseña.Text}'");
 
-                this.Hide();
+                // Check if the entered password matches the expected one
+                if (resultado.Rows.Count > 0 && txtContraseña.Text == "LaTuerca2024")
+                {
+                    // If the query has results and the password matches, show a welcome message.
+                    MessageBox.Show("Bienvenido");
+
+                    // Create and show the management form (UC_Gestion) in the vertical menu.
+                    UC_Gestion uC_Gestion = new UC_Gestion();
+                    menuVertical.addUserControl(uC_Gestion);
+
+                    // Hide the login form.
+                    this.Hide();
+                }
+                else
+                {
+                    // If the query has no results or the password doesn't match, show an access denied message and clear the password field.
+                    MessageBox.Show("Acceso Denegado.");
+                    txtContraseña.Clear();
+                }
             }
-            else
+            catch (Exception ex)
             {
-                MessageBox.Show("Acceso Denegado");
-                txtContraseña.Clear(); 
+                // Handle exceptions here
+                MessageBox.Show($"Error: {ex.Message}");
             }
-
-            procesando = false;
+            finally
+            {
+                // Indicar que el proceso ha finalizado.
+                procesando = false;
+            }
         }
 
         private void btnIniciarSesion_Click(object sender, EventArgs e)
         {
             realizarAcceso();
         }
+
         private void txtContraseña_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (e.KeyChar == (char)Keys.Enter)
             {
+                // Realiza el acceso al presionar Enter.
                 realizarAcceso();
             }
         }
     }
-    }
-
-
+}

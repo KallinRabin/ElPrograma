@@ -37,18 +37,19 @@
             // 
             // txtContraseña
             // 
-            this.txtContraseña.Location = new System.Drawing.Point(291, 244);
+            this.txtContraseña.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtContraseña.Location = new System.Drawing.Point(418, 343);
             this.txtContraseña.Name = "txtContraseña";
-            this.txtContraseña.Size = new System.Drawing.Size(131, 22);
+            this.txtContraseña.Size = new System.Drawing.Size(265, 30);
             this.txtContraseña.TabIndex = 0;
             this.txtContraseña.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtContraseña_KeyPress);
             // 
             // btnIniciarSesion
             // 
             this.btnIniciarSesion.Font = new System.Drawing.Font("Microsoft Sans Serif", 19.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnIniciarSesion.Location = new System.Drawing.Point(291, 281);
+            this.btnIniciarSesion.Location = new System.Drawing.Point(443, 388);
             this.btnIniciarSesion.Name = "btnIniciarSesion";
-            this.btnIniciarSesion.Size = new System.Drawing.Size(131, 47);
+            this.btnIniciarSesion.Size = new System.Drawing.Size(213, 56);
             this.btnIniciarSesion.TabIndex = 1;
             this.btnIniciarSesion.Text = "Iniciar";
             this.btnIniciarSesion.UseVisualStyleBackColor = true;
@@ -57,9 +58,9 @@
             // pictureBox1
             // 
             this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(291, 102);
+            this.pictureBox1.Location = new System.Drawing.Point(433, 134);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(131, 103);
+            this.pictureBox1.Size = new System.Drawing.Size(232, 176);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox1.TabIndex = 2;
             this.pictureBox1.TabStop = false;
@@ -73,7 +74,7 @@
             this.Controls.Add(this.btnIniciarSesion);
             this.Controls.Add(this.txtContraseña);
             this.Name = "UC_Sesion";
-            this.Size = new System.Drawing.Size(737, 423);
+            this.Size = new System.Drawing.Size(1126, 642);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

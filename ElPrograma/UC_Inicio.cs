@@ -15,11 +15,32 @@ namespace ElPrograma
         public UC_Inicio()
         {
             InitializeComponent();
+         
+
+            // Llamamos al método para actualizar la hora y la fecha al inicio del formulario
+            ActualizarHoraYFecha();
+
+            timer_Inicio.Start();
         }
 
-        private void pictureBox1_Click(object sender, EventArgs e)
+
+        private void timer_Inicio_Tick(object sender, EventArgs e)
         {
-
+            // Cada vez que el temporizador hace tick, actualizamos la hora y la fecha
+            ActualizarHoraYFecha();
         }
+        private void ActualizarHoraYFecha()
+        {
+            // Obtener la hora y la fecha actuales
+            DateTime ahora = DateTime.Now;
+
+            // Formatear la hora y la fecha como cadena
+            string horaYFecha = ahora.ToString("HH:mm:ss - dd/MM/yyyy");
+
+            // Mostrar la cadena en el label
+            lbl_Hora_Inicio.Text = horaYFecha;
+        }
+
+      
     }
 }
