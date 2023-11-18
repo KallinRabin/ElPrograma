@@ -15,14 +15,11 @@ namespace ElPrograma
 {
     public partial class UC_Sesion : UserControl
     {
-        menuVertical menuVertical;
-
-        private bool procesoRealizado = false;
+        private menuVertical menuVertical;
+        private Conexion conexion;
 
         private bool procesando = false;
 
-        string basedeDatos = "Proyecto";
-        string contrasenia = "contrasena";
         public UC_Sesion(menuVertical menuVertical)
         {
             InitializeComponent();
@@ -31,57 +28,56 @@ namespace ElPrograma
             txtContraseña.UseSystemPasswordChar = true;
 
             this.menuVertical = menuVertical;
+            this.conexion = new Conexion("empleado"); // Initialize the Conexion class
         }
 
-        // Función para realizar el acceso al sistema.
         private void realizarAcceso()
         {
             // Indicar que se está procesando el acceso.
             procesando = true;
 
-
-            MySqlConnection conexion = new MySqlConnection($"Server=localhost; Database=proyecto; Uid=root; Pwd=;");
-
-            conexion.Open();
-
-            // Crear comandos de MySQL.
-            MySqlCommand comandos = new MySqlCommand();
-            comandos.Connection = conexion;
-
-            // Consulta SQL para verificar la contraseña ingresada.
-            string consulta = "Select Contraseña From usuario where Contraseña ='" + txtContraseña.Text + "'";
-
-            comandos.CommandText = consulta;
-            MySqlDataReader datos = comandos.ExecuteReader();
-
-            if (datos.Read())
+            try
             {
-                // Si la consulta tiene resultados, muestra un mensaje de bienvenida.
-                MessageBox.Show("Bienvenido");
-                // Crea y muestra el formulario de gestión (UC_Gestion) en el menú vertical.
-                UC_Gestion uC_Gestion = new UC_Gestion();
-                menuVertical.addUserControl(uC_Gestion);
+                // Use the Conexion class for database operations
+                DataTable resultado = conexion.consultar($"SELECT CONTRASEÑA FROM USUARIOS WHERE CONTRASEÑA ='{txtContraseña.Text}'");
 
-                // Oculta el formulario de inicio de sesión.
-                this.Hide();
+                // Check if the entered password matches the expected one
+                if (resultado.Rows.Count > 0 && txtContraseña.Text == "LaTuerca2024")
+                {
+                    // If the query has results and the password matches, show a welcome message.
+                    MessageBox.Show("Bienvenido");
+
+                    // Create and show the management form (UC_Gestion) in the vertical menu.
+                    UC_Gestion uC_Gestion = new UC_Gestion();
+                    menuVertical.addUserControl(uC_Gestion);
+
+                    // Hide the login form.
+                    this.Hide();
+                }
+                else
+                {
+                    // If the query has no results or the password doesn't match, show an access denied message and clear the password field.
+                    MessageBox.Show("Acceso Denegado.");
+                    txtContraseña.Clear();
+                }
             }
-            else
+            catch (Exception ex)
             {
-                // Si la consulta no tiene resultados, muestra un mensaje de acceso denegado y limpia el campo de contraseña.
-                MessageBox.Show("Acceso Denegado");
-                txtContraseña.Clear(); 
+                // Handle exceptions here
+                MessageBox.Show($"Error: {ex.Message}");
             }
-
-            // Indicar que el proceso ha finalizado.
-            procesando = false;
+            finally
+            {
+                // Indicar que el proceso ha finalizado.
+                procesando = false;
+            }
         }
 
-        // Evento que se dispara al hacer clic en el botón de iniciar sesión.
         private void btnIniciarSesion_Click(object sender, EventArgs e)
         {
             realizarAcceso();
         }
-        // Evento que se dispara al presionar la tecla Enter en el campo de contraseña.
+
         private void txtContraseña_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (e.KeyChar == (char)Keys.Enter)
@@ -91,6 +87,4 @@ namespace ElPrograma
             }
         }
     }
-    }
-
-
+}

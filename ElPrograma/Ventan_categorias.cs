@@ -14,12 +14,12 @@ namespace ElPrograma
 {
     public partial class Ventan_categorias : Form
     {
-        string basedeDatos = "Proyecto1";
-        string contrasenia = "contrasena";
+
+        private Conexion Conexion;
 
         public int CategoriaSeleccionadaId { get; private set; }
 
-        private int idCategoria; 
+        private int idCategoria;
 
 
         public Ventan_categorias(string IdCategoria)
@@ -31,69 +31,55 @@ namespace ElPrograma
             txtNombreProd.KeyPress += new KeyPressEventHandler(txtNombreProd_KeyPress);
             txtPrecioProd.KeyPress += new KeyPressEventHandler(txtPrecioProd_KeyPress);
 
+            Conexion = new Conexion("admin");
+
             dataGridView1.AutoGenerateColumns = true;
 
-            string connectionString = ($"Server=localhost; Database=proyecto; Uid=root; Pwd=;");
             string query = "SELECT * from categoria where ID = " + IdCategoria + ";";
 
-            string valor = "";
+            //string valor = "";
+            dataGridView1.CellClick += new DataGridViewCellEventHandler(dataGridView1_CellClick);
 
-            using (MySqlConnection connection = new MySqlConnection(connectionString))
-            {
-                using (MySqlCommand command = new MySqlCommand(query, connection))
-                {
-                    connection.Open();
-
-                    MySqlDataReader reader = command.ExecuteReader();
-
-                    if (reader.Read())
-                    {
-                        valor = reader["nombre"].ToString();
-                    }
-                    else
-                    {
-                        MessageBox.Show("No se encontraron registros en la base de datos.");
-                    }
-
-                    reader.Close();
-
-                }
-            }
-
-            lblCategoria.Text = "Estas en la Categoria: " + valor;
+            string valor = ObtenerNombreCategoria(IdCategoria);
+            lblCategoria.Text = "Estás en la Categoría: " + valor;
             actualizarLista(IdCategoria);
+        }
+
+        private string ObtenerNombreCategoria(string idCategoria)
+        {
+            string sql = $"SELECT nombre FROM categoria WHERE ID = {idCategoria}";
+            DataTable result = Conexion.consultar(sql);
+
+            if (result.Rows.Count > 0)
+            {
+                return result.Rows[0]["nombre"].ToString();
+            }
+            else
+            {
+                MessageBox.Show("No se encontraron registros en la base de datos.");
+                return string.Empty;
+            }
         }
 
         private void actualizarLista(string idCategoria)
         {
 
-            string connectionString = ($"Server=localhost; Database=proyecto; Uid=root; Pwd=;");
-            string query = "SELECT ID, Nombre, Precio FROM platos WHERE ID_Categoria = " + idCategoria + " AND Disponible = 1;";
+            string sql = $"SELECT ID, Nombre, Precio FROM platos WHERE ID_Categoria = {idCategoria} AND Disponible = 1";
+            DataTable result = Conexion.consultar(sql);
 
-            using (MySqlConnection connection = new MySqlConnection(connectionString))
+            dataGridView1.Rows.Clear();
+
+            foreach (DataRow row in result.Rows)
             {
-                using (MySqlCommand command = new MySqlCommand(query, connection))
-                {
-                    connection.Open();
+                int id = Convert.ToInt32(row["ID"]);
+                string nombrePlato = row["Nombre"].ToString();
+                string precioPlato = row["Precio"].ToString();
 
-                    MySqlDataReader reader = command.ExecuteReader();
-                    dataGridView1.Rows.Clear();
-                    while (reader.Read())
-                    {
-                        int id = Convert.ToInt32(reader["ID"]);
-                        string NombrePlato = reader["Nombre"].ToString();
-                        string PrecioPlato = reader["Precio"].ToString();
-
-                        DataGridViewRow fila = new DataGridViewRow();
-                        fila.CreateCells(dataGridView1, NombrePlato, PrecioPlato);
-                        fila.Tag = id; 
-                        dataGridView1.Rows.Add(fila);
-                    }
-
-                    reader.Close();
-                }
+                DataGridViewRow fila = new DataGridViewRow();
+                fila.CreateCells(dataGridView1, nombrePlato, precioPlato);
+                fila.Tag = id;
+                dataGridView1.Rows.Add(fila);
             }
-
 
         }
 
@@ -112,81 +98,93 @@ namespace ElPrograma
         {
             this.Close();
         }
-
-        private void btnModificar_Click(object sender, EventArgs e)
+        private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (dataGridView1.SelectedRows.Count > 0)
-            {
-                DataGridViewRow filaSeleccionada = dataGridView1.SelectedRows[0];
 
-                string nombreProducto = filaSeleccionada.Cells["Nombre"].Value.ToString();
-                string precio = filaSeleccionada.Cells["Precio"].Value.ToString();
-
-                txtNombreProd.Text = nombreProducto;
-                txtPrecioProd.Text = precio;
-            }
-            else
+            if (e.RowIndex >= 0)
             {
-                MessageBox.Show("Por favor, selecciona una fila en el DataGridView.");
+                DataGridViewRow filaSeleccionada = dataGridView1.Rows[e.RowIndex];
+
+                if (filaSeleccionada.Cells["Nombre"].Value != null)
+                {
+                    string nombreProducto = filaSeleccionada.Cells["Nombre"].Value.ToString();
+                    txtNombreProd.Text = nombreProducto;
+                }
+                else
+                {
+                    txtNombreProd.Text = string.Empty; // O asigna otro valor predeterminado
+                }
+
+                if (filaSeleccionada.Cells["Precio"].Value != null)
+                {
+                    string precio = filaSeleccionada.Cells["Precio"].Value.ToString();
+                    txtPrecioProd.Text = precio;
+                }
+                else
+                {
+                    txtPrecioProd.Text = string.Empty; // O asigna otro valor predeterminado
+                }
             }
 
         }
-
+        
         private void btnAcetparModi_Click(object sender, EventArgs e)
         {
+
             if (dataGridView1.SelectedRows.Count > 0)
             {
-                string connectionString = $"Server=localhost; Database={basedeDatos}; Uid=root; Pwd={contrasenia};";
                 int id = Convert.ToInt32(dataGridView1.SelectedRows[0].Tag);
                 string nuevoNombre = txtNombreProd.Text;
                 string nuevoPrecio = txtPrecioProd.Text;
 
-                // Reemplazar comas por puntos en el precio
-                nuevoPrecio = nuevoPrecio.Replace(',', '.');
+                dataGridView1.SelectedRows[0].Cells["Nombre"].Value = nuevoNombre;
+                dataGridView1.SelectedRows[0].Cells["Precio"].Value = nuevoPrecio;
 
-                // Verificar que el nombre no esté vacío y el precio sea un número válido
-                if (!string.IsNullOrWhiteSpace(nuevoNombre) && decimal.TryParse(nuevoPrecio, out _))
+                string consulta = "UPDATE platos SET Nombre = @Nombre, Precio = @Precio WHERE ID = @ID";
+
+                try
                 {
-                    dataGridView1.SelectedRows[0].Cells["Nombre"].Value = nuevoNombre;
-                    dataGridView1.SelectedRows[0].Cells["Precio"].Value = nuevoPrecio;
+                    Conexion.conexion.Open();
+                    MySqlCommand sqlCommand = new MySqlCommand(consulta, Conexion.conexion);
 
-                    string consulta = "UPDATE platos SET Nombre = @Nombre, Precio = @Precio WHERE ID = @ID";
+                    sqlCommand.Parameters.AddWithValue("@Nombre", nuevoNombre);
+                    sqlCommand.Parameters.AddWithValue("@Precio", nuevoPrecio);
+                    sqlCommand.Parameters.AddWithValue("@ID", id);
 
-                    using (MySqlConnection connection = new MySqlConnection(connectionString))
+                    sqlCommand.ExecuteNonQuery();
+                }
+                catch (Exception ex)
+                {
+                    // Manejar la excepción
+                    MessageBox.Show($"Error al actualizar: {ex.Message}");
+                }
+                finally
+                {
+                    if (Conexion.conexion.State == ConnectionState.Open)
                     {
-                        connection.Open();
-                        using (MySqlCommand command = new MySqlCommand(consulta, connection))
-                        {
-                            command.Parameters.AddWithValue("@Nombre", nuevoNombre);
-                            command.Parameters.AddWithValue("@Precio", nuevoPrecio);
-                            command.Parameters.AddWithValue("@ID", id);
-
-                            command.ExecuteNonQuery();
-                        }
+                        Conexion.conexion.Close();
                     }
-
-                    MessageBox.Show("Datos actualizados correctamente en la base de datos.");
-
-                    txtNombreProd.Text = "";
-                    txtPrecioProd.Text = "";
                 }
-                else
-                {
-                    MessageBox.Show("Por favor, completa un nombre válido y un precio válido antes de actualizar.");
-                }
+
+                MessageBox.Show("Datos actualizados correctamente en la base de datos.");
+
+                txtNombreProd.Text = "";
+                txtPrecioProd.Text = "";
             }
             else
             {
                 MessageBox.Show("Por favor, selecciona una fila en el DataGridView.");
             }
+
         }
 
         private void txtNombreProd_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (!char.IsLetter(e.KeyChar) && !char.IsControl(e.KeyChar) && !char.IsWhiteSpace(e.KeyChar))
+            if (!char.IsLetter(e.KeyChar) && !char.IsControl(e.KeyChar))
             {
                 e.Handled = true;
             }
+
         }
 
         private void txtPrecioProd_KeyPress(object sender, KeyPressEventArgs e)
@@ -198,113 +196,239 @@ namespace ElPrograma
         }
         private void agregarNuevoProducto(string nombre, string precio, int idCategoria)
         {
-            string connectionString = $"Server=localhost; Database={basedeDatos}; Uid=root; Pwd={contrasenia};";
-
-            using (MySqlConnection connection = new MySqlConnection(connectionString))
-            {
-                connection.Open();
-
-                string query = "INSERT INTO platos (Nombre, Precio, ID_Categoria) VALUES (@Nombre, @Precio, @ID_Categoria);";
-
-                using (MySqlCommand command = new MySqlCommand(query, connection))
-                {
-                    command.Parameters.AddWithValue("@Nombre", nombre);
-                    command.Parameters.AddWithValue("@Precio", precio);
-                    command.Parameters.AddWithValue("@ID_Categoria", idCategoria);
-
-                    command.ExecuteNonQuery();
-                }
-            }
-        }
-        private void btnAgregar_Click(object sender, EventArgs e)
-        {
             string nuevoNombre = txtNombreProd.Text;
             string nuevoPrecio = txtPrecioProd.Text;
 
-            // Validar que se hayan ingresado datos válidos
-            if (string.IsNullOrWhiteSpace(nuevoNombre) || string.IsNullOrWhiteSpace(nuevoPrecio))
+            try
             {
-                MessageBox.Show("Por favor, ingresa un nombre y un precio para el nuevo producto.");
-                return;
+                // Verificar que se hayan ingresado datos válidos
+                if (string.IsNullOrWhiteSpace(nuevoNombre) || string.IsNullOrWhiteSpace(nuevoPrecio))
+                {
+                    MessageBox.Show("Por favor, ingresa un nombre y un precio para el nuevo producto.");
+                    return;
+                }
+
+                string consulta = "INSERT INTO platos (Nombre, Precio, ID_Categoria, Disponible) VALUES (@Nombre, @Precio, @ID_Categoria, 1)";
+
+                MySqlCommand sqlCommand = new MySqlCommand(consulta, Conexion.conexion);
+
+                sqlCommand.Parameters.AddWithValue("@Nombre", txtNombreProd);
+                sqlCommand.Parameters.AddWithValue("@Precio", txtPrecioProd);
+                sqlCommand.Parameters.AddWithValue("@ID_Categoria", CategoriaSeleccionadaId);
+
+                // Abre y cierra la conexión automáticamente debido al using
+                Conexion.conexion.Open();
+                sqlCommand.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                // Manejar la excepción
+                MessageBox.Show($"Error al agregar nuevo producto: {ex.Message}");
+            }
+            finally
+            {
+                if (Conexion.conexion.State == ConnectionState.Open)
+                {
+                    Conexion.conexion.Close();
+                }
             }
 
-            
-            agregarNuevoProducto(nuevoNombre, nuevoPrecio, CategoriaSeleccionadaId);
-
-            
+            // Actualizar la lista después de agregar el nuevo producto
             actualizarLista(CategoriaSeleccionadaId.ToString());
 
-            
+            // Limpiar los campos de entrada
+            txtNombreProd.Text = "";
+            txtPrecioProd.Text = "";
+
+            MessageBox.Show("Nuevo producto agregado correctamente.");
+
+        }
+
+        private void btnAgregar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                string nuevoNombre = txtNombreProd.Text;
+                string nuevoPrecio = txtPrecioProd.Text;
+
+                // Validar que se hayan ingresado datos válidos
+                if (string.IsNullOrWhiteSpace(nuevoNombre) || string.IsNullOrWhiteSpace(nuevoPrecio))
+                {
+                    MessageBox.Show("Por favor, ingresa un nombre y un precio para el nuevo producto.");
+                    return;
+                }
+
+                // Verificar si ya existe un producto con el mismo nombre pero está dado de baja
+                int idExistente = ObtenerIdProductoDadoDeBajaPorNombre(nuevoNombre);
+
+                if (idExistente != -1)
+                {
+                    // Preguntar al usuario si desea reactivar el producto existente
+                    DialogResult result = MessageBox.Show("Ya existe un producto con el mismo nombre pero está dado de baja. ¿Deseas reactivarlo?",
+                                                          "Producto Existente", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+                    if (result == DialogResult.Yes)
+                    {
+                        // Reactivar el producto existente
+                        ReactivarProducto(idExistente);
+                    }
+                    else
+                    {
+                        return; // Si el usuario elige no reactivar, salir del método
+                    }
+                }
+                else
+                {
+                    // Insertar un nuevo producto
+                    InsertarNuevoProducto(nuevoNombre, nuevoPrecio);
+                }
+            }
+            catch (Exception ex)
+            {
+                // Manejar la excepción
+                MessageBox.Show($"Error al agregar nuevo producto: {ex.Message}");
+            }
+            finally
+            {
+                if (Conexion.conexion.State == ConnectionState.Open)
+                {
+                    Conexion.conexion.Close();
+                }
+            }
+
+            // Actualizar la lista después de agregar el nuevo producto o reactivar el existente
+            actualizarLista(CategoriaSeleccionadaId.ToString());
+
+            // Limpiar los campos de entrada
             txtNombreProd.Text = "";
             txtPrecioProd.Text = "";
 
             MessageBox.Show("Nuevo producto agregado correctamente.");
         }
-        private void eliminarProducto(int idProducto)
-        {
-            //MessageBox.Show("ID del producto a eliminar: " + idProducto); 
 
-            string connectionString = $"Server=localhost; Database={basedeDatos}; Uid=root; Pwd={contrasenia};";
+        private int ObtenerIdProductoDadoDeBajaPorNombre(string nombre)
+        {
+            string sql = $"SELECT ID FROM platos WHERE Nombre = '{nombre}' AND Disponible = 0";
+            DataTable result = Conexion.consultar(sql);
+
+            if (result.Rows.Count > 0)
+            {
+                return Convert.ToInt32(result.Rows[0]["ID"]);
+            }
+
+            return -1; // Retorna -1 si no se encuentra un producto dado de baja con el mismo nombre
+        }
+
+        private void ReactivarProducto(int idProducto)
+        {
+            // Lógica para reactivar el producto
+            string consulta = $"UPDATE platos SET Disponible = 1 WHERE ID = @ID";
 
             try
             {
-                using (MySqlConnection connection = new MySqlConnection(connectionString))
-                {
-                    connection.Open();
-
-                    
-                    string query = $"UPDATE platos SET Disponible = 0 WHERE ID = @ID";
-
-                    using (MySqlCommand command = new MySqlCommand(query, connection))
-                    {
-                        command.Parameters.AddWithValue("@ID", idProducto);
-                        command.ExecuteNonQuery();
-                        MessageBox.Show("Producto deshabilitado correctamente."); 
-                    }
-                }
+                // Utiliza la instancia existente de la clase Conexion
+                Conexion.conexion.Open();
+                MySqlCommand sqlCommand = new MySqlCommand(consulta, Conexion.conexion);
+                sqlCommand.Parameters.AddWithValue("@ID", idProducto);
+                sqlCommand.ExecuteNonQuery();
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error al deshabilitar el producto: " + ex.Message); 
+                // Manejar la excepción
+                throw new Exception($"Error al reactivar el producto: {ex.Message}");
             }
+            finally
+            {
+                if (Conexion.conexion.State == ConnectionState.Open)
+                {
+                    Conexion.conexion.Close();
+                }
+            }
+        }
+
+        private void InsertarNuevoProducto(string nuevoNombre, string nuevoPrecio)
+        {
+            try
+            {
+                string consulta = "INSERT INTO platos (Nombre, Precio, ID_Categoria, Disponible) VALUES (@Nombre, @Precio, @ID_Categoria, 1)";
+
+                MySqlCommand sqlCommand = new MySqlCommand(consulta, Conexion.conexion);
+
+                sqlCommand.Parameters.AddWithValue("@Nombre", nuevoNombre);
+                sqlCommand.Parameters.AddWithValue("@Precio", nuevoPrecio);
+                sqlCommand.Parameters.AddWithValue("@ID_Categoria", CategoriaSeleccionadaId);
+
+                // Abre y cierra la conexión automáticamente debido al using
+                Conexion.conexion.Open();
+                sqlCommand.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                // Manejar la excepción
+                MessageBox.Show($"Error al agregar nuevo producto: {ex.Message}");
+            }
+            finally
+            {
+                if (Conexion.conexion.State == ConnectionState.Open)
+                {
+                    Conexion.conexion.Close();
+                }
+            }
+        }
+
+        private void eliminarProducto(int idProducto)
+        {
+
+            // Lógica para deshabilitar el producto
+            string consulta = $"UPDATE platos SET Disponible = 0 WHERE ID = @ID";
+
+            try
+            {
+                // Utiliza la instancia existente de la clase Conexion
+                Conexion.conexion.Open();
+                MySqlCommand sqlCommand = new MySqlCommand(consulta, Conexion.conexion);
+                sqlCommand.Parameters.AddWithValue("@ID", idProducto);
+                sqlCommand.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                // Manejar la excepción
+                throw new Exception($"Error al deshabilitar el producto: {ex.Message}");
+            }
+            finally
+            {
+                if (Conexion.conexion.State == ConnectionState.Open)
+                {
+                    Conexion.conexion.Close();
+                }
+            }
+
         }
         private void btnEliminar_Click(object sender, EventArgs e)
         {
-            // MessageBox.Show("Botón de eliminar presionado.");
 
             if (dataGridView1.SelectedRows.Count > 0)
             {
                 DataGridViewRow filaSeleccionada = dataGridView1.SelectedRows[0];
                 int idProducto = Convert.ToInt32(filaSeleccionada.Tag);
 
-                // Llama a la función para deshabilitar el producto
+                // Llama a la función para deshabilitar el producto utilizando la clase Conexion
                 eliminarProducto(idProducto);
 
                 // Actualiza la lista después de deshabilitar el producto
                 actualizarLista(CategoriaSeleccionadaId.ToString());
 
-                MessageBox.Show("Producto deshabilitado correctamente.");
+                MessageBox.Show("Producto deshabilitado correctamente." );
             }
             else
             {
-                MessageBox.Show("Por favor, selecciona una fila en el DataGridView.");
+                MessageBox.Show("Por favor, selecciona una fila de la table.");
             }
 
         }
 
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-            if (dataGridView1.SelectedRows.Count > 0)
-            {
-                DataGridViewRow selectedRow = dataGridView1.SelectedRows[0];
 
-                // Obtén el valor de las celdas y asígnalos a los TextBoxes
-                txtNombreProd.Text = selectedRow.Cells["Nombre"].Value.ToString();
-                txtPrecioProd.Text = selectedRow.Cells["Precio"].Value.ToString();
-
-          
-            }
-        }
     }
 
 }
+

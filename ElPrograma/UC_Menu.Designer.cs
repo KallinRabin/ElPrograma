@@ -35,6 +35,8 @@
             this.pnlCarrito = new System.Windows.Forms.Panel();
             this.pnlProductos = new System.Windows.Forms.Panel();
             this.btncancelar = new System.Windows.Forms.Button();
+            this.lblNumMesa = new System.Windows.Forms.Label();
+            this.txtB_NumMesa = new System.Windows.Forms.TextBox();
             this.panel2.SuspendLayout();
             this.pnlCarrito.SuspendLayout();
             this.SuspendLayout();
@@ -85,6 +87,8 @@
             // pnlCarrito
             // 
             this.pnlCarrito.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pnlCarrito.Controls.Add(this.txtB_NumMesa);
+            this.pnlCarrito.Controls.Add(this.lblNumMesa);
             this.pnlCarrito.Controls.Add(this.pnlProductos);
             this.pnlCarrito.Controls.Add(this.btncancelar);
             this.pnlCarrito.Controls.Add(this.panel2);
@@ -99,9 +103,9 @@
             // 
             this.pnlProductos.AutoScroll = true;
             this.pnlProductos.AutoScrollMargin = new System.Drawing.Size(10, 20);
-            this.pnlProductos.Location = new System.Drawing.Point(12, 69);
+            this.pnlProductos.Location = new System.Drawing.Point(12, 102);
             this.pnlProductos.Name = "pnlProductos";
-            this.pnlProductos.Size = new System.Drawing.Size(290, 487);
+            this.pnlProductos.Size = new System.Drawing.Size(290, 454);
             this.pnlProductos.TabIndex = 5;
             // 
             // btncancelar
@@ -116,6 +120,25 @@
             this.btncancelar.UseVisualStyleBackColor = true;
             this.btncancelar.Click += new System.EventHandler(this.btncancelar_Click);
             // 
+            // lblNumMesa
+            // 
+            this.lblNumMesa.AutoSize = true;
+            this.lblNumMesa.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblNumMesa.ForeColor = System.Drawing.Color.White;
+            this.lblNumMesa.Location = new System.Drawing.Point(9, 69);
+            this.lblNumMesa.Name = "lblNumMesa";
+            this.lblNumMesa.Size = new System.Drawing.Size(199, 29);
+            this.lblNumMesa.TabIndex = 6;
+            this.lblNumMesa.Text = "Numero de mesa";
+            // 
+            // txtB_NumMesa
+            // 
+            this.txtB_NumMesa.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtB_NumMesa.Location = new System.Drawing.Point(214, 69);
+            this.txtB_NumMesa.Name = "txtB_NumMesa";
+            this.txtB_NumMesa.Size = new System.Drawing.Size(68, 27);
+            this.txtB_NumMesa.TabIndex = 7;
+            // 
             // UC_Menu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -129,6 +152,7 @@
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
             this.pnlCarrito.ResumeLayout(false);
+            this.pnlCarrito.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -141,5 +165,7 @@
         private System.Windows.Forms.Panel pnlCarrito;
         private System.Windows.Forms.Button btncancelar;
         private System.Windows.Forms.Panel pnlProductos;
+        private System.Windows.Forms.TextBox txtB_NumMesa;
+        private System.Windows.Forms.Label lblNumMesa;
     }
 }

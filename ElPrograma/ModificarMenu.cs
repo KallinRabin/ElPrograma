@@ -1,7 +1,9 @@
 ﻿using MySql.Data.MySqlClient;
 using System;
+using System.Data;
 using System.Drawing;
 using System.IO;
+using System.Linq;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
 using static System.Net.Mime.MediaTypeNames;
@@ -10,38 +12,39 @@ namespace ElPrograma
 {
     public partial class ModificarMenu : Form
     {
+        // Declaración de variables miembro
         private int margin = 10;
-
         private int panelCounter = 0;
         private int panelHeight = 50;
         private int initialPanelPositionY = 10;
-
         private int panelPositionY = 10;
-
         private string rutaImagenSeleccionada = "";
 
+        // Declaraciones para el arrastre de ventanas
         [DllImport("user32.dll", EntryPoint = "ReleaseCapture")]
         private extern static void ReleaseCapture();
 
         [DllImport("user32.dll", EntryPoint = "SendMessage")]
         private extern static void SendMessage(IntPtr hWnd, int wMsg, int wParam, int lParam);
 
+        // Constantes utilizadas para el arrastre de ventanas
         private const int WM_NCLBUTTONDOWN = 0xA1;
         private const int HT_CAPTION = 0x2;
 
-        string basedeDatos = "Proyecto1";
-        string contrasenia = "contrasena";
+        private Conexion Conexion;
+
         public ModificarMenu()
         {
             InitializeComponent();
+            this.Conexion = new Conexion("admin");
 
+            // Asociar eventos KeyPress a las cajas de texto
             texprecio1.KeyPress += textBoxprecio_KeyPress;
             texprecio2.KeyPress += textBoxprecio_KeyPress;
             texprecio3.KeyPress += textBoxprecio_KeyPress;
             texprecio4.KeyPress += textBoxprecio_KeyPress;
             texprecio5.KeyPress += textBoxprecio_KeyPress;
             texprecio6.KeyPress += textBoxprecio_KeyPress;
-
             texprod1.KeyPress += textBoxnombre_KeyPress;
             texprod2.KeyPress += textBoxnombre_KeyPress;
             texprod3.KeyPress += textBoxnombre_KeyPress;
@@ -50,20 +53,23 @@ namespace ElPrograma
             texprod6.KeyPress += textBoxnombre_KeyPress;
             txtNuevaCategoria.KeyPress += textBoxnombre_KeyPress;
 
-            this.WindowState = FormWindowState.Maximized;
+            // Cargar categorías existentes en el constructor
             cargarCategorias();
         }
 
+        // Función para el botón de cerrar
         private void btnCerrar_Click(object sender, EventArgs e)
         {
             this.Close();
         }
 
+        // Función para el botón de minimizar (no implementada)
         private void btnMinimizar_Click(object sender, EventArgs e)
         {
             this.WindowState = FormWindowState.Minimized;
         }
 
+        // Función para permitir el arrastre de la ventana
         private void panelTitulo_MouseDown(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Left)
@@ -73,6 +79,7 @@ namespace ElPrograma
             }
         }
 
+        // Función para crear una nueva categoría
         private void CrearCategoria(string contenido, System.Drawing.Image imagen, string ID)
         {
             Panel nuevoPanel = new Panel() {
@@ -120,6 +127,7 @@ namespace ElPrograma
                 Ventan_categorias ven = new Ventan_categorias(lblNombre.Name);
                 ven.ShowDialog();
             };
+
             btnDarDeBaja.Click += (sender, e) =>
             {
                 string categoriaId = ((Button)sender).Name;
@@ -127,136 +135,91 @@ namespace ElPrograma
                 DarDeBajaCategoria(categoriaId);
             };
 
-
             panelCounter++;
         }
 
-        private void MostrarDatos()
-        {
-            string connectionString = ($"Server=localhost; Database={basedeDatos}; Uid=root; Pwd={contrasenia};");
-            string query = "SELECT nombre FROM categoria ORDER BY ID DESC LIMIT 1;";
-            
-
-            using (MySqlConnection connection = new MySqlConnection(connectionString))
-            {
-                using (MySqlCommand command = new MySqlCommand(query, connection))
-                {
-                    connection.Open();
-
-                    MySqlDataReader reader = command.ExecuteReader();
-
-                    if (reader.Read())
-                    {
-                        string valor = reader["nombre"].ToString();
-                    }
-                    else
-                    {
-                        MessageBox.Show("No se encontraron registros en la base de datos.");
-                    }
-
-                    reader.Close();
-                }
-            }
-        }
+       
         private void DarDeBajaCategoria(string categoriaId)
         {
-            // Establecer disponible en 0 en la base de datos
-            string connectionString = ($"Server=localhost; Database={basedeDatos}; Uid=root; Pwd={contrasenia};");
-            string updateQuery = "UPDATE categoria SET disponible = 0 WHERE ID = @CategoriaId;";
 
-            using (MySqlConnection connection = new MySqlConnection(connectionString))
+            try
             {
-                using (MySqlCommand command = new MySqlCommand(updateQuery, connection))
-                {
-                    command.Parameters.AddWithValue("@CategoriaId", categoriaId);
-                    connection.Open();
+                // Lógica para dar de baja la categoría en la base de datos y el programa
+                Conexion.actualizar($"UPDATE categoria SET disponible = 0 WHERE ID = '{categoriaId}'");
+                Conexion.actualizar($"UPDATE platos SET disponible = 0 WHERE ID_Categoria = '{categoriaId}'");
 
-                    int rowsAffected = command.ExecuteNonQuery();
-
-                    if (rowsAffected > 0)
-                    {
-                        
-                    }
-                    else
-                    {
-                        MessageBox.Show("No se pudo dar de baja la categoría.");
-                    }
-                }
+                MessageBox.Show("La categoría y sus platos han sido dadas de baja exitosamente.");
             }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al dar de baja la categoría: " + ex.Message);
+            }
+
+            // Vuelve a cargar las categorías después de dar de baja.
             cargarCategorias();
+
         }
+
+        // Función para cargar y mostrar datos de las categorías
         private void cargarCategorias()
         {
+
             pnlCategorias.Controls.Clear();
-            string connectionString = ($"Server=localhost; Database=proyecto; Uid=root; Pwd=;");
 
-            using (MySqlConnection connection = new MySqlConnection(connectionString))
+            try
             {
+                // Utilizar la instancia de Conexion para realizar la consulta
+                DataTable categoriasTable = Conexion.consultar("SELECT * FROM categoria WHERE disponible = 1;");
 
-                connection.Open();
-
-                string query = "SELECT * from categoria WHERE disponible = 1;";
-
-                using (MySqlCommand cmd = new MySqlCommand(query, connection))
+                foreach (DataRow row in categoriasTable.Rows)
                 {
-                    using (MySqlDataReader reader = cmd.ExecuteReader())
+                    byte[] imagenBytes = (byte[])row["Imagen"];
+                    string nombreCategoria = row["Nombre"].ToString();
+                    string idCategoria = row["ID"].ToString();
+
+                    using (MemoryStream ms = new MemoryStream(imagenBytes))
                     {
-                        while (reader.Read())
-                        {
-                            byte[] imagenBytes = (byte[])reader["Imagen"];
-                            string nombreCategoria = reader["Nombre"].ToString();
-                            string idCategoria = reader["ID"].ToString();
-                            using (MemoryStream ms = new MemoryStream(imagenBytes))
-                            {
-                                System.Drawing.Image imagen = System.Drawing.Image.FromStream(ms);
-                                CrearCategoria(nombreCategoria, imagen, idCategoria);
-                            }
-                        }
+                        System.Drawing.Image imagen = System.Drawing.Image.FromStream(ms);
+                        CrearCategoria(nombreCategoria, imagen, idCategoria);
                     }
                 }
-
-
             }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al cargar categorías: " + ex.Message);
+            }
+
         }
-        private void btnCargar_Click(object sender, EventArgs e)
+
+        private void btnCargar_Click(object sender, EventArgs e) 
         {
-            string connectionString = ($"Server=localhost; Database={basedeDatos}; Uid=root; Pwd={contrasenia};");
+
             long IDultimacategoria = -1;
 
             try
             {
-                using (MySqlConnection conexion = new MySqlConnection(connectionString))
+                // Utilizar la instancia existente de Conexion para realizar la inserción
+                using (MySqlConnection conexionBD = Conexion.conexion)
                 {
-                    conexion.Open();
+                    conexionBD.Open();
 
                     if (!string.IsNullOrWhiteSpace(txtNuevaCategoria.Text) && !string.IsNullOrWhiteSpace(texprod1.Text) && !string.IsNullOrWhiteSpace(texprecio1.Text) && rutaImagenSeleccionada != "")
                     {
-                        byte[] imagenBytes = ImageToByteArray(pcbAgregarImagen.Image);
-                        pcbAgregarImagen.Image = null;
-
-                        string insertCategoriaQuery = "INSERT INTO categoria (Nombre, Imagen, disponible) VALUES (@Nombre, @Imagen, 1);";
-
-                        using (MySqlCommand cmdCategoria = new MySqlCommand(insertCategoriaQuery, conexion))
+                        string valor = txtNuevaCategoria.Text;
+                        if (!string.IsNullOrWhiteSpace(valor))
                         {
-                            cmdCategoria.Parameters.AddWithValue("@Nombre", txtNuevaCategoria.Text);
-                            cmdCategoria.Parameters.AddWithValue("@Imagen", imagenBytes);
-                            int rowsAffectedCategoria = cmdCategoria.ExecuteNonQuery();
+                            byte[] imagenBytes = ImageToByteArray(pcbAgregarImagen.Image);
+                            pcbAgregarImagen.Image = null;
 
-                            // Obtener el ID de la última categoría insertada
-                            IDultimacategoria = cmdCategoria.LastInsertedId;
-                            MessageBox.Show("Nueva categoría agregada");
+                            string insertQuery = "INSERT INTO categoria (Nombre, Imagen, Disponible) VALUES (@Nombre, @Imagen, 1);";
 
-                            if (rowsAffectedCategoria > 0)
+                            using (MySqlCommand cmd = new MySqlCommand(insertQuery, conexionBD))
                             {
-                                // Establecer los productos de la nueva categoría como disponibles
-                                GuardarProducto(IDultimacategoria, texprod1.Text, texprecio1.Text);
-                                GuardarProducto(IDultimacategoria, texprod2.Text, texprecio2.Text);
-                                GuardarProducto(IDultimacategoria, texprod3.Text, texprecio3.Text);
-                                GuardarProducto(IDultimacategoria, texprod4.Text, texprecio4.Text);
-                                GuardarProducto(IDultimacategoria, texprod5.Text, texprecio5.Text);
-                                GuardarProducto(IDultimacategoria, texprod6.Text, texprecio6.Text);
-
-                                MessageBox.Show("Nuevos platos agregados");
+                                cmd.Parameters.AddWithValue("@Nombre", txtNuevaCategoria.Text);
+                                cmd.Parameters.AddWithValue("@Imagen", imagenBytes);
+                                int rowsAffected = cmd.ExecuteNonQuery();
+                                IDultimacategoria = cmd.LastInsertedId;
+                                MessageBox.Show("Nueva categoria agregada");
                             }
                         }
                     }
@@ -266,24 +229,55 @@ namespace ElPrograma
                     }
                 }
 
-                cargarCategorias();
+                if (IDultimacategoria != -1)
+                {
+                    GuardarProducto(IDultimacategoria, texprod1.Text, texprecio1.Text);
+                    GuardarProducto(IDultimacategoria, texprod2.Text, texprecio2.Text);
+                    GuardarProducto(IDultimacategoria, texprod3.Text, texprecio3.Text);
+                    GuardarProducto(IDultimacategoria, texprod4.Text, texprecio4.Text);
+                    GuardarProducto(IDultimacategoria, texprod5.Text, texprecio5.Text);
+                    GuardarProducto(IDultimacategoria, texprod6.Text, texprecio6.Text);
+
+                    MessageBox.Show("Nuevos platos agregados");
+
+                    txtNuevaCategoria.Clear();
+                    texprod1.Clear();
+                    texprod2.Clear();
+                    texprod3.Clear();
+                    texprod4.Clear();
+                    texprod5.Clear();
+                    texprod6.Clear();
+                    texprecio1.Clear();
+                    texprecio2.Clear();
+                    texprecio3.Clear();
+                    texprecio4.Clear();
+                    texprecio5.Clear();
+                    texprecio6.Clear();
+                }
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Error: " + ex.Message);
             }
+
+            cargarCategorias();
+
         }
 
+
+        // Función para crear una categoría basada en datos desde la base de datos
         private void CrearCategoriaDesdeBD(long categoriaId, string nombreCategoria)
         {
             TableLayoutPanel tableLayout = new TableLayoutPanel();
             tableLayout.Dock = DockStyle.Fill;
 
+            // Crear un Label con el nombre de la categoría.
             Label nuevoLabel = new Label();
             nuevoLabel.Text = nombreCategoria;
             nuevoLabel.AutoSize = true;
             nuevoLabel.Font = new Font("Roboto Bk", 10);
 
+            // Crear un PictureBox para mostrar la imagen de la categoría.
             PictureBox imagenPictureBox = new PictureBox();
             imagenPictureBox.SizeMode = PictureBoxSizeMode.StretchImage;
 
@@ -297,28 +291,28 @@ namespace ElPrograma
                 }
             }
 
+            // Definir la estructura de columnas y filas del TableLayoutPanel.
             tableLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 70));
             tableLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 70));
             tableLayout.RowStyles.Add(new RowStyle(SizeType.Percent, 70));
             tableLayout.RowStyles.Add(new RowStyle(SizeType.Percent, 40));
 
+            // Agregar el PictureBox con la imagen en la primera fila y el Label en la segunda fila.
             tableLayout.Controls.Add(imagenPictureBox, 0, 0);
             tableLayout.Name = categoriaId.ToString();
             tableLayout.Controls.Add(nuevoLabel, 0, 1);
-            
-           
-                  
 
+            // Asociar un evento MouseDown al TableLayoutPanel para permitir interacción con la categoría.
             tableLayout.MouseDown += new MouseEventHandler(panelRezisable_MouseDown);
 
-            
-
+            // Establecer la posición y el espaciado del TableLayoutPanel en el formulario.
             tableLayout.Location = new Point(5, panelPositionY);
             panelPositionY += tableLayout.Height + margin;
 
             panelCounter++;
         }
 
+        // Función para manejar el evento al hacer clic en una categoría desde la base de datos
         private void panelRezisable_MouseDown(object sender, MouseEventArgs e)
         {
             TableLayoutPanel panel = sender as TableLayoutPanel;
@@ -330,17 +324,20 @@ namespace ElPrograma
                 //ven.ShowDialog();
             }
         }
+        // Función para obtener una imagen desde la base de datos
         private byte[] ObtenerImagenDesdeBD(long categoriaId)
         {
-            string connectionString = ($"Server=localhost; Database={basedeDatos}; Uid=root; Pwd={contrasenia};");
+
             string query = "SELECT Imagen FROM categoria WHERE ID = @CategoriaId;";
 
-            using (MySqlConnection connection = new MySqlConnection(connectionString))
+            using (MySqlCommand command = new MySqlCommand(query, Conexion.conexion))
             {
-                using (MySqlCommand command = new MySqlCommand(query, connection))
+                // Establecer el parámetro @CategoriaId en la consulta SQL.
+                command.Parameters.AddWithValue("@CategoriaId", categoriaId);
+
+                try
                 {
-                    command.Parameters.AddWithValue("@CategoriaId", categoriaId);
-                    connection.Open();
+                    Conexion.conexion.Open();
 
                     using (MySqlDataReader reader = command.ExecuteReader())
                     {
@@ -348,88 +345,64 @@ namespace ElPrograma
                         {
                             if (!reader.IsDBNull(0))
                             {
+                                // Devolver los bytes de la imagen desde la columna "Imagen" de la consulta.
                                 return (byte[])reader[0]; // Devuelve los bytes de la imagen
                             }
                         }
                     }
                 }
-            }
-
-            return null; // Si no se encuentra la imagen, devuelve null
-        }
-
-
-        private void MostrarDatosDesdeBD()
-        {
-            string connectionString = ($"Server=localhost; Database={basedeDatos}; Uid=root; Pwd={contrasenia};");
-
-            using (MySqlConnection connection = new MySqlConnection(connectionString))
-            {
-                try
-                {
-                    connection.Open();
-
-                    string query = "SELECT ID, Nombre FROM categoria;";
-
-                    using (MySqlCommand cmd = new MySqlCommand(query, connection))
-                    {
-                        using (MySqlDataReader reader = cmd.ExecuteReader())
-                        {
-                            while (reader.Read())
-                            {
-                                long categoriaId = Convert.ToInt64(reader["ID"]);
-                                string nombreCategoria = reader["Nombre"].ToString();
-
-                                CrearCategoriaDesdeBD(categoriaId, nombreCategoria);
-                            }
-                        }
-                    }
-                }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Error: " + ex.Message);
+                    // Manejar cualquier error que pueda ocurrir durante la consulta.
+                    MessageBox.Show($"Error al obtener imagen desde la base de datos: {ex.Message}");
+                }
+                finally
+                {
+                    Conexion.conexion.Close();
                 }
             }
+
+            return null;
+
         }
 
+
+        // Función para guardar un producto en la base de datos
         private void GuardarProducto(long categoriaId, string nombre, string precio)
         {
-            if (string.IsNullOrWhiteSpace(nombre) || string.IsNullOrWhiteSpace(precio))
+            try
             {
-                return;
+                // Si el nombre o el precio están vacíos o nulos, se detiene la inserción.
+                if (string.IsNullOrEmpty(nombre) || string.IsNullOrEmpty(precio))
+                {
+                    return;
+                }
+
+                // Validar que el nombre solo contenga letras y espacios
+                if (!nombre.All(char.IsLetterOrDigit) && !nombre.Any(char.IsWhiteSpace))
+                {
+                    MessageBox.Show("El nombre solo puede contener letras y espacios.");
+                    return;
+                }
+
+                byte[] imagenBytes = ImageToByteArray(pcbAgregarImagen.Image);
+
+                // Utilizar la instancia de Conexion para realizar la inserción
+                Conexion.insertar($"INSERT INTO platos (Nombre, Precio, ID_Categoria, Disponible) VALUES ('{nombre}', '{precio}', '{categoriaId}', 1)");
             }
-
-            string connectionString = ($"Server=localhost; Database={basedeDatos}; Uid=root; Pwd={contrasenia};");
-
-            using (MySqlConnection conexion = new MySqlConnection(connectionString))
+            catch (Exception ex)
             {
-                try
-                {
-                    conexion.Open();
-
-                    string insertQuery = "INSERT INTO `platos`(`Nombre`, `Precio`, `ID_Categoria`) VALUES (@Nombre, @Precio, @ID_Categoria);";
-
-                    using (MySqlCommand cmd = new MySqlCommand(insertQuery, conexion))
-                    {
-                        cmd.Parameters.AddWithValue("@Nombre", nombre);
-                        cmd.Parameters.AddWithValue("@Precio", precio);
-                        cmd.Parameters.AddWithValue("@ID_Categoria", categoriaId);
-
-                        int rowsAffected = cmd.ExecuteNonQuery();
-                    }
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Error: " + ex.Message);
-                }
+                MessageBox.Show("Error al guardar producto: " + ex.Message);
             }
         }
+
 
         private void pcbRegresar_Click(object sender, EventArgs e)
         {
             this.Close();
         }
 
+        // Función para manejar el evento al hacer doble clic en el cuadro de imagen
         private void pcbAgregarImagen_DoubleClick(object sender, EventArgs e)
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
@@ -444,10 +417,15 @@ namespace ElPrograma
             }
         }
 
-        
-
+        // Función para convertir una imagen en un array de bytes
         private byte[] ImageToByteArray(System.Drawing.Image image)
         {
+            if (image == null)
+            {
+                // Si la imagen es nula, devolver un array de bytes vacío o manejar el caso según tus necesidades.
+                return new byte[0];
+            }
+
             using (MemoryStream memoryStream = new MemoryStream())
             {
                 image.Save(memoryStream, System.Drawing.Imaging.ImageFormat.Jpeg);
@@ -455,22 +433,18 @@ namespace ElPrograma
             }
         }
 
-        private void btnMaximizar_Click(object sender, EventArgs e)
-        {
-            if (WindowState == FormWindowState.Normal)
-                WindowState = FormWindowState.Maximized;
-            else if (WindowState == FormWindowState.Maximized)
-                WindowState = FormWindowState.Normal;
-        }
 
+
+        // Función para validar entrada de caracteres en el cuadro de texto (solo letras)
         private void textBoxnombre_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (!char.IsLetter(e.KeyChar) && !char.IsWhiteSpace(e.KeyChar) && !char.IsControl(e.KeyChar))
+            if (!char.IsLetter(e.KeyChar) && !char.IsControl(e.KeyChar) && e.KeyChar != ' ')
             {
                 e.Handled = true;
             }
         }
 
+        // Función para validar entrada de caracteres en el cuadro de texto (solo números y punto decimal)
         private void textBoxprecio_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (!char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar) && e.KeyChar != '.')

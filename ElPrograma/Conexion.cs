@@ -8,46 +8,65 @@ using System.Data;
 using MySql.Data.MySqlClient;
 
 namespace ElPrograma
-{
-    internal class Conexion
     {
-
-        MySqlConnection conexionBD = new MySqlConnection("Server=localhost; Database=proyecto; Uid=root; Pwd=");
-        
-        public DataTable consultar(string sql)
+        internal class Conexion
         {
-            DataTable tabla = new DataTable();
 
-            try
+            public MySqlConnection conexion;
+
+            public Conexion(string tipo)
             {
-                conexionBD.Open();
-
-                MySqlCommand consulta = new MySqlCommand(sql, conexionBD);
-
-                MySqlDataAdapter adaptador = new MySqlDataAdapter();
-                adaptador.SelectCommand = consulta; //Obtiene retorno de datos
-                adaptador.Fill(tabla);
-
-                conexionBD.Close();
-                return tabla;
+                if (tipo.Equals("admin"))
+                {
+                    conexion = new MySqlConnection("Server=localhost; Database=proyecto; Uid=adminLaTuerca; Pwd=LaTuerca2023;");
+                }
+                else if (tipo.Equals("empleado"))
+                {
+                    conexion = new MySqlConnection("Server=localhost; Database=proyecto; Uid=empleado; Pwd=empleado;");
+                }
             }
-            catch (Exception ex)
+
+            public DataTable consultar(string sql)
             {
-                //MessageBox.Show("Error al actualizar: " + ex.ToString());
-                return tabla;
+                DataTable tabla = new DataTable();
+
+                try
+                {
+                    conexion.Open();
+
+                    MySqlCommand consulta = new MySqlCommand(sql, conexion);
+
+                    MySqlDataAdapter adaptador = new MySqlDataAdapter();
+                    adaptador.SelectCommand = consulta; //Obtiene retorno de datos
+                    adaptador.Fill(tabla);
+
+                    conexion.Close();
+                    return tabla;
+                }
+                catch (Exception ex)
+                {
+                    //MessageBox.Show("Error al actualizar: " + ex.ToString());
+                    return tabla;
+                }
             }
+
+            public void insertar(string sql)
+            {
+                conexion.Open();
+                MySqlCommand consulta = new MySqlCommand(sql, conexion);
+                consulta.ExecuteNonQuery(); //Sin retorno de datos
+                conexion.Close();
+            }
+
+            public void actualizar(string sql)
+            {
+                conexion.Open();
+                MySqlCommand consulta = new MySqlCommand(sql, conexion);
+                consulta.ExecuteNonQuery();
+                conexion.Close();
+            }
+
         }
-
-        public void insertar(string sql)
-        {
-            conexionBD.Open();
-
-            MySqlCommand consulta = new MySqlCommand(sql, conexionBD);
-            consulta.ExecuteNonQuery(); //Sin retorno de datos
-
-            conexionBD.Close();
-        }
-
-      
     }
-}
+
+
